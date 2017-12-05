@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "main": "src/index.js",
   "scripts": {
-    "start": "npm run dev",
+    "build": "webpack --config build/webpack.build.conf.js",
     "unit": "cross-env BABEL_ENV=test karma start test/karma.conf.js --single-run",
     "watch": "cross-env BABEL_ENV=test karma start test/karma.conf.js  --auto-watch --colors --debug",
     "test": "npm run unit",
