@@ -1,11 +1,11 @@
-let path = require('path');
+const path = require('path');
+const config = require('../config')
 
-let webpack = require('webpack');
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, '../dist'),
-    filename: 'podium-sdk.js',
+    path: path.resolve(__dirname, config.build.assetsRoot),
+    filename: 'index.js',
     library: 'podiumSdk'
   },
   module: {
@@ -15,8 +15,8 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ["env", "stage-2"],
-          plugins: ["istanbul"]
+          presets: ['env', 'stage-2'],
+          plugins: ['istanbul']
         }
       }
     ]
