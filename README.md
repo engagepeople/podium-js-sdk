@@ -63,3 +63,18 @@ Podium.terms.accept(termsId)
 
 
 
+ ### LRG
+ Get data to start a redemption process with LRG.
+```
+Podium.lrg.get(redirectUrl)
+Podium.lrg.redirect(redirectUrl)
+```
+ 
+ #### Parameters
+
+| Name  | Type | Required | Description |
+| :------------- | :------------- | :------------- | :------------- |
+| redirectUrl  | url  | yes |  The URL LRG should redirect back to after a completed transaction.  |
+
+
+
