@@ -12,7 +12,7 @@ let PodiumRequest = {}
 PodiumRequest._user = {}
 
 let _makeUrl = (path) => {
-  return settings.get('endpoint') + path
+  return settings.get('settings').endpoint + path
 }
 
 let _makeHeaders = () => {

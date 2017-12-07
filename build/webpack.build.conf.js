@@ -22,6 +22,10 @@ module.exports = {
       }
     ]
   },
+  externals: {
+    axios: 'axios',
+    store: 'store'
+  },
   stats: {
     colors: true
   }

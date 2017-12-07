@@ -9,7 +9,7 @@ const terms = require('./api/terms')
 
 class Podium {
   constructor (userSettings = require('./settings')) {
-    settings.setAll(userSettings)
+    settings.set('settings', userSettings)
   }
 }
 

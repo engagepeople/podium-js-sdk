@@ -1,17 +1,31 @@
 'use strict'
 
+const store = require('store')
+
 module.exports = {
   _data: [],
-  setAll: function (settings) {
-    this._data = settings
+  _hasLocalStorage: () => {
+    return (localStorage !== undefined)
   },
   set: function (key, value) {
-    this._data[key] = value
+    if (this._hasLocalStorage()) {
+      return store.set(key, value)
+    } else {
+      this._data[key] = value
+    }
   },
   get: function (key) {
-    return this._data[key]
+    if (this._hasLocalStorage()) {
+      return store.get(key)
+    } else {
+      return this._data[key]
+    }
   },
   remove: function (key) {
-    return delete this._data[key]
+    if (this._hasLocalStorage()) {
+      return store.remove(key)
+    } else {
+      return delete this._data[key]
+    }
   }
 }

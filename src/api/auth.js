@@ -1,7 +1,6 @@
 'use strict'
 
 let PodiumRequest = require('../podiumRequest/podiumRequest')
-const settings = require('../utilities/settings')
 
 exports.getToken = () => {
   if (PodiumRequest.getUser()) {
