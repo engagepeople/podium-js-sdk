@@ -1,8 +1,7 @@
 'use strict'
 
 const axios = require('axios')
-const store = require('store')
-const settings = store.get(`__podiumSDK__settings`)
+const settings = require('./../utilities/settings')
 const convertTime = require('./../utilities/convertTime')
 
 const INVALID_TOKEN = 'INVALID_TOKEN'
@@ -13,7 +12,7 @@ let PodiumRequest = {}
 PodiumRequest._user = {}
 
 let _makeUrl = (path) => {
-  return settings.endpoint + path
+  return settings.get('settings').endpoint + path
 }
 
 let _makeHeaders = () => {
@@ -24,7 +23,7 @@ let _makeHeaders = () => {
 
 let _checkError = (error) => {
   if (error.response.status === 400 && error.response.data.apiCode === INVALID_TOKEN) {
-    store.remove(STORE_USER_KEY)
+    settings.remove(STORE_USER_KEY)
   }
 
   if (error.response.status === 403 && error.response.data.code === UNACCEPTED_TERMS) {
@@ -56,18 +55,18 @@ PodiumRequest.Authenticate = (username, password, programId) => {
         username: username,
         program_id: programId
       }
-      store.set(STORE_USER_KEY, user)
+      settings.set(STORE_USER_KEY, user)
       return user
     })
 }
 
 PodiumRequest.getUser = function () {
-  return store.get(STORE_USER_KEY)
+  return settings.get(STORE_USER_KEY)
 }
 
 PodiumRequest.Logout = () => {
   return module.exports.post('logout').then((response) => {
-    store.remove(STORE_USER_KEY)
+    settings.remove(STORE_USER_KEY)
   })
 }
 
