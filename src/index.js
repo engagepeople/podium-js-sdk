@@ -1,13 +1,14 @@
 'use strict'
-const store = require('store')
+
+const settings = require('./utilities/settings')
 const auth = require('./api/auth')
 const terms = require('./api/terms')
 const profile = require('./api/profile')
 const incentive = require('./api/incentive')
 
 class Podium {
-  constructor (settings = require('./settings')) {
-    store.set(`__podiumSDK__settings`, settings)
+  constructor (userSettings = require('./settings')) {
+    settings.setAll(userSettings)
   }
 }
 

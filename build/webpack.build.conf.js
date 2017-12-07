@@ -6,7 +6,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, config.build.assetsRoot),
     filename: 'index.js',
-    library: 'podiumSdk'
+    library: 'podiumSdk',
+    libraryTarget: 'umd'
   },
   module: {
     loaders: [
@@ -20,10 +21,6 @@ module.exports = {
         }
       }
     ]
-  },
-  externals: {
-    axios: 'axios',
-    store: 'store',
   },
   stats: {
     colors: true
