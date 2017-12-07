@@ -51,7 +51,9 @@ PodiumRequest.Authenticate = (username, password, programId) => {
     .then(function (response) {
       let user = {
         token: response.data.token,
-        user_id: response.data.user_id
+        user_id: response.data.user_id,
+        username: username,
+        program_id: programId
       }
       settings.set(STORE_USER_KEY, user)
       return user
