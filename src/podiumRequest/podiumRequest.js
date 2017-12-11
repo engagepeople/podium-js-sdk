@@ -34,7 +34,7 @@ let _checkError = (error) => {
 
 let _prepareRequest = () => {
   if (!module.exports.getUser()) {
-    console.error('PodiumSDK - User is not Authenticated.  Login in first')
+    console.error(`PodiumSDK - User is not Authenticated.  Login in first`)
     return false
   }
   return true
@@ -49,15 +49,21 @@ PodiumRequest.Authenticate = (username, password, programId) => {
 
   return axios.post(_makeUrl('login'), params)
     .then(function (response) {
-      let user = {
-        token: response.data.token,
-        user_id: response.data.user_id,
-        username: username,
-        program_id: programId
-      }
-      settings.set(STORE_USER_KEY, user)
-      return user
+      return PodiumRequest.setUser(response.data.token, programId)
     })
+    .catch((error) => {
+      return error
+    })
+}
+
+PodiumRequest.setUser = function (token, programId) {
+  let user = {
+    token: token,
+    program_id: programId
+  }
+  settings.set(STORE_USER_KEY, user)
+
+  return settings.get(STORE_USER_KEY)
 }
 
 PodiumRequest.getUser = function () {

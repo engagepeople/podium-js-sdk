@@ -9,12 +9,12 @@ exports.getToken = () => {
   return false
 }
 
-exports.login = function (username, password, programId) {
-  return PodiumRequest.Authenticate(username, password, programId)
+exports.basicAuth = (token, programId) => {
+  return PodiumRequest.setUser(token, programId)
 }
 
-exports.getUserId = () => {
-  return PodiumRequest.getUser().user_id
+exports.login = (username, password, programId) => {
+  return PodiumRequest.Authenticate(username, password, programId)
 }
 
 exports.logout = function () {

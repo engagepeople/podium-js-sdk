@@ -24,7 +24,6 @@ These methods map to the [authentication endpoints](https://developers.podiumrew
 ```
 Podium.auth.login(email, password, progamId)
 Podium.auth.getToken()
-Podium.auth.getUserId()
 Podium.auth.logout()
 ```
  
