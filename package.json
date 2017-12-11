@@ -1,6 +1,6 @@
 {
   "name": "podium-sdk",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Podium Client JavaScript SDK",
   "author": "Dan Shreim <dshreim@engagepeople.com>",
   "private": false,
