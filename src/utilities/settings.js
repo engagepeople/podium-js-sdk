@@ -5,7 +5,7 @@ const store = require('store')
 module.exports = {
   _data: [],
   _hasLocalStorage: () => {
-    return (typeof localStorage === 'undefined' || localStorage === null)
+    return !(typeof localStorage === 'undefined' || localStorage === null)
   },
   set: function (key, value) {
     if (this._hasLocalStorage()) {
