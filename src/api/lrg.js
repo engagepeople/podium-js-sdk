@@ -3,10 +3,7 @@
 let PodiumRequest = require('../podiumRequest/podiumRequest')
 
 exports.get = (redirectUrl) => {
-  const user = PodiumRequest.getUser()
   return PodiumRequest.post('lrg/session', {
-    user_id: user.user_id,
-    program_id: user.program_id,
     website_back: redirectUrl
   })
 }
