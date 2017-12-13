@@ -2,6 +2,7 @@
   "name": "podium-sdk",
   "version": "0.0.3",
   "description": "Podium Client JavaScript SDK",
+  "keywords":["loyalty", "reward", "incentive", "recognition", "engagement", "promotion", "redemption"],
   "author": "Dan Shreim <dshreim@engagepeople.com>",
   "private": false,
   "license": "Apache-2.0",
@@ -12,6 +13,9 @@
     "watch": "cross-env BABEL_ENV=test karma start test/karma.conf.js  --auto-watch --colors --debug",
     "lint": "eslint --ext .js src test/unit/specs"
   },
+  "files": [
+    "dist/*.js",
+  ],
   "dependencies": {
     "axios": "^0.17.1",
     "store": "^2.0.12"
