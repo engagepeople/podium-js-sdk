@@ -2,16 +2,25 @@
   "name": "podium-sdk",
   "version": "0.0.3",
   "description": "Podium Client JavaScript SDK",
+  "keywords":["loyalty", "reward", "incentive", "recognition", "engagement", "promotion", "redemption"],
   "author": "Dan Shreim <dshreim@engagepeople.com>",
   "private": false,
   "license": "Apache-2.0",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "webpack --config build/webpack.build.conf.js",
     "unit": "cross-env BABEL_ENV=test karma start test/karma.conf.js --single-run",
     "watch": "cross-env BABEL_ENV=test karma start test/karma.conf.js  --auto-watch --colors --debug",
     "lint": "eslint --ext .js src test/unit/specs"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/engagepeople/podium-js-sdk.git"
+  },
+  "files": [
+    "dist/*.js",
+    "types/*.d.ts"
+  ],
   "dependencies": {
     "axios": "^0.17.1",
     "store": "^2.0.12"
@@ -62,6 +71,7 @@
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
   },
+  "types": "types/index.d.ts",
   "browserslist": [
     "> 1%",
     "last 2 versions",

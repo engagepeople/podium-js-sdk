@@ -3,11 +3,13 @@ const config = require('../config')
 
 module.exports = {
   entry: './src/index.js',
+  devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, config.build.assetsRoot),
     filename: 'index.js',
     library: 'podiumSdk',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    umdNamedDefine : true
   },
   module: {
     loaders: [
