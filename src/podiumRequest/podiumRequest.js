@@ -62,6 +62,7 @@ module.exports = class PodiumRequest {
   }
 
   GetRequest (resource) {
+    if (!this._getToken()) Promise.reject(INVALID_TOKEN)
     return axios({
       method: 'get',
       transformResponse: function (data) {
@@ -75,7 +76,7 @@ module.exports = class PodiumRequest {
   }
 
   PostRequest (resource, params) {
-    // TODO: Don't request if no token
+    if (!this._getToken()) Promise.reject(INVALID_TOKEN)
     return axios({
       method: 'post',
       // transformRequest: [function (data, headers) {
@@ -96,6 +97,7 @@ module.exports = class PodiumRequest {
     return this.PostRequest(request, params)
       .then(response => {
         this._setToken(response.token)
+        return response
       })
       .catch(this._checkError)
   }
