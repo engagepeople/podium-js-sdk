@@ -15,9 +15,12 @@ module.exports = class LRG extends PodiumRequest {
   }
 
   redirect (redirectUrl) {
-    // TODO: can't redirect if server
-    this.get(redirectUrl).then(response => {
-      window.location.replace(response.body.redirect_url)
-    })
+    if (!(typeof window === 'undefined' || window === null)) {
+      this.get(redirectUrl).then(response => {
+        window.location.replace(response.body.redirect_url)
+      })
+    } else {
+      return false
+    }
   }
 }
