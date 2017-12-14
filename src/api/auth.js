@@ -1,22 +1,33 @@
 'use strict'
+let PodiumRequest = require('./../podiumRequest/podiumRequest')
 
-let PodiumRequest = require('../podiumRequest/podiumRequest')
-
-exports.getToken = () => {
-  if (PodiumRequest.getUser()) {
-    return PodiumRequest.getUser().token
+module.exports = class Auth extends PodiumRequest {
+  constructor (settings) {
+    super(settings)
+    this.settings = settings
+    this.resouce = 'login'
   }
-  return false
-}
 
-exports.basicAuth = (token, programId) => {
-  return PodiumRequest.setUser(token, programId)
-}
+  getToken () {
+    return this.settings.token
+  }
 
-exports.login = (username, password, programId) => {
-  return PodiumRequest.Authenticate(username, password, programId)
-}
+  login (username, password, programId) {
+    let params = {
+      'user_account': username,
+      'password': password,
+      'program_id': programId
+    }
+    return this.AuthenticateRequest(this.resouce, params)
+  }
 
-exports.logout = function () {
-  return PodiumRequest.Logout()
+  basicAuth (token, programId) {
+    this.settings.token = token
+  }
+
+  logout () {
+    return this.PostRequest('logout').finally(rsp => {
+      this.settings.token = undefined
+    })
+  }
 }

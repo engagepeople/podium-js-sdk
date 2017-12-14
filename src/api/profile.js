@@ -1,7 +1,14 @@
 'use strict'
 
-let PodiumRequest = require('../podiumRequest/podiumRequest')
+let PodiumRequest = require('./../podiumRequest/podiumRequest')
 
-exports.get = () => {
-  return PodiumRequest.get('profile')
+module.exports = class Profile extends PodiumRequest {
+  constructor (settings) {
+    super(settings)
+    this.resouce = 'profile'
+  }
+
+  get () {
+    return this.GetRequest(this.resouce)
+  }
 }

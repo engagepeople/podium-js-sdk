@@ -1,111 +1,73 @@
 'use strict'
-
 const axios = require('axios')
-const settings = require('./../utilities/settings')
 const convertTime = require('./../utilities/convertTime')
-
 const INVALID_TOKEN = 'INVALID_TOKEN'
 const UNACCEPTED_TERMS = 'UNACCEPTED_TERMS'
-const STORE_USER_KEY = '__podiumSDK__user'
 
-let PodiumRequest = {}
-PodiumRequest._user = {}
-
-let _makeUrl = (path) => {
-  return settings.get('settings').endpoint + path
-}
-
-let _makeHeaders = () => {
-  return {
-    'Authentication': module.exports.getUser().token
-  }
-}
-
-let _checkError = (error) => {
-  if (error.response.status === 400 && error.response.data.apiCode === INVALID_TOKEN) {
-    settings.remove(STORE_USER_KEY)
+module.exports = class PodiumRequest {
+  constructor (settings) {
+    this.settings = settings
   }
 
-  if (error.response.status === 403 && error.response.data.code === UNACCEPTED_TERMS) {
-    console.log(UNACCEPTED_TERMS)
-  }
-  return Promise.reject(error.response)
-}
-
-let _prepareRequest = () => {
-  if (!module.exports.getUser()) {
-    console.error(`PodiumSDK - User is not Authenticated.  Login in first`)
-    return false
-  }
-  return true
-}
-
-PodiumRequest.Authenticate = (username, password, programId) => {
-  let params = {
-    'user_account': username,
-    'password': password,
-    'program_id': programId
+  _makeUrl (path) {
+    return this.settings.endpoint + path
   }
 
-  return axios.post(_makeUrl('login'), params)
-    .then(function (response) {
-      return PodiumRequest.setUser(response.data.token, programId)
-    })
-    .catch((error) => {
-      return error
-    })
-}
-
-PodiumRequest.setUser = function (token, programId) {
-  let user = {
-    token: token,
-    program_id: programId
+  _makeHeaders () {
+    if (this.settings.token) {
+      return {
+        'Authentication': this.settings.token
+      }
+    }
   }
-  settings.set(STORE_USER_KEY, user)
 
-  return settings.get(STORE_USER_KEY)
+  _checkError (error) {
+    if (error.response.status === 400 && error.response.data.apiCode === INVALID_TOKEN) {
+      this.settings.token = undefined
+    }
+
+    if (error.response.status === 403 && error.response.data.code === UNACCEPTED_TERMS) {
+      console.log(UNACCEPTED_TERMS)
+    }
+    return error.response
+  }
+
+  GetRequest (resource) {
+    return axios({
+      method: 'get',
+      transformResponse: function (data) {
+        return convertTime.APIToUTC(JSON.parse(data))
+      },
+      url: this._makeUrl(resource),
+      headers: this._makeHeaders()
+    }).then(function (response) {
+      return response.data
+    }).catch(this._checkError)
+  }
+
+  PostRequest (resource, params) {
+    // TODO: Don't request if no token
+    return axios({
+      method: 'post',
+      // transformRequest: [function (data, headers) {
+      //   return convertTime.UTCtoAPI(data)
+      // }],
+      transformResponse: function (data) {
+        return convertTime.APIToUTC(JSON.parse(data))
+      },
+      url: this._makeUrl(resource),
+      data: params,
+      headers: this._makeHeaders()
+    }).then(function (response) {
+      return response.data
+    }).catch(this._checkError)
+  }
+
+  AuthenticateRequest (request, params) {
+    return this.PostRequest(request, params)
+      .then(response => {
+        this.settings.token = response.token
+      })
+      .catch(this._checkError)
+  }
 }
-
-PodiumRequest.getUser = function () {
-  return settings.get(STORE_USER_KEY)
-}
-
-PodiumRequest.Logout = () => {
-  return module.exports.post('logout').then((response) => {
-    settings.remove(STORE_USER_KEY)
-  })
-}
-
-PodiumRequest.get = (resource) => {
-  if (!_prepareRequest()) return false
-  return axios({
-    method: 'get',
-    transformResponse: function (data) {
-      return convertTime.APIToUTC(JSON.parse(data))
-    },
-    url: _makeUrl(resource),
-    headers: _makeHeaders()
-  }).then(function (response) {
-    return response.data
-  }).catch(_checkError)
-}
-
-PodiumRequest.post = (resource, params) => {
-  if (!_prepareRequest()) return false
-  return axios({
-    method: 'post',
-    // transformRequest: [function (data, headers) {
-    //   return convertTime.UTCtoAPI(data)
-    // }],
-    transformResponse: function (data) {
-      return convertTime.APIToUTC(JSON.parse(data))
-    },
-    url: _makeUrl(resource),
-    data: params,
-    headers: _makeHeaders()
-  }).then(function (response) {
-    return response.data
-  }).catch(_checkError)
-}
-
-module.exports = PodiumRequest
