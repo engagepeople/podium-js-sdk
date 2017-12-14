@@ -3,6 +3,7 @@ const axios = require('axios')
 const convertTime = require('./../utilities/convertTime')
 const INVALID_TOKEN = 'INVALID_TOKEN'
 const UNACCEPTED_TERMS = 'UNACCEPTED_TERMS'
+const LOCALSTORAGE_KEY = '__podiumSDK__'
 
 module.exports = class PodiumRequest {
   constructor (settings) {
@@ -14,11 +15,15 @@ module.exports = class PodiumRequest {
   }
 
   _makeHeaders () {
-    if (this.settings.token) {
+    if (this._getToken()) {
       return {
-        'Authentication': this.settings.token
+        'Authentication': this._getToken()
       }
     }
+  }
+
+  _hasLocalStorage () {
+    return !(typeof localStorage === 'undefined' || localStorage === null)
   }
 
   _checkError (error) {
@@ -30,6 +35,30 @@ module.exports = class PodiumRequest {
       console.log(UNACCEPTED_TERMS)
     }
     return error.response
+  }
+
+  _setToken (token) {
+    this.settings.token = token
+    if (this._hasLocalStorage()) {
+      return localStorage.setItem(`${LOCALSTORAGE_KEY}token`, this.settings.token)
+    }
+    return this.settings.token
+  }
+
+  _getToken () {
+    if (this._hasLocalStorage()) {
+      return localStorage.getItem(`${LOCALSTORAGE_KEY}token`)
+    } else {
+      return this.settings.token
+    }
+  }
+
+  _removeToken () {
+    if (this._hasLocalStorage()) {
+      localStorage.removeItem(`${LOCALSTORAGE_KEY}token`)
+    } else {
+      this.settings.token = undefined
+    }
   }
 
   GetRequest (resource) {
@@ -66,7 +95,7 @@ module.exports = class PodiumRequest {
   AuthenticateRequest (request, params) {
     return this.PostRequest(request, params)
       .then(response => {
-        this.settings.token = response.token
+        this._setToken(response.token)
       })
       .catch(this._checkError)
   }

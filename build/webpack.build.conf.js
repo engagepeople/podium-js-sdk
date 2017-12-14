@@ -25,8 +25,7 @@ module.exports = {
     ]
   },
   externals: {
-    axios: 'axios',
-    store: 'store'
+    axios: 'axios'
   },
   stats: {
     colors: true

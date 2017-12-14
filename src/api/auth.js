@@ -9,7 +9,7 @@ module.exports = class Auth extends PodiumRequest {
   }
 
   getToken () {
-    return this.settings.token
+    return this._getToken()
   }
 
   login (username, password, programId) {
@@ -21,13 +21,13 @@ module.exports = class Auth extends PodiumRequest {
     return this.AuthenticateRequest(this.resouce, params)
   }
 
-  basicAuth (token, programId) {
-    this.settings.token = token
+  basicAuth (token) {
+    this._setToken(token)
   }
 
   logout () {
     return this.PostRequest('logout').finally(rsp => {
-      this.settings.token = undefined
+      this._removeToken()
     })
   }
 }

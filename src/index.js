@@ -8,9 +8,7 @@ const Profile = require('./api/profile')
 
 class Podium {
   constructor (userSettings = require('./settings')) {
-    userSettings.token = undefined
     this.setting = userSettings
-
     this.auth = new Auth(this.setting)
     this.lrg = new LRG(this.setting)
     this.incentive = new Incentive(this.setting)

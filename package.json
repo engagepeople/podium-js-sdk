@@ -22,8 +22,7 @@
     "types/*.d.ts"
   ],
   "dependencies": {
-    "axios": "^0.17.1",
-    "store": "^2.0.12"
+    "axios": "^0.17.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
