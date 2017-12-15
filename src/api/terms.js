@@ -1,11 +1,18 @@
 'use strict'
 
-let PodiumRequest = require('../podiumRequest/podiumRequest')
+let PodiumRequest = require('./../podiumRequest/podiumRequest')
 
-exports.get = () => {
-  return PodiumRequest.get('terms')
-}
+module.exports = class Terms extends PodiumRequest {
+  constructor (settings) {
+    super(settings)
+    this.resouce = 'terms'
+  }
 
-exports.accept = (id) => {
-  return PodiumRequest.post('terms', {terms_id: id})
+  get () {
+    return this.GetRequest(this.resouce)
+  }
+
+  accept (id) {
+    return this.PostRequest(this.resouce, {terms_id: id})
+  }
 }

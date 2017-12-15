@@ -1,22 +1,20 @@
 'use strict'
 
-const settings = require('./utilities/settings')
-const auth = require('./api/auth')
-const lrg = require('./api/lrg')
-const incentive = require('./api/incentive')
-const profile = require('./api/profile')
-const terms = require('./api/terms')
+const Auth = require('./api/auth')
+const Terms = require('./api/terms')
+const LRG = require('./api/lrg')
+const Incentive = require('./api/incentive')
+const Profile = require('./api/profile')
 
 class Podium {
   constructor (userSettings = require('./settings')) {
-    settings.set('settings', userSettings)
+    this.setting = userSettings
+    this.auth = new Auth(this.setting)
+    this.lrg = new LRG(this.setting)
+    this.incentive = new Incentive(this.setting)
+    this.terms = new Terms(this.setting)
+    this.profile = new Profile(this.setting)
   }
 }
-
-Podium.prototype.auth = auth
-Podium.prototype.lrg = lrg
-Podium.prototype.incentive = incentive
-Podium.prototype.profile = profile
-Podium.prototype.terms = terms
 
 module.exports = Podium
