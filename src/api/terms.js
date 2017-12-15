@@ -1,5 +1,4 @@
 'use strict'
-
 let PodiumRequest = require('./../podiumRequest/podiumRequest')
 
 module.exports = class Terms extends PodiumRequest {
