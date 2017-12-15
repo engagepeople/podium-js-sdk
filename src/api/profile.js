@@ -5,10 +5,10 @@ let PodiumRequest = require('./../podiumRequest/podiumRequest')
 module.exports = class Profile extends PodiumRequest {
   constructor (settings) {
     super(settings)
-    this.resouce = 'profile'
+    this.resource = 'profile'
   }
 
   get () {
-    return this.GetRequest(this.resouce)
+    return this.GetRequest(this.resource)
   }
 }

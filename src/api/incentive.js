@@ -5,11 +5,11 @@ let PodiumRequest = require('./../podiumRequest/podiumRequest')
 module.exports = class Incentive extends PodiumRequest {
   constructor (settings) {
     super(settings)
-    this.resouce = 'balance'
+    this.resource = 'balance'
   }
 
   getBalance () {
-    return this.GetRequest(this.resouce).then((response) => {
+    return this.GetRequest(this.resource).then((response) => {
       return response.data[0]
     })
   }
