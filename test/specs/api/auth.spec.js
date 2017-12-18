@@ -4,7 +4,6 @@ let data = {
   settings: {
     endpoint: 'api.endpoint.test/'
   },
-  resource: 'login',
   token: 'qskrnmcyhnapvpuimndsfyhgdwqgfkxnfw',
   login: {
     username: 'testUser',
@@ -39,10 +38,9 @@ describe('Auth Resource', () => {
   })
   it('should call AuthenticateRequest on login() with the correct params', () => {
     resource.login(data.login.username, data.login.password, data.login.programId)
-    expect(spyPostRequest.firstCall.args[0]).to.equal(data.resource)
-    expect(spyPostRequest.firstCall.args[1].user_account).to.equal(data.login.username)
-    expect(spyPostRequest.firstCall.args[1].password).to.equal(data.login.password)
-    expect(spyPostRequest.firstCall.args[1].program_id).to.equal(data.login.programId)
+    expect(spyAuthenticateRequest.firstCall.args[0].user_account).to.equal(data.login.username)
+    expect(spyAuthenticateRequest.firstCall.args[0].password).to.equal(data.login.password)
+    expect(spyAuthenticateRequest.firstCall.args[0].program_id).to.equal(data.login.programId)
   })
 
   it('should call PostRequest on logout()', () => {

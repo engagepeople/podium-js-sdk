@@ -17,7 +17,7 @@ module.exports = function (config) {
     files: ['./../node_modules/babel-polyfill/dist/polyfill.js', './index.js'],
     preprocessors: {
       './index.js': ['webpack'],
-      '../src/*.js': ['coverage']
+      '../src/**/*.js': ['coverage']
     },
     webpack: webpackConfig,
     webpackMiddleware: {

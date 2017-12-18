@@ -4,7 +4,7 @@ let data = {
   settings: {
     endpoint: 'api.endpoint.test/'
   },
-  resource: 'balance'
+  resource: 'ledger'
 }
 
 describe('Incentive Resource', () => {
