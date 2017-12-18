@@ -1,15 +1,14 @@
 'use strict'
-
 let PodiumRequest = require('./../podiumRequest/podiumRequest')
 
 module.exports = class LRG extends PodiumRequest {
   constructor (settings) {
     super(settings)
-    this.resouce = 'lrg/session'
+    this.resource = 'lrg/session'
   }
 
   get (redirectUrl) {
-    return this.PostRequest(this.resouce, {
+    return this.PostRequest(this.resource, {
       website_back: redirectUrl
     })
   }

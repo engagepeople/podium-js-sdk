@@ -1,56 +1,39 @@
 import Podium from '@/index'
+import Settings from '@/settings'
 
-describe('Spy', () => {
-  let podium
+let data = {
+  settings: {
+    endpoint: 'api.endpoint.test/'
+  }
+}
+
+describe('Podium Resource', () => {
+  let resource
+
   beforeEach(() => {
-    podium = new Podium({endpoint: 'https://stage-api.podiumrewards.com/v1/'})
+    resource = new Podium(data.settings)
   })
 
-  it('It should return what was sent', () => {
-    let n = podium.terms.test('test')
-    expect(n).to.equal(n)
+  it('should use the right resource', () => {
+    expect(resource.setting).to.be.a('object')
   })
 
-  it('it should spy test 3 times', () => {
-    const testSpy = sinon.spy(podium.terms, 'test')
-
-    podium.terms.test()
-    podium.terms.test()
-    podium.terms.test()
-    testSpy.restore()
-
-    expect(testSpy.calledThrice).to.equal(true)
-    expect(testSpy.callCount).to.equal(3)
+  it('should have properties', () => {
+    expect(resource).to.have.property('setting')
+    expect(resource).to.have.property('auth')
+    expect(resource).to.have.property('lrg')
+    expect(resource).to.have.property('incentive')
+    expect(resource).to.have.property('terms')
+    expect(resource).to.have.property('profile')
+    // expect(resource.auth).to.be.('object')
   })
 
-  it('It should be called with test', () => {
-    const testSpy = sinon.spy(podium.terms, 'test')
-    podium.terms.test('test')
-    testSpy.alwaysCalledWith('test')
-    testSpy.restore()
-
-    expect(testSpy.alwaysCalledWith('test')).to.equal(true)
-  })
-})
-
-describe.only('Stub', () => {
-  let podium
-  beforeEach(() => {
-    podium = new Podium({endpoint: 'https://stage-api.podiumrewards.com/v1/'})
+  it('should set settings correctly', () => {
+    expect(resource.setting.endpoint).to.equal(data.settings.endpoint)
   })
 
-  it('It should return what was sent', () => {
-    const stub = sinon.stub()
-    stub('hello')
-    expect(stub.firstCall.args[0]).to.equal('hello')
+  it('should default settings correctly', () => {
+    resource = new Podium()
+    expect(resource.setting.endpoint).to.equal(Settings.endpoint)
   })
-
-  it('should call callback after saving', () => {
-    let post = sinon.stub($, 'post')
-    post.yields()
-    let callback = sinon.spy()
-
-    // expect(stub.firstCall.args[0]).to.equal('hello')
-  })
-
 })

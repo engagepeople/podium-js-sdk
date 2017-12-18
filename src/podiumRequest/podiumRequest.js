@@ -1,6 +1,6 @@
 'use strict'
 const axios = require('axios')
-const convertTime = require('./../utilities/convertTime')
+// const convertTime = require('./../utilities/convertTime')
 const INVALID_TOKEN = 'INVALID_TOKEN'
 const UNACCEPTED_TERMS = 'UNACCEPTED_TERMS'
 const LOCALSTORAGE_KEY = '__podiumSDK__'
@@ -56,18 +56,17 @@ module.exports = class PodiumRequest {
   _removeToken () {
     if (this._hasLocalStorage()) {
       localStorage.removeItem(`${LOCALSTORAGE_KEY}token`)
-    } else {
-      this.settings.token = undefined
     }
+    this.settings.token = undefined
   }
 
   GetRequest (resource) {
     if (!this._getToken()) Promise.reject(INVALID_TOKEN)
     return axios({
       method: 'get',
-      transformResponse: function (data) {
-        return convertTime.APIToUTC(JSON.parse(data))
-      },
+      // transformResponse: function (data) {
+      //   return convertTime.APIToUTC(JSON.parse(data))
+      // },
       url: this._makeUrl(resource),
       headers: this._makeHeaders()
     }).then(function (response) {
@@ -82,9 +81,9 @@ module.exports = class PodiumRequest {
       // transformRequest: [function (data, headers) {
       //   return convertTime.UTCtoAPI(data)
       // }],
-      transformResponse: function (data) {
-        return convertTime.APIToUTC(JSON.parse(data))
-      },
+      // transformResponse: function (data) {
+      //   return convertTime.APIToUTC(JSON.parse(data))
+      // },
       url: this._makeUrl(resource),
       data: params,
       headers: this._makeHeaders()
@@ -93,10 +92,10 @@ module.exports = class PodiumRequest {
     }).catch(this._checkError)
   }
 
-  AuthenticateRequest (request, params) {
-    return this.PostRequest(request, params)
+  AuthenticateRequest (params) {
+    return axios.post(this._makeUrl('login'), params)
       .then(response => {
-        this._setToken(response.token)
+        this._setToken(response.data.token)
         return response
       })
       .catch(this._checkError)

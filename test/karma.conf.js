@@ -14,10 +14,10 @@ module.exports = function (config) {
     browsers: ['PhantomJS'],
     frameworks: ['mocha', 'sinon-chai', 'phantomjs-shim'],
     reporters: ['spec', 'coverage'],
-    files: ['./index.js'],
+    files: ['./../node_modules/babel-polyfill/dist/polyfill.js', './index.js'],
     preprocessors: {
       './index.js': ['webpack'],
-      '../src/*.js': ['coverage']
+      '../src/**/*.js': ['coverage']
     },
     webpack: webpackConfig,
     webpackMiddleware: {
