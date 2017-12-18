@@ -459,7 +459,7 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 
 var cov_1opq5xmnpm = function () {
   var path = 'C:\\Engage\\podium.clients\\podium-js-sdk\\src\\podiumRequest\\podiumRequest.js',
-      hash = '417bf551cbd7de79b001240bf9c6856a41f7b1cf',
+      hash = 'ab75a7e7ea97504b299b1c2c29385e786a6ff917',
       global = new Function('return this')(),
       gcv = '__coverage__',
       coverageData = {
@@ -521,7 +521,7 @@ var cov_1opq5xmnpm = function () {
           column: 0
         },
         end: {
-          line: 104,
+          line: 103,
           column: 1
         }
       },
@@ -701,7 +701,7 @@ var cov_1opq5xmnpm = function () {
           column: 4
         },
         end: {
-          line: 61,
+          line: 59,
           column: 5
         }
       },
@@ -718,140 +718,120 @@ var cov_1opq5xmnpm = function () {
       '25': {
         start: {
           line: 60,
-          column: 6
+          column: 4
         },
         end: {
           line: 60,
-          column: 37
+          column: 35
         }
       },
       '26': {
         start: {
-          line: 65,
+          line: 64,
           column: 4
         },
         end: {
-          line: 65,
+          line: 64,
           column: 56
         }
       },
       '27': {
         start: {
-          line: 65,
+          line: 64,
           column: 27
         },
         end: {
-          line: 65,
+          line: 64,
           column: 56
         }
       },
       '28': {
         start: {
-          line: 66,
+          line: 65,
           column: 4
         },
         end: {
-          line: 75,
+          line: 74,
           column: 30
         }
       },
       '29': {
         start: {
-          line: 69,
-          column: 8
+          line: 73,
+          column: 6
         },
         end: {
-          line: 69,
-          column: 53
+          line: 73,
+          column: 26
         }
       },
       '30': {
         start: {
-          line: 74,
-          column: 6
+          line: 78,
+          column: 4
         },
         end: {
-          line: 74,
-          column: 26
+          line: 78,
+          column: 56
         }
       },
       '31': {
         start: {
-          line: 79,
-          column: 4
+          line: 78,
+          column: 27
         },
         end: {
-          line: 79,
+          line: 78,
           column: 56
         }
       },
       '32': {
         start: {
           line: 79,
-          column: 27
+          column: 4
         },
         end: {
-          line: 79,
-          column: 56
+          line: 92,
+          column: 30
         }
       },
       '33': {
         start: {
-          line: 80,
-          column: 4
+          line: 91,
+          column: 6
         },
         end: {
-          line: 93,
-          column: 30
+          line: 91,
+          column: 26
         }
       },
       '34': {
         start: {
-          line: 86,
-          column: 8
+          line: 96,
+          column: 4
         },
         end: {
-          line: 86,
-          column: 53
+          line: 101,
+          column: 30
         }
       },
       '35': {
         start: {
-          line: 92,
-          column: 6
+          line: 98,
+          column: 8
         },
         end: {
-          line: 92,
-          column: 26
+          line: 98,
+          column: 43
         }
       },
       '36': {
         start: {
-          line: 97,
-          column: 4
-        },
-        end: {
-          line: 102,
-          column: 30
-        }
-      },
-      '37': {
-        start: {
           line: 99,
           column: 8
         },
         end: {
           line: 99,
-          column: 38
-        }
-      },
-      '38': {
-        start: {
-          line: 100,
-          column: 8
-        },
-        end: {
-          line: 100,
           column: 23
         }
       }
@@ -1043,7 +1023,7 @@ var cov_1opq5xmnpm = function () {
             column: 18
           },
           end: {
-            line: 62,
+            line: 61,
             column: 3
           }
         },
@@ -1053,193 +1033,145 @@ var cov_1opq5xmnpm = function () {
         name: '(anonymous_8)',
         decl: {
           start: {
-            line: 64,
+            line: 63,
             column: 2
           },
           end: {
-            line: 64,
+            line: 63,
             column: 3
           }
         },
         loc: {
           start: {
-            line: 64,
+            line: 63,
             column: 24
           },
           end: {
-            line: 76,
+            line: 75,
             column: 3
           }
         },
-        line: 64
+        line: 63
       },
       '9': {
         name: '(anonymous_9)',
         decl: {
           start: {
-            line: 68,
-            column: 25
+            line: 72,
+            column: 12
           },
           end: {
-            line: 68,
-            column: 26
+            line: 72,
+            column: 13
           }
         },
         loc: {
           start: {
-            line: 68,
-            column: 41
+            line: 72,
+            column: 32
           },
           end: {
-            line: 70,
-            column: 7
+            line: 74,
+            column: 5
           }
         },
-        line: 68
+        line: 72
       },
       '10': {
         name: '(anonymous_10)',
         decl: {
           start: {
-            line: 73,
-            column: 12
+            line: 77,
+            column: 2
           },
           end: {
-            line: 73,
-            column: 13
+            line: 77,
+            column: 3
           }
         },
         loc: {
           start: {
-            line: 73,
-            column: 32
+            line: 77,
+            column: 33
           },
           end: {
-            line: 75,
-            column: 5
+            line: 93,
+            column: 3
           }
         },
-        line: 73
+        line: 77
       },
       '11': {
         name: '(anonymous_11)',
         decl: {
           start: {
-            line: 78,
-            column: 2
+            line: 90,
+            column: 12
           },
           end: {
-            line: 78,
-            column: 3
+            line: 90,
+            column: 13
           }
         },
         loc: {
           start: {
-            line: 78,
-            column: 33
+            line: 90,
+            column: 32
           },
           end: {
-            line: 94,
-            column: 3
+            line: 92,
+            column: 5
           }
         },
-        line: 78
+        line: 90
       },
       '12': {
         name: '(anonymous_12)',
         decl: {
           start: {
-            line: 85,
-            column: 25
+            line: 95,
+            column: 2
           },
           end: {
-            line: 85,
-            column: 26
+            line: 95,
+            column: 3
           }
         },
         loc: {
           start: {
-            line: 85,
-            column: 41
+            line: 95,
+            column: 31
           },
           end: {
-            line: 87,
-            column: 7
+            line: 102,
+            column: 3
           }
         },
-        line: 85
+        line: 95
       },
       '13': {
         name: '(anonymous_13)',
         decl: {
           start: {
-            line: 91,
+            line: 97,
             column: 12
           },
           end: {
-            line: 91,
+            line: 97,
             column: 13
           }
         },
         loc: {
           start: {
-            line: 91,
-            column: 32
-          },
-          end: {
-            line: 93,
-            column: 5
-          }
-        },
-        line: 91
-      },
-      '14': {
-        name: '(anonymous_14)',
-        decl: {
-          start: {
-            line: 96,
-            column: 2
-          },
-          end: {
-            line: 96,
-            column: 3
-          }
-        },
-        loc: {
-          start: {
-            line: 96,
-            column: 40
-          },
-          end: {
-            line: 103,
-            column: 3
-          }
-        },
-        line: 96
-      },
-      '15': {
-        name: '(anonymous_15)',
-        decl: {
-          start: {
-            line: 98,
-            column: 12
-          },
-          end: {
-            line: 98,
-            column: 13
-          }
-        },
-        loc: {
-          start: {
-            line: 98,
+            line: 97,
             column: 24
           },
           end: {
-            line: 101,
+            line: 100,
             column: 7
           }
         },
-        line: 98
+        line: 97
       }
     },
     branchMap: {
@@ -1514,7 +1446,7 @@ var cov_1opq5xmnpm = function () {
             column: 4
           },
           end: {
-            line: 61,
+            line: 59,
             column: 5
           }
         },
@@ -1525,7 +1457,7 @@ var cov_1opq5xmnpm = function () {
             column: 4
           },
           end: {
-            line: 61,
+            line: 59,
             column: 5
           }
         }, {
@@ -1534,7 +1466,7 @@ var cov_1opq5xmnpm = function () {
             column: 4
           },
           end: {
-            line: 61,
+            line: 59,
             column: 5
           }
         }],
@@ -1543,68 +1475,68 @@ var cov_1opq5xmnpm = function () {
       '9': {
         loc: {
           start: {
-            line: 65,
+            line: 64,
             column: 4
           },
           end: {
-            line: 65,
+            line: 64,
             column: 56
           }
         },
         type: 'if',
         locations: [{
           start: {
-            line: 65,
+            line: 64,
             column: 4
           },
           end: {
-            line: 65,
+            line: 64,
             column: 56
           }
         }, {
           start: {
-            line: 65,
+            line: 64,
             column: 4
           },
           end: {
-            line: 65,
+            line: 64,
             column: 56
           }
         }],
-        line: 65
+        line: 64
       },
       '10': {
         loc: {
           start: {
-            line: 79,
+            line: 78,
             column: 4
           },
           end: {
-            line: 79,
+            line: 78,
             column: 56
           }
         },
         type: 'if',
         locations: [{
           start: {
-            line: 79,
+            line: 78,
             column: 4
           },
           end: {
-            line: 79,
+            line: 78,
             column: 56
           }
         }, {
           start: {
-            line: 79,
+            line: 78,
             column: 4
           },
           end: {
-            line: 79,
+            line: 78,
             column: 56
           }
         }],
-        line: 79
+        line: 78
       }
     },
     s: {
@@ -1644,9 +1576,7 @@ var cov_1opq5xmnpm = function () {
       '33': 0,
       '34': 0,
       '35': 0,
-      '36': 0,
-      '37': 0,
-      '38': 0
+      '36': 0
     },
     f: {
       '0': 0,
@@ -1662,9 +1592,7 @@ var cov_1opq5xmnpm = function () {
       '10': 0,
       '11': 0,
       '12': 0,
-      '13': 0,
-      '14': 0,
-      '15': 0
+      '13': 0
     },
     b: {
       '0': [0, 0],
@@ -1819,10 +1747,9 @@ module.exports = function () {
         localStorage.removeItem(LOCALSTORAGE_KEY + 'token');
       } else {
         cov_1opq5xmnpm.b[8][1]++;
-        cov_1opq5xmnpm.s[25]++;
-
-        this.settings.token = undefined;
       }
+      cov_1opq5xmnpm.s[25]++;
+      this.settings.token = undefined;
     }
   }, {
     key: 'GetRequest',
@@ -1839,17 +1766,14 @@ module.exports = function () {
       }cov_1opq5xmnpm.s[28]++;
       return axios({
         method: 'get',
-        transformResponse: function transformResponse(data) {
-          cov_1opq5xmnpm.f[9]++;
-          cov_1opq5xmnpm.s[29]++;
-
-          return convertTime.APIToUTC(JSON.parse(data));
-        },
+        // transformResponse: function (data) {
+        //   return convertTime.APIToUTC(JSON.parse(data))
+        // },
         url: this._makeUrl(resource),
         headers: this._makeHeaders()
       }).then(function (response) {
-        cov_1opq5xmnpm.f[10]++;
-        cov_1opq5xmnpm.s[30]++;
+        cov_1opq5xmnpm.f[9]++;
+        cov_1opq5xmnpm.s[29]++;
 
         return response.data;
       }).catch(this._checkError);
@@ -1857,51 +1781,48 @@ module.exports = function () {
   }, {
     key: 'PostRequest',
     value: function PostRequest(resource, params) {
-      cov_1opq5xmnpm.f[11]++;
-      cov_1opq5xmnpm.s[31]++;
+      cov_1opq5xmnpm.f[10]++;
+      cov_1opq5xmnpm.s[30]++;
 
       if (!this._getToken()) {
           cov_1opq5xmnpm.b[10][0]++;
-          cov_1opq5xmnpm.s[32]++;
+          cov_1opq5xmnpm.s[31]++;
           _promise2.default.reject(INVALID_TOKEN);
         } else {
         cov_1opq5xmnpm.b[10][1]++;
-      }cov_1opq5xmnpm.s[33]++;
+      }cov_1opq5xmnpm.s[32]++;
       return axios({
         method: 'post',
         // transformRequest: [function (data, headers) {
         //   return convertTime.UTCtoAPI(data)
         // }],
-        transformResponse: function transformResponse(data) {
-          cov_1opq5xmnpm.f[12]++;
-          cov_1opq5xmnpm.s[34]++;
-
-          return convertTime.APIToUTC(JSON.parse(data));
-        },
+        // transformResponse: function (data) {
+        //   return convertTime.APIToUTC(JSON.parse(data))
+        // },
         url: this._makeUrl(resource),
         data: params,
         headers: this._makeHeaders()
       }).then(function (response) {
-        cov_1opq5xmnpm.f[13]++;
-        cov_1opq5xmnpm.s[35]++;
+        cov_1opq5xmnpm.f[11]++;
+        cov_1opq5xmnpm.s[33]++;
 
         return response.data;
       }).catch(this._checkError);
     }
   }, {
     key: 'AuthenticateRequest',
-    value: function AuthenticateRequest(request, params) {
+    value: function AuthenticateRequest(params) {
       var _this = this;
 
-      cov_1opq5xmnpm.f[14]++;
-      cov_1opq5xmnpm.s[36]++;
+      cov_1opq5xmnpm.f[12]++;
+      cov_1opq5xmnpm.s[34]++;
 
-      return this.PostRequest(request, params).then(function (response) {
-        cov_1opq5xmnpm.f[15]++;
-        cov_1opq5xmnpm.s[37]++;
+      return axios.post(this._makeUrl('login'), params).then(function (response) {
+        cov_1opq5xmnpm.f[13]++;
+        cov_1opq5xmnpm.s[35]++;
 
-        _this._setToken(response.token);
-        cov_1opq5xmnpm.s[38]++;
+        _this._setToken(response.data.token);
+        cov_1opq5xmnpm.s[36]++;
         return response;
       }).catch(this._checkError);
     }
@@ -2921,7 +2842,7 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var cov_1gds5yomf0 = function () {
   var path = 'C:\\Engage\\podium.clients\\podium-js-sdk\\src\\api\\auth.js',
-      hash = '29a5cb5a172643bd3b67070bba0a8840fbfbe648',
+      hash = 'ce917fa9a1c224c1ae3c52052646fd2e525b4cb7',
       global = new Function('return this')(),
       gcv = '__coverage__',
       coverageData = {
@@ -2943,7 +2864,7 @@ var cov_1gds5yomf0 = function () {
           column: 0
         },
         end: {
-          line: 33,
+          line: 32,
           column: 1
         }
       },
@@ -2969,71 +2890,61 @@ var cov_1gds5yomf0 = function () {
       },
       '4': {
         start: {
-          line: 8,
+          line: 11,
           column: 4
         },
         end: {
-          line: 8,
-          column: 26
+          line: 11,
+          column: 27
         }
       },
       '5': {
         start: {
-          line: 12,
-          column: 4
+          line: 15,
+          column: 17
         },
         end: {
-          line: 12,
-          column: 27
+          line: 19,
+          column: 5
         }
       },
       '6': {
         start: {
-          line: 16,
-          column: 17
+          line: 20,
+          column: 4
         },
         end: {
           line: 20,
-          column: 5
+          column: 43
         }
       },
       '7': {
         start: {
-          line: 21,
+          line: 24,
           column: 4
         },
         end: {
-          line: 21,
-          column: 57
+          line: 24,
+          column: 25
         }
       },
       '8': {
         start: {
-          line: 25,
+          line: 28,
           column: 4
         },
         end: {
-          line: 25,
-          column: 25
+          line: 30,
+          column: 6
         }
       },
       '9': {
         start: {
           line: 29,
-          column: 4
-        },
-        end: {
-          line: 31,
-          column: 6
-        }
-      },
-      '10': {
-        start: {
-          line: 30,
           column: 6
         },
         end: {
-          line: 30,
+          line: 29,
           column: 25
         }
       }
@@ -3057,7 +2968,7 @@ var cov_1gds5yomf0 = function () {
             column: 25
           },
           end: {
-            line: 9,
+            line: 8,
             column: 3
           }
         },
@@ -3067,121 +2978,121 @@ var cov_1gds5yomf0 = function () {
         name: '(anonymous_1)',
         decl: {
           start: {
-            line: 11,
+            line: 10,
             column: 2
           },
           end: {
-            line: 11,
+            line: 10,
             column: 3
           }
         },
         loc: {
           start: {
-            line: 11,
+            line: 10,
             column: 14
           },
           end: {
-            line: 13,
+            line: 12,
             column: 3
           }
         },
-        line: 11
+        line: 10
       },
       '2': {
         name: '(anonymous_2)',
         decl: {
           start: {
-            line: 15,
+            line: 14,
             column: 2
           },
           end: {
-            line: 15,
+            line: 14,
             column: 3
           }
         },
         loc: {
           start: {
-            line: 15,
+            line: 14,
             column: 40
           },
           end: {
-            line: 22,
+            line: 21,
             column: 3
           }
         },
-        line: 15
+        line: 14
       },
       '3': {
         name: '(anonymous_3)',
         decl: {
           start: {
-            line: 24,
+            line: 23,
             column: 2
           },
           end: {
-            line: 24,
+            line: 23,
             column: 3
           }
         },
         loc: {
           start: {
-            line: 24,
+            line: 23,
             column: 20
           },
           end: {
-            line: 26,
+            line: 25,
             column: 3
           }
         },
-        line: 24
+        line: 23
       },
       '4': {
         name: '(anonymous_4)',
         decl: {
           start: {
-            line: 28,
+            line: 27,
             column: 2
           },
           end: {
-            line: 28,
+            line: 27,
             column: 3
           }
         },
         loc: {
           start: {
-            line: 28,
+            line: 27,
             column: 12
           },
           end: {
-            line: 32,
+            line: 31,
             column: 3
           }
         },
-        line: 28
+        line: 27
       },
       '5': {
         name: '(anonymous_5)',
         decl: {
           start: {
-            line: 29,
+            line: 28,
             column: 46
           },
           end: {
-            line: 29,
+            line: 28,
             column: 47
           }
         },
         loc: {
           start: {
-            line: 29,
+            line: 28,
             column: 53
           },
           end: {
-            line: 31,
+            line: 30,
             column: 5
           }
         },
-        line: 29
+        line: 28
       }
     },
     branchMap: {},
@@ -3195,8 +3106,7 @@ var cov_1gds5yomf0 = function () {
       '6': 0,
       '7': 0,
       '8': 0,
-      '9': 0,
-      '10': 0
+      '9': 0
     },
     f: {
       '0': 0,
@@ -3237,8 +3147,6 @@ module.exports = function (_PodiumRequest) {
     cov_1gds5yomf0.s[3]++;
 
     _this.settings = settings;
-    cov_1gds5yomf0.s[4]++;
-    _this.resouce = 'login';
     return _this;
   }
 
@@ -3246,7 +3154,7 @@ module.exports = function (_PodiumRequest) {
     key: 'getToken',
     value: function getToken() {
       cov_1gds5yomf0.f[1]++;
-      cov_1gds5yomf0.s[5]++;
+      cov_1gds5yomf0.s[4]++;
 
       return this._getToken();
     }
@@ -3255,19 +3163,19 @@ module.exports = function (_PodiumRequest) {
     value: function login(username, password, programId) {
       cov_1gds5yomf0.f[2]++;
 
-      var params = (cov_1gds5yomf0.s[6]++, {
+      var params = (cov_1gds5yomf0.s[5]++, {
         'user_account': username,
         'password': password,
         'program_id': programId
       });
-      cov_1gds5yomf0.s[7]++;
-      return this.AuthenticateRequest(this.resouce, params);
+      cov_1gds5yomf0.s[6]++;
+      return this.AuthenticateRequest(params);
     }
   }, {
     key: 'basicAuth',
     value: function basicAuth(token) {
       cov_1gds5yomf0.f[3]++;
-      cov_1gds5yomf0.s[8]++;
+      cov_1gds5yomf0.s[7]++;
 
       this._setToken(token);
     }
@@ -3277,11 +3185,11 @@ module.exports = function (_PodiumRequest) {
       var _this2 = this;
 
       cov_1gds5yomf0.f[4]++;
-      cov_1gds5yomf0.s[9]++;
+      cov_1gds5yomf0.s[8]++;
 
       return this.PostRequest('logout').finally(function (rsp) {
         cov_1gds5yomf0.f[5]++;
-        cov_1gds5yomf0.s[10]++;
+        cov_1gds5yomf0.s[9]++;
 
         _this2._removeToken();
       });
@@ -5575,7 +5483,7 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var cov_2ot5ggtqce = function () {
   var path = 'C:\\Engage\\podium.clients\\podium-js-sdk\\src\\api\\terms.js',
-      hash = '8d856c746b2c4258b9962a68ead65fe736b881bc',
+      hash = 'd9196683811537ff327a9ef94483258e0bf72d6b',
       global = new Function('return this')(),
       gcv = '__coverage__',
       coverageData = {
@@ -5583,62 +5491,62 @@ var cov_2ot5ggtqce = function () {
     statementMap: {
       '0': {
         start: {
-          line: 3,
+          line: 2,
           column: 20
         },
         end: {
-          line: 3,
+          line: 2,
           column: 63
         }
       },
       '1': {
         start: {
-          line: 5,
+          line: 4,
           column: 0
         },
         end: {
-          line: 18,
+          line: 17,
           column: 1
         }
       },
       '2': {
         start: {
-          line: 7,
+          line: 6,
           column: 4
         },
         end: {
-          line: 7,
+          line: 6,
           column: 19
         }
       },
       '3': {
         start: {
-          line: 8,
+          line: 7,
           column: 4
         },
         end: {
-          line: 8,
-          column: 26
+          line: 7,
+          column: 27
         }
       },
       '4': {
         start: {
-          line: 12,
+          line: 11,
           column: 4
         },
         end: {
-          line: 12,
-          column: 40
+          line: 11,
+          column: 41
         }
       },
       '5': {
         start: {
-          line: 16,
+          line: 15,
           column: 4
         },
         end: {
-          line: 16,
-          column: 57
+          line: 15,
+          column: 58
         }
       }
     },
@@ -5647,73 +5555,73 @@ var cov_2ot5ggtqce = function () {
         name: '(anonymous_0)',
         decl: {
           start: {
-            line: 6,
+            line: 5,
             column: 2
           },
           end: {
-            line: 6,
+            line: 5,
             column: 3
           }
         },
         loc: {
           start: {
-            line: 6,
+            line: 5,
             column: 25
           },
           end: {
-            line: 9,
+            line: 8,
             column: 3
           }
         },
-        line: 6
+        line: 5
       },
       '1': {
         name: '(anonymous_1)',
         decl: {
           start: {
-            line: 11,
+            line: 10,
             column: 2
           },
           end: {
-            line: 11,
+            line: 10,
             column: 3
           }
         },
         loc: {
           start: {
-            line: 11,
+            line: 10,
             column: 9
           },
           end: {
-            line: 13,
+            line: 12,
             column: 3
           }
         },
-        line: 11
+        line: 10
       },
       '2': {
         name: '(anonymous_2)',
         decl: {
           start: {
-            line: 15,
+            line: 14,
             column: 2
           },
           end: {
-            line: 15,
+            line: 14,
             column: 3
           }
         },
         loc: {
           start: {
-            line: 15,
+            line: 14,
             column: 14
           },
           end: {
-            line: 17,
+            line: 16,
             column: 3
           }
         },
-        line: 15
+        line: 14
       }
     },
     branchMap: {},
@@ -5760,7 +5668,7 @@ module.exports = function (_PodiumRequest) {
 
     cov_2ot5ggtqce.s[3]++;
 
-    _this.resouce = 'terms';
+    _this.resource = 'terms';
     return _this;
   }
 
@@ -5770,7 +5678,7 @@ module.exports = function (_PodiumRequest) {
       cov_2ot5ggtqce.f[1]++;
       cov_2ot5ggtqce.s[4]++;
 
-      return this.GetRequest(this.resouce);
+      return this.GetRequest(this.resource);
     }
   }, {
     key: 'accept',
@@ -5778,7 +5686,7 @@ module.exports = function (_PodiumRequest) {
       cov_2ot5ggtqce.f[2]++;
       cov_2ot5ggtqce.s[5]++;
 
-      return this.PostRequest(this.resouce, { terms_id: id });
+      return this.PostRequest(this.resource, { terms_id: id });
     }
   }]);
   return Terms;
@@ -5813,7 +5721,7 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var cov_2lt44hlgmf = function () {
   var path = 'C:\\Engage\\podium.clients\\podium-js-sdk\\src\\api\\lrg.js',
-      hash = '85ac38ccfad8a54a2079ade3474c6001af6d7403',
+      hash = '9e271f8571ecf2339d0cfd678028f46b23073beb',
       global = new Function('return this')(),
       gcv = '__coverage__',
       coverageData = {
@@ -5821,91 +5729,91 @@ var cov_2lt44hlgmf = function () {
     statementMap: {
       '0': {
         start: {
-          line: 3,
+          line: 2,
           column: 20
         },
         end: {
-          line: 3,
+          line: 2,
           column: 63
         }
       },
       '1': {
         start: {
-          line: 5,
+          line: 4,
           column: 0
         },
         end: {
-          line: 26,
+          line: 25,
           column: 1
         }
       },
       '2': {
         start: {
-          line: 7,
+          line: 6,
           column: 4
         },
         end: {
-          line: 7,
+          line: 6,
           column: 19
         }
       },
       '3': {
         start: {
-          line: 8,
+          line: 7,
           column: 4
         },
         end: {
-          line: 8,
-          column: 32
+          line: 7,
+          column: 33
         }
       },
       '4': {
         start: {
-          line: 12,
+          line: 11,
           column: 4
         },
         end: {
-          line: 14,
+          line: 13,
           column: 6
         }
       },
       '5': {
         start: {
-          line: 18,
+          line: 17,
           column: 4
         },
         end: {
-          line: 24,
+          line: 23,
           column: 5
         }
       },
       '6': {
         start: {
-          line: 19,
+          line: 18,
           column: 6
         },
         end: {
-          line: 21,
+          line: 20,
           column: 8
         }
       },
       '7': {
         start: {
-          line: 20,
+          line: 19,
           column: 8
         },
         end: {
-          line: 20,
+          line: 19,
           column: 59
         }
       },
       '8': {
         start: {
-          line: 23,
+          line: 22,
           column: 6
         },
         end: {
-          line: 23,
+          line: 22,
           column: 18
         }
       }
@@ -5915,165 +5823,165 @@ var cov_2lt44hlgmf = function () {
         name: '(anonymous_0)',
         decl: {
           start: {
-            line: 6,
+            line: 5,
             column: 2
           },
           end: {
-            line: 6,
+            line: 5,
             column: 3
           }
         },
         loc: {
           start: {
-            line: 6,
+            line: 5,
             column: 25
           },
           end: {
-            line: 9,
+            line: 8,
             column: 3
           }
         },
-        line: 6
+        line: 5
       },
       '1': {
         name: '(anonymous_1)',
         decl: {
           start: {
-            line: 11,
+            line: 10,
             column: 2
           },
           end: {
-            line: 11,
+            line: 10,
             column: 3
           }
         },
         loc: {
           start: {
-            line: 11,
+            line: 10,
             column: 20
           },
           end: {
-            line: 15,
+            line: 14,
             column: 3
           }
         },
-        line: 11
+        line: 10
       },
       '2': {
         name: '(anonymous_2)',
         decl: {
           start: {
-            line: 17,
+            line: 16,
             column: 2
           },
           end: {
-            line: 17,
+            line: 16,
             column: 3
           }
         },
         loc: {
           start: {
-            line: 17,
+            line: 16,
             column: 25
           },
           end: {
-            line: 25,
+            line: 24,
             column: 3
           }
         },
-        line: 17
+        line: 16
       },
       '3': {
         name: '(anonymous_3)',
         decl: {
           start: {
-            line: 19,
+            line: 18,
             column: 33
           },
           end: {
-            line: 19,
+            line: 18,
             column: 34
           }
         },
         loc: {
           start: {
-            line: 19,
+            line: 18,
             column: 45
           },
           end: {
-            line: 21,
+            line: 20,
             column: 7
           }
         },
-        line: 19
+        line: 18
       }
     },
     branchMap: {
       '0': {
         loc: {
           start: {
-            line: 18,
+            line: 17,
             column: 4
           },
           end: {
-            line: 24,
+            line: 23,
             column: 5
           }
         },
         type: 'if',
         locations: [{
           start: {
-            line: 18,
+            line: 17,
             column: 4
           },
           end: {
-            line: 24,
+            line: 23,
             column: 5
           }
         }, {
           start: {
-            line: 18,
+            line: 17,
             column: 4
           },
           end: {
-            line: 24,
+            line: 23,
             column: 5
           }
         }],
-        line: 18
+        line: 17
       },
       '1': {
         loc: {
           start: {
-            line: 18,
+            line: 17,
             column: 10
           },
           end: {
-            line: 18,
+            line: 17,
             column: 58
           }
         },
         type: 'binary-expr',
         locations: [{
           start: {
-            line: 18,
+            line: 17,
             column: 10
           },
           end: {
-            line: 18,
+            line: 17,
             column: 39
           }
         }, {
           start: {
-            line: 18,
+            line: 17,
             column: 43
           },
           end: {
-            line: 18,
+            line: 17,
             column: 58
           }
         }],
-        line: 18
+        line: 17
       }
     },
     s: {
@@ -6126,7 +6034,7 @@ module.exports = function (_PodiumRequest) {
 
     cov_2lt44hlgmf.s[3]++;
 
-    _this.resouce = 'lrg/session';
+    _this.resource = 'lrg/session';
     return _this;
   }
 
@@ -6136,7 +6044,7 @@ module.exports = function (_PodiumRequest) {
       cov_2lt44hlgmf.f[1]++;
       cov_2lt44hlgmf.s[4]++;
 
-      return this.PostRequest(this.resouce, {
+      return this.PostRequest(this.resource, {
         website_back: redirectUrl
       });
     }
@@ -6196,7 +6104,7 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var cov_h5lh0ytqj = function () {
   var path = 'C:\\Engage\\podium.clients\\podium-js-sdk\\src\\api\\incentive.js',
-      hash = 'baed048a161abfcdf4427bbb97a46fa95b4b0db5',
+      hash = 'e6bb94141ece0b02cfb72d693a0c8f5a15d34201',
       global = new Function('return this')(),
       gcv = '__coverage__',
       coverageData = {
@@ -6204,82 +6112,62 @@ var cov_h5lh0ytqj = function () {
     statementMap: {
       '0': {
         start: {
-          line: 3,
+          line: 2,
           column: 20
         },
         end: {
-          line: 3,
+          line: 2,
           column: 63
         }
       },
       '1': {
         start: {
-          line: 5,
+          line: 4,
           column: 0
         },
         end: {
-          line: 22,
+          line: 17,
           column: 1
         }
       },
       '2': {
         start: {
-          line: 7,
+          line: 6,
           column: 4
         },
         end: {
-          line: 7,
+          line: 6,
           column: 19
         }
       },
       '3': {
         start: {
-          line: 8,
+          line: 7,
           column: 4
         },
         end: {
-          line: 8,
+          line: 7,
           column: 28
         }
       },
       '4': {
         start: {
-          line: 12,
+          line: 11,
           column: 4
         },
         end: {
-          line: 14,
-          column: 6
+          line: 11,
+          column: 54
         }
       },
       '5': {
         start: {
-          line: 13,
-          column: 6
-        },
-        end: {
-          line: 13,
-          column: 29
-        }
-      },
-      '6': {
-        start: {
-          line: 18,
+          line: 15,
           column: 4
         },
         end: {
-          line: 20,
-          column: 6
-        }
-      },
-      '7': {
-        start: {
-          line: 19,
-          column: 6
-        },
-        end: {
-          line: 19,
-          column: 26
+          line: 15,
+          column: 41
         }
       }
     },
@@ -6288,121 +6176,73 @@ var cov_h5lh0ytqj = function () {
         name: '(anonymous_0)',
         decl: {
           start: {
-            line: 6,
+            line: 5,
             column: 2
           },
           end: {
-            line: 6,
+            line: 5,
             column: 3
           }
         },
         loc: {
           start: {
-            line: 6,
+            line: 5,
             column: 25
           },
           end: {
-            line: 9,
+            line: 8,
             column: 3
           }
         },
-        line: 6
+        line: 5
       },
       '1': {
         name: '(anonymous_1)',
         decl: {
           start: {
-            line: 11,
+            line: 10,
             column: 2
           },
           end: {
-            line: 11,
+            line: 10,
             column: 3
           }
         },
         loc: {
           start: {
-            line: 11,
+            line: 10,
             column: 16
           },
           end: {
-            line: 15,
+            line: 12,
             column: 3
           }
         },
-        line: 11
+        line: 10
       },
       '2': {
         name: '(anonymous_2)',
         decl: {
           start: {
-            line: 12,
-            column: 46
-          },
-          end: {
-            line: 12,
-            column: 47
-          }
-        },
-        loc: {
-          start: {
-            line: 12,
-            column: 60
-          },
-          end: {
             line: 14,
-            column: 5
-          }
-        },
-        line: 12
-      },
-      '3': {
-        name: '(anonymous_3)',
-        decl: {
-          start: {
-            line: 17,
             column: 2
           },
           end: {
-            line: 17,
+            line: 14,
             column: 3
           }
         },
         loc: {
           start: {
-            line: 17,
+            line: 14,
             column: 21
           },
           end: {
-            line: 21,
+            line: 16,
             column: 3
           }
         },
-        line: 17
-      },
-      '4': {
-        name: '(anonymous_4)',
-        decl: {
-          start: {
-            line: 18,
-            column: 55
-          },
-          end: {
-            line: 18,
-            column: 56
-          }
-        },
-        loc: {
-          start: {
-            line: 18,
-            column: 69
-          },
-          end: {
-            line: 20,
-            column: 5
-          }
-        },
-        line: 18
+        line: 14
       }
     },
     branchMap: {},
@@ -6412,16 +6252,12 @@ var cov_h5lh0ytqj = function () {
       '2': 0,
       '3': 0,
       '4': 0,
-      '5': 0,
-      '6': 0,
-      '7': 0
+      '5': 0
     },
     f: {
       '0': 0,
       '1': 0,
-      '2': 0,
-      '3': 0,
-      '4': 0
+      '2': 0
     },
     b: {},
     _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c'
@@ -6453,7 +6289,7 @@ module.exports = function (_PodiumRequest) {
 
     cov_h5lh0ytqj.s[3]++;
 
-    _this.resouce = 'balance';
+    _this.resource = 'ledger';
     return _this;
   }
 
@@ -6463,25 +6299,15 @@ module.exports = function (_PodiumRequest) {
       cov_h5lh0ytqj.f[1]++;
       cov_h5lh0ytqj.s[4]++;
 
-      return this.GetRequest(this.resouce).then(function (response) {
-        cov_h5lh0ytqj.f[2]++;
-        cov_h5lh0ytqj.s[5]++;
-
-        return response.data[0];
-      });
+      return this.GetRequest(this.resource + '/balance');
     }
   }, {
     key: 'getTransactions',
     value: function getTransactions() {
-      cov_h5lh0ytqj.f[3]++;
-      cov_h5lh0ytqj.s[6]++;
+      cov_h5lh0ytqj.f[2]++;
+      cov_h5lh0ytqj.s[5]++;
 
-      return this.GetRequest('points_transactions').then(function (response) {
-        cov_h5lh0ytqj.f[4]++;
-        cov_h5lh0ytqj.s[7]++;
-
-        return response.data;
-      });
+      return this.GetRequest(this.resource);
     }
   }]);
   return Incentive;
@@ -6516,7 +6342,7 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var cov_kbvmnx5tk = function () {
   var path = 'C:\\Engage\\podium.clients\\podium-js-sdk\\src\\api\\profile.js',
-      hash = '8db32a1f900d6301b92bf78b620167d5bf763dbf',
+      hash = 'f066a7a16eceedd1716c509ff6111773dfd07bb5',
       global = new Function('return this')(),
       gcv = '__coverage__',
       coverageData = {
@@ -6559,7 +6385,7 @@ var cov_kbvmnx5tk = function () {
         },
         end: {
           line: 8,
-          column: 28
+          column: 29
         }
       },
       '4': {
@@ -6569,7 +6395,7 @@ var cov_kbvmnx5tk = function () {
         },
         end: {
           line: 12,
-          column: 40
+          column: 41
         }
       }
     },
@@ -6665,7 +6491,7 @@ module.exports = function (_PodiumRequest) {
 
     cov_kbvmnx5tk.s[3]++;
 
-    _this.resouce = 'profile';
+    _this.resource = 'profile';
     return _this;
   }
 
@@ -6675,7 +6501,7 @@ module.exports = function (_PodiumRequest) {
       cov_kbvmnx5tk.f[1]++;
       cov_kbvmnx5tk.s[4]++;
 
-      return this.GetRequest(this.resouce);
+      return this.GetRequest(this.resource);
     }
   }]);
   return Profile;
