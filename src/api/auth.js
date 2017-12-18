@@ -5,7 +5,6 @@ module.exports = class Auth extends PodiumRequest {
   constructor (settings) {
     super(settings)
     this.settings = settings
-    this.resource = 'login'
   }
 
   getToken () {
@@ -18,7 +17,7 @@ module.exports = class Auth extends PodiumRequest {
       'password': password,
       'program_id': programId
     }
-    return this.AuthenticateRequest(this.resource, params)
+    return this.AuthenticateRequest(params)
   }
 
   basicAuth (token) {
