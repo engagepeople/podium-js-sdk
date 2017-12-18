@@ -9,7 +9,6 @@ let data = {
 }
 
 describe('podiumRequest', () => {
-
   describe('Authentication ', () => {
     let podiumRequest
 
@@ -23,7 +22,6 @@ describe('podiumRequest', () => {
     })
 
     it('Expects Authenticate2Request to set token', function (done) {
-
       expect(podiumRequest._getToken()).to.equal(null)
 
       moxios.withMock(function () {
@@ -110,6 +108,5 @@ describe('podiumRequest', () => {
         })
       })
     })
-
   })
 })

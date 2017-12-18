@@ -1,6 +1,6 @@
 'use strict'
 const axios = require('axios')
-const convertTime = require('./../utilities/convertTime')
+// const convertTime = require('./../utilities/convertTime')
 const INVALID_TOKEN = 'INVALID_TOKEN'
 const UNACCEPTED_TERMS = 'UNACCEPTED_TERMS'
 const LOCALSTORAGE_KEY = '__podiumSDK__'

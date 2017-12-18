@@ -36,12 +36,16 @@ describe('LRG Resource', () => {
 
 describe('LRG Resource', () => {
   let resource
-  let spyPostRequest = sinon.spy
+  let spyPostRequest = sinon.stub
+  let spyWindow = sinon.spy
 
   beforeEach(() => {
     resource = new LRG(data.settings)
-    spyPostRequest = sinon.stub(resource, 'PostRequest').returns({
-
+    spyWindow = sinon.stub(window, 'location')
+    spyPostRequest = sinon.stub(resource, 'PostRequest').resolves({
+      body: {
+        redirect_url: 'http://lrg.url'
+      }
     })
   })
   afterEach(() => {
@@ -49,7 +53,8 @@ describe('LRG Resource', () => {
   })
 
   it.skip('should call GetRequest once', () => {
-    resource.redirect()
+    resource.redirect('http://www.redirecturl.com')
     expect(spyPostRequest.callCount).to.equal(1)
+    expect(spyWindow.callCount).to.equal(1)
   })
 })
