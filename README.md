@@ -9,9 +9,15 @@ npm install podium-sdk
 
 ## Usage
 ```
-import Podium from 'podium-sdk'
-let podium = new Podium({endpoint: 'http://podium.api/v1/'})
-podium.auth.login($email, $password, $progamId)
+import Podium from 'podium-sdk';
+
+let podium = new Podium({endpoint: 'http://podium.api/v1/'});
+
+podium.auth.login($email, $password, $progamId).then(rsp => {
+  console.log(rsp.message);
+}).catch(error => {
+  console.log(error.message);
+})
 ``` 
  
 ## API methods
@@ -22,7 +28,7 @@ podium.auth.login($email, $password, $progamId)
 These methods map to the [authentication endpoints](https://developers.podiumrewards.com/api_docs/Member/Authentication) in the API. 
 
 ```
-Podium.auth.login(email, password, progamId)
+Podium.auth.login($email, $password, $progamId)
 Podium.auth.getToken()
 Podium.auth.logout()
 ```
@@ -54,7 +60,7 @@ Podium.incentive.getTransactions()
  
 ```
 Podium.terms.get()
-Podium.terms.accept(termsId)
+Podium.terms.accept($termsId)
 ```
  
  ##### Podium.terms.accept parameters
@@ -71,8 +77,8 @@ Podium.terms.accept(termsId)
  These methods map to the [LRG authentication endpoints](https://developers.podiumrewards.com/api_docs/Member/Lrg%20Authentication) in the API.
  
 ```
-Podium.lrg.redirect(websiteBack)
-Podium.lrg.get(websiteBack)
+Podium.lrg.redirect($websiteBack)
+Podium.lrg.get($websiteBack)
 ```
  
  ##### Parameters
