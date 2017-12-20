@@ -96,7 +96,7 @@ module.exports = class PodiumRequest {
     return axios.post(this._makeUrl('login'), params)
       .then(response => {
         this._setToken(response.data.token)
-        return response
+        return response.data
       })
       .catch(this._checkError)
   }
