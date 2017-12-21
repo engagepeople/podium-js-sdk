@@ -34,7 +34,7 @@ module.exports = class PodiumRequest {
     if (error.response.status === 403 && error.response.data.code === UNACCEPTED_TERMS) {
       console.log(UNACCEPTED_TERMS)
     }
-    return error.response
+    throw error
   }
 
   _setToken (token) {

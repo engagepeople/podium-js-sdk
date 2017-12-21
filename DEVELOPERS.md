@@ -7,6 +7,7 @@ Developing
 
 Release Process
 ----------
+- check package.json "main": "dist/index.js", 
 - npm run unit
 - npm run build
 - git commit

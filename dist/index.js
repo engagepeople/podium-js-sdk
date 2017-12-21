@@ -459,7 +459,7 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 
 var cov_1opq5xmnpm = function () {
   var path = 'C:\\Engage\\podium.clients\\podium-js-sdk\\src\\podiumRequest\\podiumRequest.js',
-      hash = '1bedae162cbdef1b42e3d5719029f8f508da85c6',
+      hash = 'de4821e7ec2af20484d0097aeb6d1d685c8a2bcc',
       global = new Function('return this')(),
       gcv = '__coverage__',
       coverageData = {
@@ -612,7 +612,7 @@ var cov_1opq5xmnpm = function () {
         },
         end: {
           line: 37,
-          column: 25
+          column: 15
         }
       },
       '15': {
@@ -822,7 +822,7 @@ var cov_1opq5xmnpm = function () {
         },
         end: {
           line: 99,
-          column: 23
+          column: 28
         }
       }
     },
@@ -1684,7 +1684,7 @@ module.exports = function () {
         cov_1opq5xmnpm.b[4][1]++;
       }
       cov_1opq5xmnpm.s[14]++;
-      return error.response;
+      throw error;
     }
   }, {
     key: '_setToken',
@@ -1812,7 +1812,7 @@ module.exports = function () {
 
         _this._setToken(response.data.token);
         cov_1opq5xmnpm.s[35]++;
-        return response;
+        return response.data;
       }).catch(this._checkError);
     }
   }]);
