@@ -34,7 +34,7 @@ module.exports = class PodiumRequest {
     if (error.response.status === 403 && error.response.data.code === UNACCEPTED_TERMS) {
       console.log(UNACCEPTED_TERMS)
     }
-    return error.response
+    throw error
   }
 
   _setToken (token) {
@@ -96,7 +96,7 @@ module.exports = class PodiumRequest {
     return axios.post(this._makeUrl('login'), params)
       .then(response => {
         this._setToken(response.data.token)
-        return response
+        return response.data
       })
       .catch(this._checkError)
   }

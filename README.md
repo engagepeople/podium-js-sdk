@@ -22,8 +22,8 @@ podium.auth.login($email, $password, $progamId).then(rsp => {
  
 ## API methods
 
- ### User authentication
- Log in with a username and password and receive an API token to interact with other resources available via the API. The logout endpoint deletes the authentication token. 
+### User authentication
+Log in with a username and password and receive an API token to interact with other resources available via the API. The logout endpoint deletes the authentication token. 
 
 These methods map to the [authentication endpoints](https://developers.podiumrewards.com/api_docs/Member/Authentication) in the API. 
 
@@ -33,7 +33,7 @@ Podium.auth.getToken()
 Podium.auth.logout()
 ```
  
- ##### Podium.auth.login parameters
+##### Podium.auth.login parameters
 
 | Name  | Type | Required? | Description |
 | :------------- | :------------- | :------------- | :------------- |
@@ -42,8 +42,8 @@ Podium.auth.logout()
 | programId  | number | yes | The ID of the program to which you are authenticating the user. |
 
 
- ### Member information
- Get a member's profile information (e.g., name, email address), incentive balance, and list of incentive transactions. 
+### Member information
+Get a member's profile information (e.g., name, email address), incentive balance, and list of incentive transactions. 
  
 These methods map to the [profile](https://developers.podiumrewards.com/api_docs/Member/Profile) and [incentive endpoints](https://developers.podiumrewards.com/api_docs/Member/Incentive%20Transactions) in the API. 
  
@@ -53,17 +53,17 @@ Podium.incentive.getBalance()
 Podium.incentive.getTransactions()
 ```
 
- ### Terms and conditions
- Get the latest terms and conditions for the user's program, and also save the version of the terms and conditions that the user has accepted. 
+### Terms and conditions
+Get the latest terms and conditions for the user's program, and also save the version of the terms and conditions that the user has accepted. 
  
- These methods map to the [terms endpoints](https://developers.podiumrewards.com/api_docs/Member/Terms%20and%20Conditions#!) in the API.
+These methods map to the [terms endpoints](https://developers.podiumrewards.com/api_docs/Member/Terms%20and%20Conditions#!) in the API.
  
 ```
 Podium.terms.get()
 Podium.terms.accept($termsId)
 ```
  
- ##### Podium.terms.accept parameters
+##### Podium.terms.accept parameters
 
 | Name  | Type | Required? | Description |
 | :---- | :---- | :------ | :------------- |
@@ -71,17 +71,17 @@ Podium.terms.accept($termsId)
 
 
 
- ### LRG authentication
- Authenticate a Podium user into LRG and redirect the user to the LRG site to shop and redeem. Alternatively, get the data needed to allow the user to shop on the LRG site (e.g., LRG redirect URL, authentication token). 
+### LRG authentication
+Authenticate a Podium user into LRG and redirect the user to the LRG site to shop and redeem. Alternatively, get the data needed to allow the user to shop on the LRG site (e.g., LRG redirect URL, authentication token). 
  
- These methods map to the [LRG authentication endpoints](https://developers.podiumrewards.com/api_docs/Member/Lrg%20Authentication) in the API.
+These methods map to the [LRG authentication endpoints](https://developers.podiumrewards.com/api_docs/Member/Lrg%20Authentication) in the API.
  
 ```
 Podium.lrg.redirect($websiteBack)
 Podium.lrg.get($websiteBack)
 ```
  
- ##### Parameters
+##### Parameters
 
 | Name  | Type | Required? | Description |
 | :------ | :----- | :----- | :------------- |
