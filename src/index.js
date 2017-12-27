@@ -9,7 +9,6 @@ const Paginator = require('./utilities/Paginator')
 
 class Podium {
   constructor (userSettings = require('./settings')) {
-    console.log('/src')
     this.Paginator = Paginator
     this.setting = userSettings
     this.auth = new Auth(this.setting)

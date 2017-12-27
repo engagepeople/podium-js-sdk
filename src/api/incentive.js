@@ -12,6 +12,6 @@ module.exports = class Incentive extends PodiumRequest {
   }
 
   getTransactions (paginator) {
-    return this.GetRequest(this.resource, paginator.toParams())
+    return this.GetRequest(this.resource, paginator)
   }
 }
