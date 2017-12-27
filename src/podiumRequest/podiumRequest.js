@@ -60,10 +60,11 @@ module.exports = class PodiumRequest {
     this.settings.token = undefined
   }
 
-  GetRequest (resource) {
+  GetRequest (resource, params) {
     if (!this._getToken()) Promise.reject(INVALID_TOKEN)
     return axios({
       method: 'get',
+      params: params,
       // transformResponse: function (data) {
       //   return convertTime.APIToUTC(JSON.parse(data))
       // },

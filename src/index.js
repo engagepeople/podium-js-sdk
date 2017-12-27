@@ -5,9 +5,12 @@ const Terms = require('./api/terms')
 const LRG = require('./api/lrg')
 const Incentive = require('./api/incentive')
 const Profile = require('./api/profile')
+const Paginator = require('./utilities/Paginator')
 
 class Podium {
   constructor (userSettings = require('./settings')) {
+    console.log('/src')
+    this.Paginator = Paginator
     this.setting = userSettings
     this.auth = new Auth(this.setting)
     this.lrg = new LRG(this.setting)
