@@ -1,18 +1,18 @@
 'use strict'
 
 module.exports = class PodiumQuery {
-  constructor () {
+  constructor (userSettings = require('./../settings')) {
     this.page = 1
-    this.perPage = 50
-    this.sort_field = 'created_at'
-    this.sort_direction = 'desc'
+    this.perPage = userSettings.perPage
+    this.sort_field = userSettings.sortField
+    this.sort_direction = userSettings.sortDirection
   }
 
   setContext (ctx) {
-    this.setPage(ctx.currentPage || this.page)
-    this.setPerPage(ctx.perPage || this.perPage)
-    this.setSortBy(ctx.sortBy || this.sort_field)
-    this.setSortDesc(ctx.sortDesc || this.sort_direction)
+    this.setPage(ctx.currentPage)
+    this.setPerPage(ctx.perPage)
+    this.setSortBy(ctx.sortBy)
+    this.setSortDesc(ctx.sortDesc)
     return this
   }
 
