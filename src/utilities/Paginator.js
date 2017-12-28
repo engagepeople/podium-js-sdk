@@ -4,14 +4,14 @@ module.exports = class PodiumPaginator {
   constructor (userSettings = require('./../settings')) {
     this.page = 1
     this.perPage = userSettings.perPage
-    this.sort_field = userSettings.sortField
-    this.sort_direction = userSettings.sortDirection
+    this.sortField = userSettings.sortField
+    this.sortDirection = userSettings.sortDirection
   }
 
   setContext (ctx) {
     this.setPage(ctx.currentPage)
     this.setPerPage(ctx.perPage)
-    this.setSortBy(ctx.sortBy)
+    this.setSortField(ctx.sortBy)
     this.setSortDesc(ctx.sortDesc)
     return this
   }
@@ -26,21 +26,21 @@ module.exports = class PodiumPaginator {
     return this
   }
 
-  setSortBy (sortBy) {
-    this.sortBy = sortBy
+  setSortField (sortField) {
+    this.sortField = sortField
     return this
   }
 
   setSortDirection (direction) {
-    this.sort_direction = direction
+    this.sortDirection = direction
     return this
   }
 
   setSortDesc (direction) {
     if (direction) {
-      this.sort_direction = 'desc'
+      this.sortDirection = 'desc'
     } else {
-      this.sort_direction = 'asc'
+      this.sortDirection = 'asc'
     }
     return this
   }
@@ -49,8 +49,8 @@ module.exports = class PodiumPaginator {
     return {
       page: this.page,
       count: this.perPage,
-      sort_field: this.sort_field,
-      sort_direction: this.sort_direction
+      sort_field: this.sortField,
+      sort_direction: this.sortDirection
     }
   }
 }
