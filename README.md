@@ -50,13 +50,13 @@ These methods map to the [profile](https://developers.podiumrewards.com/api_docs
  ```
 Podium.profile.get()
 Podium.incentive.getBalance()
-Podium.incentive.getTransactions(paginator)
+Podium.incentive.getTransactions($paginator)
 ```
 ##### Podium.incentive.getTransactions parameters
 
 | Name  | Type | Required? | Description |
 | :------------- | :------------- | :------------- | :------------- |
-| paginator  | PodiumPaginator  | no | Paginator object will return paginated results. |
+| paginator  | PodiumPaginator  | no | The paginator object will return paginated results. |
 
 ### Terms and conditions
 Get the latest terms and conditions for the user's program, and also save the version of the terms and conditions that the user has accepted. 
@@ -93,13 +93,12 @@ Podium.lrg.get($websiteBack)
 | websiteBack  | string  | yes |  The URL used to route the user back to Podium when the user is finished shopping on LRG. |
 
 
-## Podium Paginator
+## Paginator
 ```
 import Podium from 'podium-sdk';
 
-let paginator = new Podium.Paginator();
-paginator.setPage(2)
-paginator.setPerPage(10)
+let paginator = new Podium.Paginator(); // Create an instance of PodiumPaginator
+paginator.setPage(2).setPerPage(10)
 
 Podium.incentive.getTransactions(paginator).then(rsp => {
   console.log(rsp.data);
@@ -107,16 +106,18 @@ Podium.incentive.getTransactions(paginator).then(rsp => {
   console.log(error.message);
 })
 ``` 
-* The set properties are chainable
+### Paginator properties
+The following set properties are chainable:
 
-#### Paginator.setContext(object)
-Object must have the properties of `currentPage`, `perPage`,`sortBy`,`sortDesc` 
-#### Paginator.setPage(number) 
-#### Paginator.setPerPage(number) 
-#### Paginator.setSortBy(field) 
-#### Paginator.setSortDirection([asc|desc]) 
-#### Paginator.setSortDesc(boolean)
-#### Paginator.toParams()
-Returns an object that can be sent as a get parameter to the API
- 
-
+##### PodiumPaginator.setPage(number) 
+The page number to be returned.
+##### PodiumPaginator.setPerPage(number) 
+The number of rows of data returned per page. 
+##### PodiumPaginator.setSortField(field) 
+The field by which the rows of data are sorted. 
+##### PodiumPaginator.setSortDirection([asc|desc]) 
+The sort direction, either ascending or descending.
+##### PodiumPaginator.setSortDesc(boolean)
+The descending sort direction set as either true or false. 
+##### PodiumPaginator.setContext(object)
+Object must have the properties of `currentPage`, `perPage`, `sortBy`, and `sortDesc`. 
