@@ -13,7 +13,7 @@ import Podium from 'podium-sdk';
 
 let podium = new Podium({endpoint: 'http://podium.api/v1/'});
 
-podium.auth.login($email, $password, $progamId).then(rsp => {
+podium.auth.login(email, password, progamId).then(rsp => {
   console.log(rsp.message);
 }).catch(error => {
   console.log(error.message);
@@ -28,7 +28,7 @@ Log in with a username and password and receive an API token to interact with ot
 These methods map to the [authentication endpoints](https://developers.podiumrewards.com/api_docs/Member/Authentication) in the API. 
 
 ```
-Podium.auth.login($email, $password, $progamId)
+Podium.auth.login(email, password, progamId)
 Podium.auth.getToken()
 Podium.auth.logout()
 ```
@@ -50,7 +50,7 @@ These methods map to the [profile](https://developers.podiumrewards.com/api_docs
  ```
 Podium.profile.get()
 Podium.incentive.getBalance()
-Podium.incentive.getTransactions($paginator)
+Podium.incentive.getTransactions(paginator)
 ```
 ##### Podium.incentive.getTransactions parameters
 
@@ -65,7 +65,7 @@ These methods map to the [terms endpoints](https://developers.podiumrewards.com/
  
 ```
 Podium.terms.get()
-Podium.terms.accept($termsId)
+Podium.terms.accept(termsId)
 ```
  
 ##### Podium.terms.accept parameters
@@ -82,8 +82,8 @@ Authenticate a Podium user into LRG and redirect the user to the LRG site to sho
 These methods map to the [LRG authentication endpoints](https://developers.podiumrewards.com/api_docs/Member/Lrg%20Authentication) in the API.
  
 ```
-Podium.lrg.redirect($websiteBack)
-Podium.lrg.get($websiteBack)
+Podium.lrg.redirect(websiteBack)
+Podium.lrg.get(websiteBack)
 ```
  
 ##### Parameters
