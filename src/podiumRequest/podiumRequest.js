@@ -1,6 +1,7 @@
 'use strict'
 const axios = require('axios')
-// const convertTime = require('./../utilities/convertTime')
+const convertTime = require('./../utilities/convertTime')
+const PodiumPaginator = require('./../utilities/Paginator')
 const INVALID_TOKEN = 'INVALID_TOKEN'
 const UNACCEPTED_TERMS = 'UNACCEPTED_TERMS'
 const LOCALSTORAGE_KEY = '__podiumSDK__'
@@ -60,13 +61,18 @@ module.exports = class PodiumRequest {
     this.settings.token = undefined
   }
 
-  GetRequest (resource) {
+  GetRequest (resource, params) {
+    if (params instanceof PodiumPaginator) {
+      params = params.toParams()
+    }
+
     if (!this._getToken()) Promise.reject(INVALID_TOKEN)
     return axios({
       method: 'get',
-      // transformResponse: function (data) {
-      //   return convertTime.APIToUTC(JSON.parse(data))
-      // },
+      params: params,
+      transformResponse: function (data) {
+        return convertTime.APIToUTC(JSON.parse(data))
+      },
       url: this._makeUrl(resource),
       headers: this._makeHeaders()
     }).then(function (response) {

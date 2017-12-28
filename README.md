@@ -13,7 +13,7 @@ import Podium from 'podium-sdk';
 
 let podium = new Podium({endpoint: 'http://podium.api/v1/'});
 
-podium.auth.login($email, $password, $progamId).then(rsp => {
+podium.auth.login(email, password, progamId).then(rsp => {
   console.log(rsp.message);
 }).catch(error => {
   console.log(error.message);
@@ -28,7 +28,7 @@ Log in with a username and password and receive an API token to interact with ot
 These methods map to the [authentication endpoints](https://developers.podiumrewards.com/api_docs/Member/Authentication) in the API. 
 
 ```
-Podium.auth.login($email, $password, $progamId)
+Podium.auth.login(email, password, progamId)
 Podium.auth.getToken()
 Podium.auth.logout()
 ```
@@ -50,8 +50,13 @@ These methods map to the [profile](https://developers.podiumrewards.com/api_docs
  ```
 Podium.profile.get()
 Podium.incentive.getBalance()
-Podium.incentive.getTransactions()
+Podium.incentive.getTransactions(paginator)
 ```
+##### Podium.incentive.getTransactions parameters
+
+| Name  | Type | Required? | Description |
+| :------------- | :------------- | :------------- | :------------- |
+| paginator  | PodiumPaginator  | no | The paginator object will return paginated results. |
 
 ### Terms and conditions
 Get the latest terms and conditions for the user's program, and also save the version of the terms and conditions that the user has accepted. 
@@ -60,7 +65,7 @@ These methods map to the [terms endpoints](https://developers.podiumrewards.com/
  
 ```
 Podium.terms.get()
-Podium.terms.accept($termsId)
+Podium.terms.accept(termsId)
 ```
  
 ##### Podium.terms.accept parameters
@@ -77,8 +82,8 @@ Authenticate a Podium user into LRG and redirect the user to the LRG site to sho
 These methods map to the [LRG authentication endpoints](https://developers.podiumrewards.com/api_docs/Member/Lrg%20Authentication) in the API.
  
 ```
-Podium.lrg.redirect($websiteBack)
-Podium.lrg.get($websiteBack)
+Podium.lrg.redirect(websiteBack)
+Podium.lrg.get(websiteBack)
 ```
  
 ##### Parameters
@@ -86,3 +91,33 @@ Podium.lrg.get($websiteBack)
 | Name  | Type | Required? | Description |
 | :------ | :----- | :----- | :------------- |
 | websiteBack  | string  | yes |  The URL used to route the user back to Podium when the user is finished shopping on LRG. |
+
+
+## Paginator
+```
+import Podium from 'podium-sdk';
+
+let paginator = new Podium.Paginator(); // Create an instance of PodiumPaginator
+paginator.setPage(2).setPerPage(10)
+
+Podium.incentive.getTransactions(paginator).then(rsp => {
+  console.log(rsp.data);
+}).catch(error => {
+  console.log(error.message);
+})
+``` 
+### Paginator properties
+The following set properties are chainable:
+
+##### PodiumPaginator.setPage(number) 
+The page number to be returned.
+##### PodiumPaginator.setPerPage(number) 
+The number of rows of data returned per page. 
+##### PodiumPaginator.setSortField(field) 
+The field by which the rows of data are sorted. 
+##### PodiumPaginator.setSortDirection([asc|desc]) 
+The sort direction, either ascending or descending.
+##### PodiumPaginator.setSortDesc(boolean)
+The descending sort direction set as either true or false. 
+##### PodiumPaginator.setContext(object)
+Object must have the properties of `currentPage`, `perPage`, `sortBy`, and `sortDesc`. 
