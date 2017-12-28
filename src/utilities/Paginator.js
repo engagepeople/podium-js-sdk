@@ -18,18 +18,22 @@ module.exports = class PodiumPaginator {
 
   setPage (page) {
     this.page = page
+    return this
   }
 
   setPerPage (perPage) {
     this.perPage = perPage
+    return this
   }
 
   setSortBy (sortBy) {
     this.sortBy = sortBy
+    return this
   }
 
   setSortDirection (direction) {
     this.sort_direction = direction
+    return this
   }
 
   setSortDesc (direction) {
@@ -38,6 +42,7 @@ module.exports = class PodiumPaginator {
     } else {
       this.sort_direction = 'asc'
     }
+    return this
   }
 
   toParams () {
