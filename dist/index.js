@@ -2692,7 +2692,7 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 
 var cov_2frt24ugrq = function () {
   var path = 'C:\\Engage\\podium.clients\\podium-js-sdk\\src\\utilities\\Paginator.js',
-      hash = '290073f14785fa2476489968bc0eefe9941ec876',
+      hash = 'bae71b7309fdc0549bd8d7046a6e735f2b3379a4',
       global = new Function('return this')(),
       gcv = '__coverage__',
       coverageData = {
@@ -2735,7 +2735,7 @@ var cov_2frt24ugrq = function () {
         },
         end: {
           line: 7,
-          column: 44
+          column: 43
         }
       },
       '4': {
@@ -2745,7 +2745,7 @@ var cov_2frt24ugrq = function () {
         },
         end: {
           line: 8,
-          column: 52
+          column: 51
         }
       },
       '5': {
@@ -2775,7 +2775,7 @@ var cov_2frt24ugrq = function () {
         },
         end: {
           line: 14,
-          column: 30
+          column: 33
         }
       },
       '8': {
@@ -2845,7 +2845,7 @@ var cov_2frt24ugrq = function () {
         },
         end: {
           line: 30,
-          column: 24
+          column: 30
         }
       },
       '15': {
@@ -2865,7 +2865,7 @@ var cov_2frt24ugrq = function () {
         },
         end: {
           line: 35,
-          column: 35
+          column: 34
         }
       },
       '17': {
@@ -2895,7 +2895,7 @@ var cov_2frt24ugrq = function () {
         },
         end: {
           line: 41,
-          column: 34
+          column: 33
         }
       },
       '20': {
@@ -2905,7 +2905,7 @@ var cov_2frt24ugrq = function () {
         },
         end: {
           line: 43,
-          column: 33
+          column: 32
         }
       },
       '21': {
@@ -3041,7 +3041,7 @@ var cov_2frt24ugrq = function () {
         loc: {
           start: {
             line: 29,
-            column: 21
+            column: 27
           },
           end: {
             line: 32,
@@ -3247,9 +3247,9 @@ module.exports = function () {
     cov_2frt24ugrq.s[2]++;
     this.perPage = userSettings.perPage;
     cov_2frt24ugrq.s[3]++;
-    this.sort_field = userSettings.sortField;
+    this.sortField = userSettings.sortField;
     cov_2frt24ugrq.s[4]++;
-    this.sort_direction = userSettings.sortDirection;
+    this.sortDirection = userSettings.sortDirection;
   }
 
   (0, _createClass3.default)(PodiumPaginator, [{
@@ -3262,7 +3262,7 @@ module.exports = function () {
       cov_2frt24ugrq.s[6]++;
       this.setPerPage(ctx.perPage);
       cov_2frt24ugrq.s[7]++;
-      this.setSortBy(ctx.sortBy);
+      this.setSortField(ctx.sortBy);
       cov_2frt24ugrq.s[8]++;
       this.setSortDesc(ctx.sortDesc);
       cov_2frt24ugrq.s[9]++;
@@ -3289,12 +3289,12 @@ module.exports = function () {
       return this;
     }
   }, {
-    key: 'setSortBy',
-    value: function setSortBy(sortBy) {
+    key: 'setSortField',
+    value: function setSortField(sortField) {
       cov_2frt24ugrq.f[4]++;
       cov_2frt24ugrq.s[14]++;
 
-      this.sortBy = sortBy;
+      this.sortField = sortField;
       cov_2frt24ugrq.s[15]++;
       return this;
     }
@@ -3304,7 +3304,7 @@ module.exports = function () {
       cov_2frt24ugrq.f[5]++;
       cov_2frt24ugrq.s[16]++;
 
-      this.sort_direction = direction;
+      this.sortDirection = direction;
       cov_2frt24ugrq.s[17]++;
       return this;
     }
@@ -3318,12 +3318,12 @@ module.exports = function () {
         cov_2frt24ugrq.b[1][0]++;
         cov_2frt24ugrq.s[19]++;
 
-        this.sort_direction = 'desc';
+        this.sortDirection = 'desc';
       } else {
         cov_2frt24ugrq.b[1][1]++;
         cov_2frt24ugrq.s[20]++;
 
-        this.sort_direction = 'asc';
+        this.sortDirection = 'asc';
       }
       cov_2frt24ugrq.s[21]++;
       return this;
@@ -3337,8 +3337,8 @@ module.exports = function () {
       return {
         page: this.page,
         count: this.perPage,
-        sort_field: this.sort_field,
-        sort_direction: this.sort_direction
+        sort_field: this.sortField,
+        sort_direction: this.sortDirection
       };
     }
   }]);
