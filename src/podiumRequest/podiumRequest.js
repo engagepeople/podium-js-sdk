@@ -27,13 +27,12 @@ module.exports = class PodiumRequest {
     return !(typeof localStorage === 'undefined' || localStorage === null)
   }
 
-  _checkError (error) {
+  _catchError (error, context) {
     if (error.response.status === 400 && error.response.data.apiCode === INVALID_TOKEN) {
-      this.settings.token = undefined
+      this._removeToken()
     }
-
-    if (error.response.status === 403 && error.response.data.code === UNACCEPTED_TERMS) {
-      console.log(UNACCEPTED_TERMS)
+    if (typeof context.settings.catchError === 'function') {
+      context.settings.catchError(error)
     }
     throw error
   }
@@ -75,9 +74,13 @@ module.exports = class PodiumRequest {
       },
       url: this._makeUrl(resource),
       headers: this._makeHeaders()
-    }).then(function (response) {
-      return response.data
-    }).catch(this._checkError)
+    })
+      .then(function (response) {
+        return response.data
+      })
+      .catch((error) => {
+        this._catchError(error, this)
+      })
   }
 
   PostRequest (resource, params) {
@@ -93,9 +96,13 @@ module.exports = class PodiumRequest {
       url: this._makeUrl(resource),
       data: params,
       headers: this._makeHeaders()
-    }).then(function (response) {
-      return response.data
-    }).catch(this._checkError)
+    })
+      .then(function (response) {
+        return response.data
+      })
+      .catch((error) => {
+        this._catchError(error, this)
+      })
   }
 
   AuthenticateRequest (params) {
@@ -103,7 +110,8 @@ module.exports = class PodiumRequest {
       .then(response => {
         this._setToken(response.data.token)
         return response.data
+      }).catch((error) => {
+        this._catchError(error, this)
       })
-      .catch(this._checkError)
   }
 }

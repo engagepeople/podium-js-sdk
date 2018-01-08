@@ -4,5 +4,6 @@ module.exports = {
   endpoint: 'https://api.podiumrewards.com/v1/',
   perPage: 50,
   sortField: 'created_at',
-  sortDirection: 'asc'
+  sortDirection: 'asc',
+  catchError: null
 }

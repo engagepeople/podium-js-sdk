@@ -11,7 +11,7 @@ npm install podium-sdk
 ```
 import Podium from 'podium-sdk';
 
-let podium = new Podium({endpoint: 'http://podium.api/v1/'});
+let podium = new Podium({endpoint: 'https://api.podiumrewards.com/v1/'});
 
 podium.auth.login(email, password, progamId).then(rsp => {
   console.log(rsp.message);
