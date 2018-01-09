@@ -18,6 +18,7 @@ module.exports = class LRG extends PodiumRequest {
       this.get(redirectUrl).then(response => {
         window.location.replace(response.body.redirect_url)
       })
+      return true
     } else {
       return false
     }
