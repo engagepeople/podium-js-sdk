@@ -3,8 +3,7 @@ const axios = require('axios')
 const convertTime = require('./../utilities/convertTime')
 const PodiumPaginator = require('./../utilities/Paginator')
 const INVALID_TOKEN = 'INVALID_TOKEN'
-const UNACCEPTED_TERMS = 'UNACCEPTED_TERMS'
-const LOCALSTORAGE_KEY = '__podiumSDK__'
+const LOCAL_STORAGE_KEY = '__podiumSDK__'
 
 module.exports = class PodiumRequest {
   constructor (settings) {
@@ -28,26 +27,32 @@ module.exports = class PodiumRequest {
   }
 
   _catchError (error, context) {
-    if (error.response.status === 400 && error.response.data.apiCode === INVALID_TOKEN) {
+    let cleanError = {}
+    cleanError.status = error.response.status
+    cleanError.statusText = error.response.statusText
+    cleanError.data = error.response.data
+
+    if (cleanError.status === 400 && cleanError.data.apiCode === INVALID_TOKEN) {
       this._removeToken()
     }
     if (typeof context.settings.catchError === 'function') {
-      context.settings.catchError(error)
+      context.settings.catchError(cleanError)
     }
-    throw error
+
+    throw cleanError
   }
 
   _setToken (token) {
     this.settings.token = token
     if (this._hasLocalStorage()) {
-      return localStorage.setItem(`${LOCALSTORAGE_KEY}token`, this.settings.token)
+      return localStorage.setItem(`${LOCAL_STORAGE_KEY}token`, this.settings.token)
     }
     return this.settings.token
   }
 
   _getToken () {
     if (this._hasLocalStorage()) {
-      return localStorage.getItem(`${LOCALSTORAGE_KEY}token`)
+      return localStorage.getItem(`${LOCAL_STORAGE_KEY}token`)
     } else {
       return this.settings.token
     }
@@ -55,7 +60,7 @@ module.exports = class PodiumRequest {
 
   _removeToken () {
     if (this._hasLocalStorage()) {
-      localStorage.removeItem(`${LOCALSTORAGE_KEY}token`)
+      localStorage.removeItem(`${LOCAL_STORAGE_KEY}token`)
     }
     this.settings.token = undefined
   }

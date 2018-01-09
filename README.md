@@ -10,8 +10,8 @@ npm install podium-sdk
 ## Usage
 ```
 import Podium from 'podium-sdk';
-
-let podium = new Podium({endpoint: 'https://api.podiumrewards.com/v1/'});
+let settings = {}
+let podium = new Podium(settings);
 
 podium.auth.login(email, password, progamId).then(rsp => {
   console.log(rsp.message);
@@ -19,9 +19,15 @@ podium.auth.login(email, password, progamId).then(rsp => {
   console.log(error.message);
 })
 ``` 
- 
-## API methods
+## Settings
+Settings can be passed into the Podium constructor as a JSON object.
 
+| Name  | Type | Default | Description |
+| :------------- | :------------- | :------------- | :------------- |
+| endpoint  | url  | https://api.podiumrewards.com/v1/ | The Podium endpoint URL. |
+| catchError  | function  | - | The callback when any request has been unsuccessful. Takes one argument of the error. |
+
+## API methods
 ### User authentication
 Log in with a username and password and receive an API token to interact with other resources available via the API. The logout endpoint deletes the authentication token. 
 
@@ -39,7 +45,7 @@ Podium.auth.logout()
 | :------------- | :------------- | :------------- | :------------- |
 | email  | string  | yes | The user's email address, which is the username required for login. |
 | password  | string  | yes | The password required for login. |
-| programId  | number | yes | The ID of the program to which you are authenticating the user. |
+| programId  | number  | yes | The ID of the program to which you are authenticating the user. |
 
 
 ### Member information
