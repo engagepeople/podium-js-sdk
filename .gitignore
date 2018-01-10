@@ -13,3 +13,4 @@ test/coverage/
 *.ntvs*
 *.njsproj
 *.sln
+bash.exe.stackdump

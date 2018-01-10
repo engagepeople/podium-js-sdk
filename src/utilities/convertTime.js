@@ -1,5 +1,5 @@
 'use strict'
-/* eslint-disable no-useless-escape */
+
 const _loopNestedObj = (obj, method) => {
   Object.keys(obj).forEach(key => {
     if (obj[key] && typeof obj[key] === 'object' && !(obj[key] instanceof Date)) _loopNestedObj(obj[key], method)

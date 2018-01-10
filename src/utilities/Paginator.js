@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = class PodiumPaginator {
+module.exports = class Paginator {
   constructor (userSettings = require('./../settings')) {
     this.page = 1
     this.perPage = userSettings.perPage
