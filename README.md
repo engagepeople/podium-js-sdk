@@ -25,6 +25,7 @@ Settings can be passed into the Podium constructor as a JSON object.
 | Name  | Type | Default | Description |
 | :------------- | :------------- | :------------- | :------------- |
 | endpoint  | url  | https://api.podiumrewards.com/v1/ | The Podium endpoint URL. |
+| perPage  | number  | 50 | Default number of rows to return on paginator |
 | catchError  | function  | - | The callback when any request has been unsuccessful. Takes one argument of the error. |
 
 ## API methods

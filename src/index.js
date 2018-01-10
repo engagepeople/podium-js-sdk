@@ -9,13 +9,15 @@ const Paginator = require('./utilities/Paginator')
 
 class Podium {
   constructor (userSettings = require('./settings')) {
-    this.Paginator = Paginator
-    this.setting = userSettings
-    this.auth = new Auth(this.setting)
-    this.lrg = new LRG(this.setting)
-    this.incentive = new Incentive(this.setting)
-    this.terms = new Terms(this.setting)
-    this.profile = new Profile(this.setting)
+    this.settings = userSettings
+    this.Paginator = () => {
+      return new Paginator(this.settings)
+    }
+    this.auth = new Auth(this.settings)
+    this.lrg = new LRG(this.settings)
+    this.incentive = new Incentive(this.settings)
+    this.terms = new Terms(this.settings)
+    this.profile = new Profile(this.settings)
   }
 }
 
