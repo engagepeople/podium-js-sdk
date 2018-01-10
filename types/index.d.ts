@@ -1,5 +1,6 @@
 
 export interface PodiumSDK {
+    constructor(settings: Settings)
     setting: Settings
     Paginator: Paginator
     auth: Auth
