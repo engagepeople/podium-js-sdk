@@ -104,7 +104,7 @@ Podium.lrg.get(websiteBack)
 ```
 import Podium from 'podium-sdk';
 
-let paginator = new Podium.Paginator(); // Create an instance of PodiumPaginator
+let paginator = Podium.Paginator(); // Create an instance of PodiumPaginator
 paginator.setPage(2).setPerPage(10)
 
 Podium.incentive.getTransactions(paginator).then(rsp => {
