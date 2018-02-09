@@ -3885,7 +3885,7 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var cov_1gds5yomf0 = function () {
   var path = 'C:\\Engage\\podium.clients\\podium-js-sdk\\src\\api\\auth.js',
-      hash = 'ce917fa9a1c224c1ae3c52052646fd2e525b4cb7',
+      hash = 'f9596c921adff3594f312ec0c1f3788b3ba4babe',
       global = new Function('return this')(),
       gcv = '__coverage__',
       coverageData = {
@@ -4056,7 +4056,7 @@ var cov_1gds5yomf0 = function () {
         loc: {
           start: {
             line: 14,
-            column: 40
+            column: 35
           },
           end: {
             line: 21,
@@ -4203,13 +4203,13 @@ module.exports = function (_PodiumRequest) {
     }
   }, {
     key: 'login',
-    value: function login(username, password, programId) {
+    value: function login(username, password, slug) {
       cov_1gds5yomf0.f[2]++;
 
       var params = (cov_1gds5yomf0.s[5]++, {
         'user_account': username,
         'password': password,
-        'program_id': programId
+        'slug': slug
       });
       cov_1gds5yomf0.s[6]++;
       return this.AuthenticateRequest(params);

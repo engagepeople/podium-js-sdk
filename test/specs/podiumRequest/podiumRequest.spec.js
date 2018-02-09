@@ -26,7 +26,7 @@ describe('podiumRequest', () => {
 
       moxios.withMock(function () {
         let onFulfilled = sinon.spy()
-        let axObj = podiumRequest.AuthenticateRequest({username: 'testUser', password: '1234', program_id: 1})
+        let axObj = podiumRequest.AuthenticateRequest({username: 'testUser', password: '1234', slug: 'program'})
         axObj.then(onFulfilled)
 
         moxios.wait(function () {

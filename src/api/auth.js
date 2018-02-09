@@ -11,11 +11,11 @@ module.exports = class Auth extends PodiumRequest {
     return this._getToken()
   }
 
-  login (username, password, programId) {
+  login (username, password, programSlug) {
     let params = {
       'user_account': username,
       'password': password,
-      'program_id': programId
+      'slug': programSlug
     }
     return this.AuthenticateRequest(params)
   }

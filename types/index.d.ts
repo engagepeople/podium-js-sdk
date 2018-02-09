@@ -12,9 +12,9 @@ export interface PodiumSDK {
 
 export interface Auth {
     constructor(settings: Settings)
-    login(login: string, password: string, programId: number): Promise
+    login(login: string, password: string, programSlug: string): Promise
     basicAuth(token: string): void
-    logout(token: string): Promise
+    logout(): Promise
 }
 
 export interface Incentive {
