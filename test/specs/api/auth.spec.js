@@ -8,7 +8,7 @@ let data = {
   login: {
     username: 'testUser',
     password: 'password123',
-    programId: 1
+    slug: 'program-slug'
   }
 }
 
@@ -33,14 +33,14 @@ describe('Auth Resource', () => {
   })
 
   it('should call AuthenticateRequest on login()', () => {
-    resource.login(data.login.username, data.login.password, data.login.programId)
+    resource.login(data.login.username, data.login.password, data.login.slug)
     expect(spyAuthenticateRequest.callCount).to.equal(1)
   })
   it('should call AuthenticateRequest on login() with the correct params', () => {
-    resource.login(data.login.username, data.login.password, data.login.programId)
+    resource.login(data.login.username, data.login.password, data.login.slug)
     expect(spyAuthenticateRequest.firstCall.args[0].user_account).to.equal(data.login.username)
     expect(spyAuthenticateRequest.firstCall.args[0].password).to.equal(data.login.password)
-    expect(spyAuthenticateRequest.firstCall.args[0].program_id).to.equal(data.login.programId)
+    expect(spyAuthenticateRequest.firstCall.args[0].slug).to.equal(data.login.slug)
   })
 
   it('should call PostRequest on logout()', () => {

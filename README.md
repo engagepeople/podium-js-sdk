@@ -46,7 +46,7 @@ Podium.auth.logout()
 | :------------- | :------------- | :------------- | :------------- |
 | email  | string  | yes | The user's email address, which is the username required for login. |
 | password  | string  | yes | The password required for login. |
-| programId  | number  | yes | The ID of the program to which you are authenticating the user. |
+| slug  | string  | yes | The slug of the program to which you are authenticating the user. |
 
 
 ### Member information
