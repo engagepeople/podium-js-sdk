@@ -24,3 +24,5 @@ With addition to every call; make sure each call is
 - Run `git push`
 - Run `npm publish`
 - Verify latest version on https://www.npmjs.com/package/podium-sdk
+- Merge PR
+- Create Github version

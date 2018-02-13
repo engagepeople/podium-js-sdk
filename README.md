@@ -56,8 +56,9 @@ These methods map to the [profile](https://developers.podiumrewards.com/api_docs
  
  ```
 Podium.profile.get()
-Podium.incentive.getBalance()
-Podium.incentive.getTransactions(paginator)
+Podium.incentive.getLedger()
+Podium.incentive.getLedgers()
+Podium.incentive.getTransactions(ledgerId, paginator)
 ```
 ##### Podium.incentive.getTransactions parameters
 

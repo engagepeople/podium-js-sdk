@@ -1,5 +1,6 @@
 'use strict'
 let PodiumRequest = require('./../podiumRequest/podiumRequest')
+let PodiumPaginator = require('./../utilities/Paginator')
 
 module.exports = class Incentive extends PodiumRequest {
   constructor (settings) {
@@ -7,11 +8,23 @@ module.exports = class Incentive extends PodiumRequest {
     this.resource = 'ledger'
   }
 
-  getBalance () {
-    return this.GetRequest(`${this.resource}/balance`)
+  getLedger () {
+    return this.getLedgers().then(rsp => {
+      if (typeof rsp.data === 'object') {
+        return rsp.data[0]
+      } else {
+        return rsp
+      }
+    })
   }
 
-  getTransactions (paginator) {
-    return this.GetRequest(this.resource, paginator)
+  getLedgers (paginator) {
+    let podiumPaginator = new PodiumPaginator()
+    podiumPaginator.setPerPage(1)
+    return this.GetRequest(`${this.resource}`, podiumPaginator)
+  }
+
+  getTransactions (ledgerId, paginator) {
+    return this.GetRequest(`${this.resource}/${ledgerId}/transaction`, paginator)
   }
 }
