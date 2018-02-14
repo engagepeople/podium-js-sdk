@@ -19,7 +19,8 @@ export interface Auth {
 
 export interface Incentive {
     constructor(settings: Settings)
-    getBalance(): Promise
+    getLedger(): Promise
+    getLedgers(paginator: Paginator): Promise
     getTransactions(paginator: Paginator): Promise
 }
 

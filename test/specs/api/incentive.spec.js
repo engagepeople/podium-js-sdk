@@ -4,7 +4,8 @@ let data = {
   settings: {
     endpoint: 'api.endpoint.test/'
   },
-  resource: 'ledger'
+  resource: 'ledger',
+  ledgerId: 123
 }
 
 describe('Incentive Resource', () => {
@@ -19,13 +20,19 @@ describe('Incentive Resource', () => {
     spyGetRequest.restore()
   })
 
-  it('should call GetRequest once on getBalance', () => {
-    resource.getBalance()
+  it('should call GetRequest once on getLedgers', () => {
+    resource.getLedgers()
     expect(spyGetRequest.callCount).to.equal(1)
   })
 
-  it('should call getTransactions once on getBalance', () => {
-    resource.getTransactions()
+  it('should call GetRequest once on getLedgers', () => {
+    resource.getLedgers()
+    expect(spyGetRequest.callCount).to.equal(1)
+  })
+
+  it('should call getTransactions once on getTransactions', () => {
+    resource.getTransactions(data.ledgerId)
+    expect(spyGetRequest.firstCall.args[0]).to.equal(data.ledgerId)
     expect(spyGetRequest.callCount).to.equal(1)
   })
 })
