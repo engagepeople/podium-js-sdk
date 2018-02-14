@@ -32,7 +32,7 @@ describe('Incentive Resource', () => {
 
   it('should call getTransactions once on getTransactions', () => {
     resource.getTransactions(data.ledgerId)
-    expect(spyGetRequest.firstCall.args[0]).to.equal(data.ledgerId)
+    expect(spyGetRequest.firstCall.args[0]).to.equal(`ledger/${data.ledgerId}/transaction`)
     expect(spyGetRequest.callCount).to.equal(1)
   })
 })
