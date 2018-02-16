@@ -15,7 +15,7 @@ module.exports = class Auth extends PodiumRequest {
     let params = {
       'user_account': username,
       'password': password,
-      'slug': programSlug
+      'program_slug': programSlug
     }
     return this.AuthenticateRequest(params)
   }
