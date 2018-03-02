@@ -7163,7 +7163,7 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var cov_h5lh0ytqj = function () {
   var path = 'C:\\Engage\\podium.clients\\podium-js-sdk\\src\\api\\incentive.js',
-      hash = 'c5c7e5ef81d536ee2fd7624f5cf9cb5e41b9958f',
+      hash = '194505ddf82c7fe223827afb24a665acd5d266e7',
       global = new Function('return this')(),
       gcv = '__coverage__',
       coverageData = {
@@ -7222,61 +7222,61 @@ var cov_h5lh0ytqj = function () {
       '5': {
         start: {
           line: 12,
-          column: 4
+          column: 26
         },
         end: {
-          line: 18,
-          column: 6
+          line: 12,
+          column: 47
         }
       },
       '6': {
         start: {
           line: 13,
-          column: 6
+          column: 4
         },
         end: {
-          line: 17,
-          column: 7
+          line: 13,
+          column: 33
         }
       },
       '7': {
         start: {
           line: 14,
-          column: 8
+          column: 4
         },
         end: {
-          line: 14,
-          column: 26
+          line: 20,
+          column: 6
         }
       },
       '8': {
         start: {
+          line: 15,
+          column: 6
+        },
+        end: {
+          line: 19,
+          column: 7
+        }
+      },
+      '9': {
+        start: {
           line: 16,
           column: 8
         },
         end: {
           line: 16,
-          column: 18
-        }
-      },
-      '9': {
-        start: {
-          line: 22,
           column: 26
-        },
-        end: {
-          line: 22,
-          column: 47
         }
       },
       '10': {
         start: {
-          line: 23,
-          column: 4
+          line: 18,
+          column: 8
         },
         end: {
-          line: 23,
-          column: 33
+          line: 18,
+          column: 18
         }
       },
       '11': {
@@ -7286,7 +7286,7 @@ var cov_h5lh0ytqj = function () {
         },
         end: {
           line: 24,
-          column: 63
+          column: 57
         }
       },
       '12': {
@@ -7343,7 +7343,7 @@ var cov_h5lh0ytqj = function () {
             column: 15
           },
           end: {
-            line: 19,
+            line: 21,
             column: 3
           }
         },
@@ -7353,41 +7353,41 @@ var cov_h5lh0ytqj = function () {
         name: '(anonymous_2)',
         decl: {
           start: {
-            line: 12,
+            line: 14,
             column: 34
           },
           end: {
-            line: 12,
+            line: 14,
             column: 35
           }
         },
         loc: {
           start: {
-            line: 12,
+            line: 14,
             column: 41
           },
           end: {
-            line: 18,
+            line: 20,
             column: 5
           }
         },
-        line: 12
+        line: 14
       },
       '3': {
         name: '(anonymous_3)',
         decl: {
           start: {
-            line: 21,
+            line: 23,
             column: 2
           },
           end: {
-            line: 21,
+            line: 23,
             column: 3
           }
         },
         loc: {
           start: {
-            line: 21,
+            line: 23,
             column: 25
           },
           end: {
@@ -7395,7 +7395,7 @@ var cov_h5lh0ytqj = function () {
             column: 3
           }
         },
-        line: 21
+        line: 23
       },
       '4': {
         name: '(anonymous_4)',
@@ -7426,35 +7426,35 @@ var cov_h5lh0ytqj = function () {
       '0': {
         loc: {
           start: {
-            line: 13,
+            line: 15,
             column: 6
           },
           end: {
-            line: 17,
+            line: 19,
             column: 7
           }
         },
         type: 'if',
         locations: [{
           start: {
-            line: 13,
+            line: 15,
             column: 6
           },
           end: {
-            line: 17,
+            line: 19,
             column: 7
           }
         }, {
           start: {
-            line: 13,
+            line: 15,
             column: 6
           },
           end: {
-            line: 17,
+            line: 19,
             column: 7
           }
         }],
-        line: 13
+        line: 15
       }
     },
     s: {
@@ -7520,20 +7520,23 @@ module.exports = function (_PodiumRequest) {
     key: 'getLedger',
     value: function getLedger() {
       cov_h5lh0ytqj.f[1]++;
-      cov_h5lh0ytqj.s[5]++;
 
+      var podiumPaginator = (cov_h5lh0ytqj.s[5]++, new PodiumPaginator());
+      cov_h5lh0ytqj.s[6]++;
+      podiumPaginator.setPerPage(1);
+      cov_h5lh0ytqj.s[7]++;
       return this.getLedgers().then(function (rsp) {
         cov_h5lh0ytqj.f[2]++;
-        cov_h5lh0ytqj.s[6]++;
+        cov_h5lh0ytqj.s[8]++;
 
         if ((0, _typeof3.default)(rsp.data) === 'object') {
           cov_h5lh0ytqj.b[0][0]++;
-          cov_h5lh0ytqj.s[7]++;
+          cov_h5lh0ytqj.s[9]++;
 
           return rsp.data[0];
         } else {
           cov_h5lh0ytqj.b[0][1]++;
-          cov_h5lh0ytqj.s[8]++;
+          cov_h5lh0ytqj.s[10]++;
 
           return rsp;
         }
@@ -7543,12 +7546,9 @@ module.exports = function (_PodiumRequest) {
     key: 'getLedgers',
     value: function getLedgers(paginator) {
       cov_h5lh0ytqj.f[3]++;
-
-      var podiumPaginator = (cov_h5lh0ytqj.s[9]++, new PodiumPaginator());
-      cov_h5lh0ytqj.s[10]++;
-      podiumPaginator.setPerPage(1);
       cov_h5lh0ytqj.s[11]++;
-      return this.GetRequest('' + this.resource, podiumPaginator);
+
+      return this.GetRequest('' + this.resource, paginator);
     }
   }, {
     key: 'getTransactions',
