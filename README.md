@@ -35,7 +35,7 @@ Log in with a username and password and receive an API token to interact with ot
 These methods map to the [authentication endpoints](https://developers.podiumrewards.com/api_docs/Member/Authentication) in the API. 
 
 ```
-Podium.auth.login(email, password, progamId)
+Podium.auth.login(email, password, programSlug)
 Podium.auth.getToken()
 Podium.auth.logout()
 ```
@@ -46,7 +46,7 @@ Podium.auth.logout()
 | :------------- | :------------- | :------------- | :------------- |
 | email  | string  | yes | The user's email address, which is the username required for login. |
 | password  | string  | yes | The password required for login. |
-| slug  | string  | yes | The slug of the program to which you are authenticating the user. |
+| programSlug  | string  | yes | The slug of the program to which you are authenticating the user. |
 
 
 ### Member information
@@ -56,8 +56,9 @@ These methods map to the [profile](https://developers.podiumrewards.com/api_docs
  
  ```
 Podium.profile.get()
-Podium.incentive.getBalance()
-Podium.incentive.getTransactions(paginator)
+Podium.incentive.getLedger()
+Podium.incentive.getLedgers(paginator)
+Podium.incentive.getTransactions(ledgerId, paginator)
 ```
 ##### Podium.incentive.getTransactions parameters
 

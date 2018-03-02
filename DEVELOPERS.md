@@ -20,7 +20,10 @@ With addition to every call; make sure each call is
 - Check the value of `main` in `package.json` is `dist/index.js`
 - Run `npm run unit` Make sure all tests are run - there are no `.only` checked in
 - Run `npm run build`
+- Run `git commit`
 - Run `npm version` [major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]
 - Run `git push`
 - Run `npm publish`
 - Verify latest version on https://www.npmjs.com/package/podium-sdk
+- Merge PR
+- Create Github version
