@@ -9,6 +9,8 @@ module.exports = class Incentive extends PodiumRequest {
   }
 
   getLedger () {
+    let podiumPaginator = new PodiumPaginator()
+    podiumPaginator.setPerPage(1)
     return this.getLedgers().then(rsp => {
       if (typeof rsp.data === 'object') {
         return rsp.data[0]
@@ -19,9 +21,7 @@ module.exports = class Incentive extends PodiumRequest {
   }
 
   getLedgers (paginator) {
-    let podiumPaginator = new PodiumPaginator()
-    podiumPaginator.setPerPage(1)
-    return this.GetRequest(`${this.resource}`, podiumPaginator)
+    return this.GetRequest(`${this.resource}`, paginator)
   }
 
   getTransactions (ledgerId, paginator) {
