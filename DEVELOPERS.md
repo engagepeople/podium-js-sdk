@@ -3,9 +3,10 @@
 ## Settings up Environment
 
 To used the source code
-- Change the value of `main` in `package.json` to `src/index.js`
-- Run `npm link` from the podium-sdk `package.json` folder  
+- Run `npm dev` from the `podium-sdk` folder to start TS watch 
+- Run `npm link` from the `podium-sdk` `package.json` folder  
 - Run `npm link podium-sdk` from the package you are developing in
+
 - Restart of your dev server maybe required
 
 ## Adding new API Calls
@@ -24,3 +25,5 @@ With addition to every call; make sure each call is
 - Run `git push`
 - Run `npm publish`
 - Verify latest version on https://www.npmjs.com/package/podium-sdk
+- Merge PR
+- Create Github version
