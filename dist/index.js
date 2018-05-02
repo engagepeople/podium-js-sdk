@@ -2028,6 +2028,32 @@ exports.Auth = Auth;
 
 /***/ }),
 
+/***/ "./src/Api/Ledgers.ts":
+/*!****************************!*\
+  !*** ./src/Api/Ledgers.ts ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const Resource_1 = __webpack_require__(/*! ../Podium/Resource */ "./src/Podium/Resource.ts");
+class Ledgers extends Resource_1.Resource {
+    constructor(settings) {
+        super(settings);
+        super.SetResource('ledger');
+    }
+    GetTransactions(LedgerID, paginator) {
+        super.SetResource(`ledger/${LedgerID}/transaction`);
+        return super.List(paginator);
+    }
+}
+exports.Ledgers = Ledgers;
+
+
+/***/ }),
+
 /***/ "./src/Api/Lrg.ts":
 /*!************************!*\
   !*** ./src/Api/Lrg.ts ***!
@@ -2391,8 +2417,7 @@ class Request extends Token_1.Token {
                 resolve(response.data);
             })
                 .catch((error) => {
-                this.catchError(error);
-                reject(error);
+                reject(this.parseError(error));
             });
         });
     }
@@ -2410,7 +2435,7 @@ class Request extends Token_1.Token {
             };
         }
     }
-    catchError(error) {
+    parseError(error) {
         const podiumError = {
             data: error.response.data,
             status: error.response.status,
@@ -2419,7 +2444,7 @@ class Request extends Token_1.Token {
         if ((podiumError.status === 400) && (podiumError.data.apiCode === "INVALID_TOKEN" /* INVALID_TOKEN */)) {
             this.RemoveToken();
         }
-        throw podiumError;
+        return podiumError;
     }
 }
 exports.Request = Request;
@@ -2548,11 +2573,12 @@ const Auth_1 = __webpack_require__(/*! ./Api/Auth */ "./src/Api/Auth.ts");
 const Lrg_1 = __webpack_require__(/*! ./Api/Lrg */ "./src/Api/Lrg.ts");
 const Resource_1 = __webpack_require__(/*! ./Podium/Resource */ "./src/Podium/Resource.ts");
 const Terms_1 = __webpack_require__(/*! ./Api/Terms */ "./src/Api/Terms.ts");
+const Ledgers_1 = __webpack_require__(/*! ./Api/Ledgers */ "./src/Api/Ledgers.ts");
 class Podium {
     constructor(settings) {
         this.Auth = new Auth_1.Auth(settings);
         this.Profile = new Resource_1.Resource(settings).SetResource('profile').SetLegacy(true);
-        this.Ledgers = new Resource_1.Resource(settings).SetResource('ledger');
+        this.Ledgers = new Ledgers_1.Ledgers(settings);
         this.LRG = new Lrg_1.LRG(settings);
         this.Terms = new Terms_1.Terms(settings);
     }
@@ -2562,26 +2588,6 @@ var Paginator_1 = __webpack_require__(/*! ./Podium/Paginator */ "./src/Podium/Pa
 exports.PodiumPaginator = Paginator_1.Paginator;
 var Filter_1 = __webpack_require__(/*! ./Podium/Filter */ "./src/Podium/Filter.ts");
 exports.PodiumFilter = Filter_1.Filter;
-// const Auth = require('./api/auth')
-// const Terms = require('./api/terms')
-// const LRG = require('./api/lrg')
-// const Incentive = require('./api/incentive')
-// const Profile = require('./api/profile')
-// const Paginator = require('./utilities/Paginator')
-//
-// class Podium {
-//     constructor (userSettings = require('./settings')) {
-//         this.settings = userSettings
-//         this.Paginator = () => {
-//             return new Paginator(this.settings)
-//         }
-//         this.auth = new Auth(this.settings)
-//         this.lrg = new LRG(this.settings)
-//         this.incentive = new Incentive(this.settings)
-//         this.terms = new Terms(this.settings)
-//         this.profile = new Profile(this.settings)
-//     }
-// }
 
 
 /***/ })
