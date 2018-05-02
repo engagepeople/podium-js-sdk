@@ -1,6 +1,6 @@
 # Podium Client JavaScript SDK
 
-This library allows you to access the Podium REST API for building client applications. 
+This library allows you to access the Podium Client REST API for building client applications. 
 
 ## Installation
 ```
@@ -9,123 +9,119 @@ npm install podium-sdk
 
 ## Usage
 ```
-import Podium from 'podium-sdk';
-let settings = {}
-let podium = new Podium(settings);
-
-podium.auth.login(email, password, progamId).then(rsp => {
-  console.log(rsp.message);
-}).catch(error => {
-  console.log(error.message);
+import { Podium, PodiumPaginator, PodiumFilter } from 'podium-sdk'
+let podium = new Podium({
+  endpoint: 'https://api.podiumrewards.com/v1/'
 })
+
+podium.Auth.login(email, password, slug).then(rsp => {
+  console.log(rsp.message)
+}).catch(error => {
+  console.log(error.message)
+})
+
+let filter = new PodiumFilter()
+    filter.setValues({ customer_id: 1, search: 'Dan' })
+let paginator = new PodiumPaginator()
+    paginator.setPerPage(5)
+    paginator.setSortField('last_name')
+    paginator.setSortDirection('asc')
+podium.Users.List(filter, paginator).then((rsp) => {
+      console.log(rsp)
+})
+
 ``` 
+
 ## Settings
 Settings can be passed into the Podium constructor as a JSON object.
 
 | Name  | Type | Default | Description |
 | :------------- | :------------- | :------------- | :------------- |
 | endpoint  | url  | https://api.podiumrewards.com/v1/ | The Podium endpoint URL. |
-| perPage  | number  | 50 | Default number of rows to return on paginator |
-| catchError  | function  | - | The callback when any request has been unsuccessful. Takes one argument of the error. |
 
 ## API methods
-### User authentication
+
+### Authentication
 Log in with a username and password and receive an API token to interact with other resources available via the API. The logout endpoint deletes the authentication token. 
 
-These methods map to the [authentication endpoints](https://developers.podiumrewards.com/api_docs/Member/Authentication) in the API. 
+```
+Podium.Auth.Login(email, password, slug)
+Podium.Auth.GetToken()
+Podium.Auth.SetToken(string)
+Podium.Auth.HasToken()
+Podium.Auth.logout()
 
 ```
-Podium.auth.login(email, password, programSlug)
-Podium.auth.getToken()
-Podium.auth.logout()
-```
- 
-##### Podium.auth.login parameters
+
+### Podium Resource
+Log in with a username and password and receive an API token to interact with other resources available via the API. The logout endpoint deletes the authentication token. 
+
+##### Get
 
 | Name  | Type | Required? | Description |
 | :------------- | :------------- | :------------- | :------------- |
-| email  | string  | yes | The user's email address, which is the username required for login. |
-| password  | string  | yes | The password required for login. |
-| programSlug  | string  | yes | The slug of the program to which you are authenticating the user. |
+| id  | number/string  | yes | ID of Resource. |
 
-
-### Member information
-Get a member's profile information (e.g., name, email address), incentive balance, and list of incentive transactions. 
- 
-These methods map to the [profile](https://developers.podiumrewards.com/api_docs/Member/Profile) and [incentive endpoints](https://developers.podiumrewards.com/api_docs/Member/Incentive%20Transactions) in the API. 
- 
- ```
-Podium.profile.get()
-Podium.incentive.getLedger()
-Podium.incentive.getLedgers(paginator)
-Podium.incentive.getTransactions(ledgerId, paginator)
-```
-##### Podium.incentive.getTransactions parameters
+##### List
 
 | Name  | Type | Required? | Description |
 | :------------- | :------------- | :------------- | :------------- |
-| paginator  | PodiumPaginator  | no | The paginator object will return paginated results. |
+| arg1  | Filter/Paginator  | no | Filter or Paginator Object. |
+| paginator  | Paginator  | no | Paginator if first parameter is filter. |
 
-### Terms and conditions
-Get the latest terms and conditions for the user's program, and also save the version of the terms and conditions that the user has accepted. 
- 
-These methods map to the [terms endpoints](https://developers.podiumrewards.com/api_docs/Member/Terms%20and%20Conditions#!) in the API.
- 
-```
-Podium.terms.get()
-Podium.terms.accept(termsId)
-```
- 
-##### Podium.terms.accept parameters
+##### Create
 
 | Name  | Type | Required? | Description |
-| :---- | :---- | :------ | :------------- |
-| termsId  | integer  | yes |  The ID of the terms and conditions that the user is accepting.  |
+| :------------- | :------------- | :------------- | :------------- |
+| object  | object  | no | Object to be created. |
 
-
-
-### LRG authentication
-Authenticate a Podium user into LRG and redirect the user to the LRG site to shop and redeem. Alternatively, get the data needed to allow the user to shop on the LRG site (e.g., LRG redirect URL, authentication token). 
- 
-These methods map to the [LRG authentication endpoints](https://developers.podiumrewards.com/api_docs/Member/Lrg%20Authentication) in the API.
- 
-```
-Podium.lrg.redirect(websiteBack)
-Podium.lrg.get(websiteBack)
-```
- 
-##### Parameters
+##### Update
 
 | Name  | Type | Required? | Description |
-| :------ | :----- | :----- | :------------- |
-| websiteBack  | string  | yes |  The URL used to route the user back to Podium when the user is finished shopping on LRG. |
+| :------------- | :------------- | :------------- | :------------- |
+| id  | number/string  | yes | ID of Resource. |
+| object  | object  | no | Object to be deleted. |
+
+##### Delete
+
+| Name  | Type | Required? | Description |
+| :------------- | :------------- | :------------- | :------------- |
+| id  | number/string  | yes | ID of object to be delete. |
 
 
-## Paginator
+
+### Methods that extend Resource
+
 ```
-import Podium from 'podium-sdk';
+Podium.Profile
+Podium.Users
 
-let paginator = Podium.Paginator(); // Create an instance of PodiumPaginator
-paginator.setPage(2).setPerPage(10)
+### Methods with additonal functions
 
-Podium.incentive.getTransactions(paginator).then(rsp => {
-  console.log(rsp.data);
-}).catch(error => {
-  console.log(error.message);
-})
-``` 
+```
+Podium.Ledgers.GetTransactions
+Podium.LRG.GetUrl
+Podium.LRG.Redirect
+Podium.Terms.Accept
+```
+
 ### Paginator properties
 The following set properties are chainable:
 
-##### PodiumPaginator.setPage(number) 
-The page number to be returned.
-##### PodiumPaginator.setPerPage(number) 
-The number of rows of data returned per page. 
-##### PodiumPaginator.setSortField(field) 
-The field by which the rows of data are sorted. 
-##### PodiumPaginator.setSortDirection([asc|desc]) 
-The sort direction, either ascending or descending.
-##### PodiumPaginator.setSortDesc(boolean)
-The descending sort direction set as either true or false. 
-##### PodiumPaginator.setContext(object)
-Object must have the properties of `currentPage`, `perPage`, `sortBy`, and `sortDesc`. 
+```
+PodiumPaginator.setPage(number)
+PodiumPaginator.setPerPage(number)
+PodiumPaginator.setSortField(field)
+PodiumPaginator.setSortDirection([asc|desc])
+PodiumPaginator.setSortDesc(boolean)
+PodiumPaginator.toParams()
+```
+
+### Filter properties
+The following set properties are chainable:
+
+```
+PodiumFilter.setValues(object)
+PodiumFilter.getValues(number)
+PodiumFilter.toParams()
+```

@@ -1,71 +1,133 @@
-
-export interface PodiumSDK {
-    constructor(settings: Settings)
-    setting: Settings
-    Paginator: Paginator
-    auth: Auth
-    lrg: LRG
-    incentive: Incentive
-    profile: Profile
-    terms: Terms
+export interface ISettings {
+    endpoint: string
 }
 
-export interface Auth {
-    constructor(settings: Settings)
-    login(login: string, password: string, programSlug: string): Promise
-    basicAuth(token: string): void
-    logout(): Promise
+export interface IPodiumError {
+    data: object
+    status: number
+    statusText: string
 }
 
-export interface Incentive {
-    constructor(settings: Settings)
-    getLedger(): Promise
-    getLedgers(paginator: Paginator): Promise
-    getTransactions(paginator: Paginator): Promise
+export interface IPodiumErrorResponse {
+    data: IResponse
+    status: number
+    statusText: string
 }
 
-export interface LRG {
-    constructor(settings: Settings)
-    get(redirectUrl: string): Promise
-    redirect(redirectUrl: string): boolean
+export interface IPodiumPromise<T> extends Promise<T> {
+    finally?: string
 }
 
-export interface Profile {
-    constructor(settings: Settings)
-    get(redirectUrl: string): Promise
+export interface IResponse {
+    apiCode: API_CODE
+    detail: object
+    token: string
 }
 
-export interface Terms {
-    constructor(settings: Settings)
-    get(redirectUrl: string): Promise
-    accept(id: number): Promise
+export interface IAuthResponse {
+    code: API_CODE
+    message: string
+    user_id: number
+    token: string
 }
 
-export interface Paginator {
-    constructor(settings: Settings)
-    setContext(ctx: object): this
-    setPage(page: number): this
-    setPerPage(perPage: number): this
-    setSortField(sortField: number): this
-    setSortDirection(direction: SORT_DIRECTION): this
-    setSortDesc(direction: boolean): this
-    toParams(): {
-        page: number
-        count: number
-        sort_field: string
-        sort_direction: SORT_DIRECTION
+export interface ILogoutResponse {
+    code: API_CODE
+    id: object
+    message: string
+}
+
+export interface IPodiumList<T> {
+    readonly current_page: number
+    readonly data: T[]
+    readonly last_page: number
+    readonly per_page: number
+    readonly to: number
+    readonly total: number
+}
+
+export interface IPodiumModel {
+    readonly id: number
+    readonly created_at: Date
+    readonly updated_at: Date
+}
+
+export interface ITransactions extends IPodiumModel {
+    amount: number
+    description: string
+    running_balance: number
+    link_type: number
+    link_id: number
+}
+
+export interface IUser extends IPodiumModel {
+    first_name: string
+    last_name: string
+    user_account: string
+    email: string
+}
+
+export interface ICurrency extends IPodiumModel {
+    code: string
+    country_alpha_2_code: string
+    increment: string
+    is_virtual: boolean
+    name: string
+    numeric_code: string
+    precision: number
+    symbol: string
+}
+
+export interface IFlex extends IPodiumModel {
+    readonly id: number
+    program_id: number
+    rules: IFlexRule[]
+}
+
+export interface IFlexRule {
+    id: number
+    name: string
+    reward_id: number
+    slug: string
+}
+
+export interface IUserFilter {
+    customer_id?: number
+    search?: string
+    email?: string
+    group_ids?: number
+    only_managers?: boolean
+}
+
+export interface ITermsAccept extends IPodiumModel {
+    choice_selections: [number]
+}
+
+export interface ILRGRedirect extends IPodiumModel {
+    body: {
+        redirect_url: string,
     }
 }
 
-export interface Settings {
-    endpoint: string;
-    catchError: Function;
-    perPage: number;
-    sortField: string;
-    sortDirection: SORT_DIRECTION;
+export interface IReward extends IPodiumModel {
+    choice_selections: [number]
+    incentives: [number]
+    notification_map: [number]
+    product_assets: [number]
+    program_id: number
 }
 
-export enum SORT_DIRECTION {
+export const enum API_CODE {
+    INVALID_TOKEN = 'INVALID_TOKEN',
+    SUCCESS = 'success',
+    NO_TERMS = 'NO_TERMS',
+    UNACCEPTED_TERMS = 'UNACCEPTED_TERMS',
+}
+
+export const enum SORT_DIRECTION {
     ASC = 'asc',
-    DESC = 'desc'
+    DESC = 'desc',
+}
+export const enum SORT_FIELD {
+    CREATED_AT = 'created_at',
 }
