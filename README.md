@@ -14,7 +14,7 @@ let podium = new Podium({
   endpoint: 'https://api.podiumrewards.com/v1/'
 })
 
-podium.Auth.login(email, password).then(rsp => {
+podium.Auth.login(email, password, slug).then(rsp => {
   console.log(rsp.message)
 }).catch(error => {
   console.log(error.message)
@@ -45,7 +45,7 @@ Settings can be passed into the Podium constructor as a JSON object.
 Log in with a username and password and receive an API token to interact with other resources available via the API. The logout endpoint deletes the authentication token. 
 
 ```
-Podium.Auth.Login(email, password)
+Podium.Auth.Login(email, password, slug)
 Podium.Auth.GetToken()
 Podium.Auth.SetToken(string)
 Podium.Auth.HasToken()
@@ -93,8 +93,16 @@ Log in with a username and password and receive an API token to interact with ot
 ### Methods that extend Resource
 
 ```
-Podium.Auth
+Podium.Profile
 Podium.Users
+
+### Methods with additonal functions
+
+```
+Podium.Ledgers.GetTransactions
+Podium.LRG.GetUrl
+Podium.LRG.Redirect
+Podium.Terms.Accept
 ```
 
 ### Paginator properties

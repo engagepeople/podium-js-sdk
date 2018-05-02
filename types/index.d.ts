@@ -53,8 +53,11 @@ export interface IPodiumModel {
 }
 
 export interface ITransactions extends IPodiumModel {
-    readonly amount: number
-    readonly description: string
+    amount: number
+    description: string
+    running_balance: number
+    link_type: number
+    link_id: number
 }
 
 export interface IUser extends IPodiumModel {
