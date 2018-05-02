@@ -52,6 +52,11 @@ export interface IPodiumModel {
     readonly updated_at: Date
 }
 
+export interface ITransactions extends IPodiumModel {
+    readonly amount: number
+    readonly description: string
+}
+
 export interface IUser extends IPodiumModel {
     first_name: string
     last_name: string
