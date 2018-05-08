@@ -79,7 +79,6 @@ export interface ICurrency extends IPodiumModel {
 }
 
 export interface IFlex extends IPodiumModel {
-    readonly id: number
     program_id: number
     rules: IFlexRule[]
 }
@@ -105,12 +104,7 @@ export interface IEcardsFilter {
     searchInfo?: string
 }
 
-export interface IEcardCategoryFilter {
-    program_id?: number
-}
-
 export interface IEcardCategory extends IPodiumModel {
-    id: number
     program_id: number
     group_id: number
     name: string
@@ -122,7 +116,6 @@ export interface IEcardTemplateFilter {
 }
 
 export interface IEcardTemplate extends IPodiumModel {
-    id: number
     program_id: number
     subject: string
     message: string
@@ -142,7 +135,6 @@ export interface ILRGRedirect extends IPodiumModel {
 }
 
 export interface IEcard extends IPodiumModel {
-    id: number,
     template_id: number,
     subject: string,
     message: string,
@@ -178,4 +170,10 @@ export const enum SORT_DIRECTION {
 }
 export const enum SORT_FIELD {
     CREATED_AT = 'created_at',
+}
+
+export const enum ECARD_STATUS {
+    RECEIVED = 'received',
+    SENT = 'sent',
+    PENDING = 'pending',
 }
