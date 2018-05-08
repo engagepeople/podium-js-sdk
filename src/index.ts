@@ -22,9 +22,9 @@ export class Podium {
         this.Auth = new Auth(settings)
         this.Profile = new Resource(settings).SetResource('profile').SetLegacy(true)
         this.Ecards = {
-            Categories : new Resource(settings).SetResource('profile'),
-            Ecards: new Resource(settings).SetResource('profile'),
-            Templates : new Resource(settings).SetResource('profile'),
+            Categories : new Resource(settings).SetResource('ecardCategory'),
+            Ecards: new Resource(settings).SetResource('ecard'),
+            Templates : new Resource(settings).SetResource('ecardTemplate'),
         }
         this.Ledgers = new Ledgers(settings)
         this.LRG = new LRG(settings)
