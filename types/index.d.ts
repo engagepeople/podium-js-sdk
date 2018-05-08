@@ -99,6 +99,38 @@ export interface IUserFilter {
     only_managers?: boolean
 }
 
+export interface IEcardsFilter {
+    type?: string,
+    show?: string,
+    searchInfo?: string
+}
+
+export interface IEcardCategoryFilter {
+    program_id?: number
+}
+
+export interface IEcardCategory extends IPodiumModel {
+    id: number
+    program_id: number
+    group_id: number
+    name: string
+}
+
+export interface IEcardTemplateFilter {
+    category_id?: number
+    searchInfo?: string
+}
+
+export interface IEcardTemplate extends IPodiumModel {
+    id: number
+    program_id: number
+    subject: string
+    message: string
+    tags: [string]
+    image: object
+    categories: [object]
+}
+
 export interface ITermsAccept extends IPodiumModel {
     choice_selections: [number]
 }
@@ -107,6 +139,22 @@ export interface ILRGRedirect extends IPodiumModel {
     body: {
         redirect_url: string,
     }
+}
+
+export interface IEcard extends IPodiumModel {
+    id: number,
+    template_id: number,
+    subject: string,
+    message: string,
+    sent: boolean,
+    send_date: string,
+    template: object,
+    image: object,
+    categories: [object]
+    sender: object,
+    recipients: [object],
+    cc: [object],
+    collaborators: [object]
 }
 
 export interface IReward extends IPodiumModel {

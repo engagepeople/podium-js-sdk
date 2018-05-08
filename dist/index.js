@@ -2578,6 +2578,11 @@ class Podium {
     constructor(settings) {
         this.Auth = new Auth_1.Auth(settings);
         this.Profile = new Resource_1.Resource(settings).SetResource('profile').SetLegacy(true);
+        this.Ecards = {
+            Categories: new Resource_1.Resource(settings).SetResource('profile'),
+            Ecards: new Resource_1.Resource(settings).SetResource('profile'),
+            Templates: new Resource_1.Resource(settings).SetResource('profile'),
+        };
         this.Ledgers = new Ledgers_1.Ledgers(settings);
         this.LRG = new Lrg_1.LRG(settings);
         this.Terms = new Terms_1.Terms(settings);

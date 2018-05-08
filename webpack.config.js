@@ -4,7 +4,7 @@ module.exports = {
   output: {
     filename: "index.js",
     path: __dirname + "/dist",
-    library: 'podiumAdminSdk',
+    library: 'podiumSdk',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
