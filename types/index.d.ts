@@ -49,7 +49,7 @@ export interface IPodiumList<T> {
 export interface IPodiumModel {
     readonly id: number
     readonly created_at: Date
-    readonly updated_at: Date
+    readonly updated_at?: Date
 }
 
 export interface ITransactions extends IPodiumModel {
@@ -99,7 +99,7 @@ export interface IUserFilter {
 }
 
 export interface IEcardsFilter {
-    type?: string,
+    type?: ECARD_STATUS,
     show?: string,
     searchInfo?: string
 }
@@ -120,8 +120,8 @@ export interface IEcardTemplate extends IPodiumModel {
     subject: string
     message: string
     tags: [string]
-    image: object
-    categories: [object]
+    image: IImage
+    categories: [IEcardCategory]
 }
 
 export interface ITermsAccept extends IPodiumModel {
@@ -134,19 +134,41 @@ export interface ILRGRedirect extends IPodiumModel {
     }
 }
 
+export interface IImage extends IPodiumModel {
+    file_name: string
+    height: number
+    type: string
+    url: string
+    width: number
+}
+
+export interface IEcardUser {
+    id: number
+    first_name: string
+    last_name: string
+}
+
 export interface IEcard extends IPodiumModel {
     template_id: number,
     subject: string,
     message: string,
     sent: boolean,
+    read?: boolean,
     send_date: string,
-    template: object,
-    image: object,
-    categories: [object]
-    sender: object,
-    recipients: [object],
-    cc: [object],
-    collaborators: [object]
+    template: ITemplate,
+    image: IImage,
+    categories: [IEcardCategory]
+    sender: IEcardUser,
+    recipients: [IEcardUser],
+    cc: [IEcardUser],
+    collaborators: [IEcardUser]
+}
+
+export interface ITemplate extends IPodiumModel {
+    group_id: number
+    subject: string
+    message: string
+    tags: [string]
 }
 
 export interface IReward extends IPodiumModel {
