@@ -5,13 +5,15 @@ import {LRG} from './Api/Lrg'
 import {Resource} from './Podium/Resource'
 import {Terms} from './Api/Terms'
 import {Ledgers} from './Api/Ledgers'
+import {Ecards} from './Api/Ecards/Ecards'
+import {Templates} from './Api/Ecards/Templates'
 
 export class Podium {
     public Auth: Auth
     public Ecards: {
         Categories: Resource
-        Ecards: Resource
-        Templates: Resource,
+        Ecards: Ecards
+        Templates: Templates,
     }
     public Profile: Resource
     public Ledgers: Ledgers
@@ -23,8 +25,8 @@ export class Podium {
         this.Profile = new Resource(settings).SetResource('profile').SetLegacy(true)
         this.Ecards = {
             Categories : new Resource(settings).SetResource('ecardCategory'),
-            Ecards: new Resource(settings).SetResource('ecard'),
-            Templates : new Resource(settings).SetResource('ecardTemplate'),
+            Ecards: new Ecards(settings),
+            Templates : new Templates(settings),
         }
         this.Ledgers = new Ledgers(settings)
         this.LRG = new LRG(settings)
