@@ -21,7 +21,6 @@
             "member-variable-declaration"
         ],
         "no-any": true,
-        "no-console": false,
         "ordered-imports": [
             true,
             {
