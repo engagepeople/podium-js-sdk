@@ -11,7 +11,7 @@ export class Templates extends Resource {
     }
 
     public GetTemplates(categoryId: number, paginator: Paginator): IPodiumPromise<IPodiumList<IEcardTemplate>> {
-        let filter: Filter<IEcardTemplateFilter> = new Filter<IEcardTemplateFilter>({category_id: categoryId})
+        const filter: Filter<IEcardTemplateFilter> = new Filter<IEcardTemplateFilter>({category_id: categoryId})
         return super.List(filter, paginator)
     }
 }
