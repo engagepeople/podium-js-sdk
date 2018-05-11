@@ -13,7 +13,7 @@ export class Podium {
     public Ecards: {
         Categories: Resource
         Ecards: Ecards
-        Templates: Templates,
+        Templates: Resource,
     }
     public Profile: Resource
     public Ledgers: Ledgers
@@ -26,7 +26,7 @@ export class Podium {
         this.Ecards = {
             Categories : new Resource(settings).SetResource('ecardCategory'),
             Ecards: new Ecards(settings),
-            Templates : new Templates(settings),
+            Templates : new Resource(settings).SetResource('ecardTemplate'),
         }
         this.Ledgers = new Ledgers(settings)
         this.LRG = new LRG(settings)
