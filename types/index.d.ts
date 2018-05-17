@@ -99,20 +99,22 @@ export interface IUserFilter {
 }
 
 export interface IEcardsFilter {
-    type?: ECARD_STATUS,
-    show?: string,
-    searchInfo?: string
+    status?: ECARD_STATUS,
+    read?: boolean,
+    subject?: string
+    body?: string
+    name?: string
 }
 
 export interface IEcardCategory extends IPodiumModel {
     program_id: number
-    group_id: number
     name: string
+    count: number
 }
 
 export interface IEcardTemplateFilter {
-    category_id?: number
-    searchInfo?: string
+    category_id?: [number]
+    search?: string
 }
 
 export interface IEcardTemplate extends IPodiumModel {
