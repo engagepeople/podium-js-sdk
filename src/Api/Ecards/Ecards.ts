@@ -11,17 +11,17 @@ export class Ecards extends Resource {
     }
 
     public GetReceived(paginator: Paginator): IPodiumPromise<IPodiumList<IEcard>> {
-        const filter: Filter<IEcardsFilter> = new Filter<IEcardsFilter>({type: ECARD_STATUS.RECEIVED})
+        const filter: Filter<IEcardsFilter> = new Filter<IEcardsFilter>({status: ECARD_STATUS.RECEIVED})
         return super.List(filter, paginator)
     }
 
     public GetSent(paginator: Paginator): IPodiumPromise<IPodiumList<IEcard>> {
-        const filter: Filter<IEcardsFilter> = new Filter<IEcardsFilter>({type: ECARD_STATUS.SENT})
+        const filter: Filter<IEcardsFilter> = new Filter<IEcardsFilter>({status: ECARD_STATUS.SENT})
         return super.List(filter, paginator)
     }
 
     public GetPending(paginator: Paginator): IPodiumPromise<IPodiumList<IEcard>> {
-        const filter: Filter<IEcardsFilter> = new Filter<IEcardsFilter>({type: ECARD_STATUS.PENDING})
+        const filter: Filter<IEcardsFilter> = new Filter<IEcardsFilter>({status: ECARD_STATUS.PENDING})
         return super.List(filter, paginator)
     }
 }
