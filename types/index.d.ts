@@ -49,7 +49,7 @@ export interface IPodiumList<T> {
 export interface IPodiumModel {
     readonly id: number
     readonly created_at: Date
-    readonly updated_at: Date
+    readonly updated_at?: Date
 }
 
 export interface ITransactions extends IPodiumModel {
@@ -79,7 +79,6 @@ export interface ICurrency extends IPodiumModel {
 }
 
 export interface IFlex extends IPodiumModel {
-    readonly id: number
     program_id: number
     rules: IFlexRule[]
 }
@@ -99,6 +98,34 @@ export interface IUserFilter {
     only_managers?: boolean
 }
 
+export interface IEcardsFilter {
+    status?: ECARD_STATUS,
+    read?: boolean,
+    subject?: string
+    body?: string
+    name?: string
+}
+
+export interface IEcardCategory extends IPodiumModel {
+    program_id: number
+    name: string
+    count: number
+}
+
+export interface IEcardTemplateFilter {
+    category_id?: [number]
+    search?: string
+}
+
+export interface IEcardTemplate extends IPodiumModel {
+    program_id: number
+    subject: string
+    message: string
+    tags: [string]
+    image: IImage
+    categories: [IEcardCategory]
+}
+
 export interface ITermsAccept extends IPodiumModel {
     choice_selections: [number]
 }
@@ -107,6 +134,33 @@ export interface ILRGRedirect extends IPodiumModel {
     body: {
         redirect_url: string,
     }
+}
+
+export interface IImage extends IPodiumModel {
+    height: number
+    url: string
+    width: number
+}
+
+export interface IEcardUser {
+    id: number
+    first_name: string
+    last_name: string
+}
+
+export interface IEcard extends IPodiumModel {
+    template_id: number,
+    subject: string,
+    message: string,
+    sent: boolean,
+    read?: boolean,
+    send_date: Date,
+    image: IImage,
+    categories: [IEcardCategory]
+    sender: IEcardUser,
+    recipients: [IEcardUser],
+    cc: [IEcardUser],
+    collaborators: [IEcardUser]
 }
 
 export interface IReward extends IPodiumModel {
@@ -130,4 +184,10 @@ export const enum SORT_DIRECTION {
 }
 export const enum SORT_FIELD {
     CREATED_AT = 'created_at',
+}
+
+export const enum ECARD_STATUS {
+    RECEIVED = 'received',
+    SENT = 'sent',
+    PENDING = 'pending',
 }

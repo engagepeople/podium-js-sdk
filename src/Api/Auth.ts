@@ -15,7 +15,6 @@ export class Auth extends Resource {
             program_slug: slug,
             user_account: username,
         }).then((response) => {
-            console.log(response)
             if (response.code === API_CODE.SUCCESS) {
                 this.SetToken(response.token)
                 return response.user_id
