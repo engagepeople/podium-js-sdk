@@ -93,16 +93,24 @@ Log in with a username and password and receive an API token to interact with ot
 ### Methods that extend Resource
 
 ```
+Podium.Ecards.Categories
+Podium.Ecards.Templates
 Podium.Profile
 Podium.Users
 
-### Methods with additonal functions
+```
+
+### Methods with additional functions
 
 ```
-Podium.Ledgers.GetTransactions
-Podium.LRG.GetUrl
-Podium.LRG.Redirect
-Podium.Terms.Accept
+Podium.Ecards.Ecards.GetReceived(Paginator)
+Podium.Ecards.Ecards.GetSent(Paginator)
+Podium.Ecards.Ecards.GetPending(Paginator)
+Podium.Ledgers.GetTransactions(LedgerID, Paginator)
+Podium.LRG.GetUrl(redirectUrl)
+Podium.LRG.Redirect(redirectUrl)
+Podium.Terms.Accept(termsId)
+
 ```
 
 ### Paginator properties
@@ -115,6 +123,7 @@ PodiumPaginator.setSortField(field)
 PodiumPaginator.setSortDirection([asc|desc])
 PodiumPaginator.setSortDesc(boolean)
 PodiumPaginator.toParams()
+
 ```
 
 ### Filter properties

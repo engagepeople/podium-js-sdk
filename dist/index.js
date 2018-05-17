@@ -2,11 +2,11 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("podiumAdminSdk", [], factory);
+		define("podiumSdk", [], factory);
 	else if(typeof exports === 'object')
-		exports["podiumAdminSdk"] = factory();
+		exports["podiumSdk"] = factory();
 	else
-		root["podiumAdminSdk"] = factory();
+		root["podiumSdk"] = factory();
 })(window, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -1999,7 +1999,6 @@ class Auth extends Resource_1.Resource {
             program_slug: slug,
             user_account: username,
         }).then((response) => {
-            console.log(response);
             if (response.code === "success" /* SUCCESS */) {
                 this.SetToken(response.token);
                 return response.user_id;
@@ -2024,6 +2023,41 @@ class Auth extends Resource_1.Resource {
     }
 }
 exports.Auth = Auth;
+
+
+/***/ }),
+
+/***/ "./src/Api/Ecards/Ecards.ts":
+/*!**********************************!*\
+  !*** ./src/Api/Ecards/Ecards.ts ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const Resource_1 = __webpack_require__(/*! ../../Podium/Resource */ "./src/Podium/Resource.ts");
+const Filter_1 = __webpack_require__(/*! ../../Podium/Filter */ "./src/Podium/Filter.ts");
+class Ecards extends Resource_1.Resource {
+    constructor(settings) {
+        super(settings);
+        super.SetResource('ecard');
+    }
+    GetReceived(paginator) {
+        const filter = new Filter_1.Filter({ status: "received" /* RECEIVED */ });
+        return super.List(filter, paginator);
+    }
+    GetSent(paginator) {
+        const filter = new Filter_1.Filter({ status: "sent" /* SENT */ });
+        return super.List(filter, paginator);
+    }
+    GetPending(paginator) {
+        const filter = new Filter_1.Filter({ status: "pending" /* PENDING */ });
+        return super.List(filter, paginator);
+    }
+}
+exports.Ecards = Ecards;
 
 
 /***/ }),
@@ -2574,13 +2608,14 @@ const Lrg_1 = __webpack_require__(/*! ./Api/Lrg */ "./src/Api/Lrg.ts");
 const Resource_1 = __webpack_require__(/*! ./Podium/Resource */ "./src/Podium/Resource.ts");
 const Terms_1 = __webpack_require__(/*! ./Api/Terms */ "./src/Api/Terms.ts");
 const Ledgers_1 = __webpack_require__(/*! ./Api/Ledgers */ "./src/Api/Ledgers.ts");
+const Ecards_1 = __webpack_require__(/*! ./Api/Ecards/Ecards */ "./src/Api/Ecards/Ecards.ts");
 class Podium {
     constructor(settings) {
         this.Auth = new Auth_1.Auth(settings);
         this.Profile = new Resource_1.Resource(settings).SetResource('profile').SetLegacy(true);
         this.Ecards = {
             Categories: new Resource_1.Resource(settings).SetResource('ecardCategory'),
-            Ecards: new Resource_1.Resource(settings).SetResource('ecard'),
+            Ecards: new Ecards_1.Ecards(settings),
             Templates: new Resource_1.Resource(settings).SetResource('ecardTemplate'),
         };
         this.Ledgers = new Ledgers_1.Ledgers(settings);
