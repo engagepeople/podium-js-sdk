@@ -137,9 +137,7 @@ export interface ILRGRedirect extends IPodiumModel {
 }
 
 export interface IImage extends IPodiumModel {
-    file_name: string
     height: number
-    type: string
     url: string
     width: number
 }
@@ -156,21 +154,13 @@ export interface IEcard extends IPodiumModel {
     message: string,
     sent: boolean,
     read?: boolean,
-    send_date: string,
-    template: ITemplate,
+    send_date: Date,
     image: IImage,
     categories: [IEcardCategory]
     sender: IEcardUser,
     recipients: [IEcardUser],
     cc: [IEcardUser],
     collaborators: [IEcardUser]
-}
-
-export interface ITemplate extends IPodiumModel {
-    group_id: number
-    subject: string
-    message: string
-    tags: [string]
 }
 
 export interface IReward extends IPodiumModel {
