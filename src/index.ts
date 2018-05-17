@@ -6,7 +6,6 @@ import {Resource} from './Podium/Resource'
 import {Terms} from './Api/Terms'
 import {Ledgers} from './Api/Ledgers'
 import {Ecards} from './Api/Ecards/Ecards'
-import {Templates} from './Api/Ecards/Templates'
 
 export class Podium {
     public Auth: Auth
