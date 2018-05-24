@@ -2198,12 +2198,8 @@ class ConvertTime {
             return new Date(key.replace(' ', 'T') + 'Z');
         };
         this.DateToAPI = (key) => {
-            return `${key.getUTCFullYear()}-
-        ${this.strPad(key.getUTCMonth() + 1)}-
-        ${this.strPad(key.getUTCDate())}
-        ${this.strPad(key.getUTCHours())}:
-        ${this.strPad(key.getUTCMinutes())}:
-        ${this.strPad(key.getUTCSeconds())}`;
+            // tslint:disable-next-line:max-line-length
+            return `${key.getUTCFullYear()}-${this.strPad(key.getUTCMonth() + 1)}-${this.strPad(key.getUTCDate())} ${this.strPad(key.getUTCHours())}:${this.strPad(key.getUTCMinutes())}:${this.strPad(key.getUTCSeconds())}`;
         };
         this.strPad = (n) => {
             return String('00' + n).slice(-2);
@@ -2438,11 +2434,15 @@ class Request extends Token_1.Token {
                 reject("INVALID_TOKEN" /* INVALID_TOKEN */);
             });
         }
+        if (typeof config.data === 'object') {
+            const convertTimeToAPI = new ConvertTime_1.ConvertTime(config.data);
+            config.data = convertTimeToAPI.ToAPI();
+        }
         config = Object.assign({
             headers: this.makeHeaders(),
             transformResponse: [(data) => {
-                    const convertTime = new ConvertTime_1.ConvertTime(JSON.parse(data));
-                    return convertTime.ToUTC();
+                    const convertTimeToUTC = new ConvertTime_1.ConvertTime(JSON.parse(data));
+                    return convertTimeToUTC.ToUTC();
                 }],
         }, config);
         return new Promise((resolve, reject) => {
@@ -2604,15 +2604,18 @@ exports.Token = Token;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const Auth_1 = __webpack_require__(/*! ./Api/Auth */ "./src/Api/Auth.ts");
+const Ecards_1 = __webpack_require__(/*! ./Api/Ecards/Ecards */ "./src/Api/Ecards/Ecards.ts");
 const Lrg_1 = __webpack_require__(/*! ./Api/Lrg */ "./src/Api/Lrg.ts");
+const Ledgers_1 = __webpack_require__(/*! ./Api/Ledgers */ "./src/Api/Ledgers.ts");
 const Resource_1 = __webpack_require__(/*! ./Podium/Resource */ "./src/Podium/Resource.ts");
 const Terms_1 = __webpack_require__(/*! ./Api/Terms */ "./src/Api/Terms.ts");
-const Ledgers_1 = __webpack_require__(/*! ./Api/Ledgers */ "./src/Api/Ledgers.ts");
-const Ecards_1 = __webpack_require__(/*! ./Api/Ecards/Ecards */ "./src/Api/Ecards/Ecards.ts");
+var Filter_1 = __webpack_require__(/*! ./Podium/Filter */ "./src/Podium/Filter.ts");
+exports.PodiumFilter = Filter_1.Filter;
+var Paginator_1 = __webpack_require__(/*! ./Podium/Paginator */ "./src/Podium/Paginator.ts");
+exports.PodiumPaginator = Paginator_1.Paginator;
 class Podium {
     constructor(settings) {
         this.Auth = new Auth_1.Auth(settings);
-        this.Profile = new Resource_1.Resource(settings).SetResource('profile').SetLegacy(true);
         this.Ecards = {
             Categories: new Resource_1.Resource(settings).SetResource('ecardCategory'),
             Ecards: new Ecards_1.Ecards(settings),
@@ -2620,14 +2623,14 @@ class Podium {
         };
         this.Ledgers = new Ledgers_1.Ledgers(settings);
         this.LRG = new Lrg_1.LRG(settings);
+        this.Profile = new Resource_1.Resource(settings).SetResource('profile').SetLegacy(true);
+        this.Shop = {
+            Products: new Resource_1.Resource(settings).SetResource('member/product'),
+        };
         this.Terms = new Terms_1.Terms(settings);
     }
 }
 exports.Podium = Podium;
-var Paginator_1 = __webpack_require__(/*! ./Podium/Paginator */ "./src/Podium/Paginator.ts");
-exports.PodiumPaginator = Paginator_1.Paginator;
-var Filter_1 = __webpack_require__(/*! ./Podium/Filter */ "./src/Podium/Filter.ts");
-exports.PodiumFilter = Filter_1.Filter;
 
 
 /***/ })
