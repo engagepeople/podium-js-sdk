@@ -23,13 +23,14 @@ export class Podium {
         Products: Resource,
     }
     public Terms: Terms
+    public Users: Resource
 
     constructor(settings: ISettings) {
         this.Auth = new Auth(settings)
         this.Ecards = {
-            Categories: new Resource(settings).SetResource('ecardCategory'),
+            Categories: new Resource(settings).SetResource('ecard/category'),
             Ecards: new Ecards(settings),
-            Templates: new Resource(settings).SetResource('ecardTemplate'),
+            Templates: new Resource(settings).SetResource('ecard/template'),
         }
         this.Ledgers = new Ledgers(settings)
         this.LRG = new LRG(settings)
@@ -38,5 +39,6 @@ export class Podium {
             Products: new Resource(settings).SetResource('member/product'),
         }
         this.Terms = new Terms(settings)
+        this.Users = new Resource(settings).SetResource('user').SetLegacy(true)
     }
 }
