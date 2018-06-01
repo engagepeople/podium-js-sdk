@@ -2617,9 +2617,9 @@ class Podium {
     constructor(settings) {
         this.Auth = new Auth_1.Auth(settings);
         this.Ecards = {
-            Categories: new Resource_1.Resource(settings).SetResource('ecardCategory'),
+            Categories: new Resource_1.Resource(settings).SetResource('ecard/category'),
             Ecards: new Ecards_1.Ecards(settings),
-            Templates: new Resource_1.Resource(settings).SetResource('ecardTemplate'),
+            Templates: new Resource_1.Resource(settings).SetResource('ecard/template'),
         };
         this.Ledgers = new Ledgers_1.Ledgers(settings);
         this.LRG = new Lrg_1.LRG(settings);
@@ -2628,6 +2628,7 @@ class Podium {
             Products: new Resource_1.Resource(settings).SetResource('member/product'),
         };
         this.Terms = new Terms_1.Terms(settings);
+        this.Users = new Resource_1.Resource(settings).SetResource('user').SetLegacy(true);
     }
 }
 exports.Podium = Podium;
