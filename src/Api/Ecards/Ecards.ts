@@ -10,17 +10,17 @@ export class Ecards extends Resource {
         super.SetResource('ecard')
     }
 
-    public GetReceived(paginator: Paginator): IPodiumPromise<IPodiumList<IEcard>> {
+    public GetReceived(paginator: Paginator): IPodiumPromise<IEcard[]> {
         const filter: Filter<IEcardsFilter> = new Filter<IEcardsFilter>({status: ECARD_STATUS.RECEIVED})
         return super.List(filter, paginator)
     }
 
-    public GetSent(paginator: Paginator): IPodiumPromise<IPodiumList<IEcard>> {
+    public GetSent(paginator: Paginator): IPodiumPromise<IEcard[]> {
         const filter: Filter<IEcardsFilter> = new Filter<IEcardsFilter>({status: ECARD_STATUS.SENT})
         return super.List(filter, paginator)
     }
 
-    public GetPending(paginator: Paginator): IPodiumPromise<IPodiumList<IEcard>> {
+    public GetPending(paginator: Paginator): IPodiumPromise<IEcard[]> {
         const filter: Filter<IEcardsFilter> = new Filter<IEcardsFilter>({status: ECARD_STATUS.PENDING})
         return super.List(filter, paginator)
     }

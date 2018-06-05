@@ -40,6 +40,7 @@ export interface ILogoutResponse {
 export interface IPodiumList<T> {
     readonly current_page: number
     readonly data: T[]
+    readonly from: number
     readonly last_page: number
     readonly per_page: number
     readonly to: number
