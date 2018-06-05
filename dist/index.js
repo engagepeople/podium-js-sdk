@@ -2299,11 +2299,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const ListQuery_1 = __webpack_require__(/*! ./ListQuery */ "./src/Podium/ListQuery.ts");
 class Paginator extends ListQuery_1.ListQuery {
     constructor() {
-        super(...arguments);
+        super();
+        this.loading = false;
         this.page = 1;
         this.perPage = 50;
         this.sortField = "created_at" /* CREATED_AT */;
         this.sortDirection = "desc" /* DESC */;
+        this.response = {
+            currentPage: null,
+            from: null,
+            lastPage: null,
+            perPage: null,
+            to: null,
+            total: null,
+        };
+    }
+    setResponse(currentPage, from, lastPage, perPage, to, total) {
+        this.response.currentPage = currentPage;
+        this.response.from = from;
+        this.response.lastPage = lastPage;
+        this.response.perPage = perPage;
+        this.response.to = to;
+        this.response.total = total;
+        return this;
+    }
+    isLoading(status) {
+        this.loading = status;
+        return this;
     }
     setPage(page) {
         this.page = page;
@@ -2526,7 +2548,16 @@ class Resource extends Request_1.Request {
         else if (arg1 instanceof Filter_1.Filter) {
             filter = arg1;
         }
-        return super.ListRequest(filter, paginator);
+        if (paginator) {
+            paginator.isLoading(true);
+        }
+        return super.ListRequest(filter, paginator).then((rep) => {
+            paginator.setResponse(rep.current_page, rep.from, rep.last_page, rep.per_page, rep.to, rep.total);
+            if (paginator) {
+                paginator.isLoading(false);
+            }
+            return rep.data;
+        });
     }
     Create(params) {
         return super.PostRequest(params);

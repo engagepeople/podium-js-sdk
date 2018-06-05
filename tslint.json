@@ -20,7 +20,7 @@
             "parameter",
             "member-variable-declaration"
         ],
-        "no-console": true,
+        "no-console": false,
         "no-any": true,
         "ordered-imports": [
             true,

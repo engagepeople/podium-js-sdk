@@ -1,5 +1,5 @@
 import axios, {AxiosError, AxiosRequestConfig} from 'axios'
-import {API_CODE, IPodiumErrorResponse, IPodiumPromise, IResponse, ISettings} from '../../types'
+import {API_CODE, IPodiumErrorResponse, IPodiumList, IPodiumPromise, IResponse, ISettings} from '../../types'
 import {ConvertTime} from './ConvertTime'
 import {Filter} from './Filter'
 import {Token} from './Token'
@@ -33,7 +33,7 @@ export class Request extends Token {
         return this.Request(request, this.makeURL(id))
     }
 
-    protected ListRequest<F, T>(filter?: Filter<F>, paginator?: Paginator): IPodiumPromise<T> {
+    protected ListRequest<F, T>(filter?: Filter<F>, paginator?: Paginator): IPodiumPromise<IPodiumList<T>> {
         let params = {}
         if (filter instanceof Filter) {
             filter.setLegacyMode(this.Legacy)

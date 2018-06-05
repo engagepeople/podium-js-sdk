@@ -19,11 +19,11 @@ export class Resource extends Request {
         return this
     }
 
-    public Get<T>(id?: number|string): IPodiumPromise<T> {
+    public Get<T>(id?: number | string): IPodiumPromise<T> {
         return super.GetRequest(id)
     }
 
-    public List<F, T>(arg1?: Filter<F> | Paginator, paginator?: | Paginator): IPodiumPromise<IPodiumList<T>> {
+    public List<F, T>(arg1?: Filter<F> | Paginator, paginator?: | Paginator): IPodiumPromise<T[]> {
         let filter: Filter<F>
         if (arg1 instanceof Paginator) {
             if (paginator) {
@@ -34,18 +34,27 @@ export class Resource extends Request {
         } else if (arg1 instanceof Filter) {
             filter = arg1
         }
-        return super.ListRequest(filter, paginator)
+        if (paginator)  {
+            paginator.isLoading(true)
+        }
+        return super.ListRequest(filter, paginator).then((rep: IPodiumList<T>): T[] => {
+            paginator.setResponse(rep.current_page, rep.from, rep.last_page, rep.per_page, rep.to, rep.total)
+            if (paginator)  {
+                paginator.isLoading(false)
+            }
+            return rep.data
+        })
     }
 
     public Create<T>(params?: object): IPodiumPromise<T> {
         return super.PostRequest(params)
     }
 
-    public Update<T>(id: number|string, params?: object): IPodiumPromise<T> {
+    public Update<T>(id: number | string, params?: object): IPodiumPromise<T> {
         return super.UpdateRequest(id, params)
     }
 
-    public Delete<T>(id: number|string): IPodiumPromise<T> {
+    public Delete<T>(id: number | string): IPodiumPromise<T> {
         return super.DeleteRequest(id)
     }
 
