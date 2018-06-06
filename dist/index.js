@@ -2548,12 +2548,12 @@ class Resource extends Request_1.Request {
         else if (arg1 instanceof Filter_1.Filter) {
             filter = arg1;
         }
-        if (paginator) {
+        if (paginator instanceof Paginator_1.Paginator) {
             paginator.isLoading(true);
         }
         return super.ListRequest(filter, paginator).then((rep) => {
-            paginator.setResponse(rep.current_page, rep.from, rep.last_page, rep.per_page, rep.to, rep.total);
-            if (paginator) {
+            if (paginator instanceof Paginator_1.Paginator) {
+                paginator.setResponse(rep.current_page, rep.from, rep.last_page, rep.per_page, rep.to, rep.total);
                 paginator.isLoading(false);
             }
             return rep.data;

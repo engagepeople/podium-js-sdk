@@ -34,12 +34,12 @@ export class Resource extends Request {
         } else if (arg1 instanceof Filter) {
             filter = arg1
         }
-        if (paginator)  {
+        if (paginator instanceof Paginator) {
             paginator.isLoading(true)
         }
         return super.ListRequest(filter, paginator).then((rep: IPodiumList<T>): T[] => {
-            paginator.setResponse(rep.current_page, rep.from, rep.last_page, rep.per_page, rep.to, rep.total)
-            if (paginator)  {
+            if (paginator instanceof Paginator) {
+                paginator.setResponse(rep.current_page, rep.from, rep.last_page, rep.per_page, rep.to, rep.total)
                 paginator.isLoading(false)
             }
             return rep.data
