@@ -1,11 +1,27 @@
 import axios, {AxiosError, AxiosRequestConfig} from 'axios'
-import {API_CODE, IPodiumErrorResponse, IPodiumList, IPodiumPromise, IResponse, ISettings} from '../../types'
+import {
+    API_CODE,
+    IPodiumErrorResponse,
+    IPodiumList,
+    IPodiumPromise,
+    IPodiumRequestError,
+    IResponse,
+    ISettings,
+} from '../../types'
 import {ConvertTime} from './ConvertTime'
 import {Filter} from './Filter'
 import {Token} from './Token'
 import {Paginator} from './Paginator'
 
 export class Request extends Token {
+    private static parseError(error: AxiosError): IPodiumErrorResponse {
+        return {
+            data: error.response.data as IResponse,
+            status: error.response.status,
+            statusText: error.response.statusText,
+        }
+    }
+
     protected Legacy: boolean = false
     protected Resource: string
     private settings: ISettings
@@ -71,11 +87,6 @@ export class Request extends Token {
         if (!url) {
             url = this.makeURL()
         }
-        if ((this.Resource !== 'login') && !this.HasToken()) { // Don't even make the request
-            return new Promise((resolve, reject) => {
-                reject(API_CODE.INVALID_TOKEN)
-            })
-        }
 
         if (typeof config.data  === 'object') {
             const convertTimeToAPI = new ConvertTime(config.data)
@@ -96,7 +107,16 @@ export class Request extends Token {
                     resolve(response.data)
                 })
                 .catch((error) => {
-                    reject(this.parseError(error))
+                    // todo: Discuss if this is needed or axios error should be passed below
+                    const parsedError = Request.parseError(error)
+                    if ((parsedError.status === 400) && (parsedError.data.apiCode === API_CODE.INVALID_TOKEN)) {
+                        this.RemoveToken()
+                    }
+                    this.onRequestError({
+                        error: parsedError,
+                        request: this,
+                    })
+                    reject(parsedError)
                 })
         })
     }
@@ -117,17 +137,10 @@ export class Request extends Token {
         }
     }
 
-    private parseError(error: AxiosError): IPodiumErrorResponse {
-        const podiumError: IPodiumErrorResponse = {
-            data: error.response.data as IResponse,
-            status: error.response.status,
-            statusText: error.response.statusText,
+    private onRequestError(errorData: IPodiumRequestError): void {
+        if (typeof this.settings.onRequestError === 'function') {
+            this.settings.onRequestError(errorData)
         }
-
-        if ((podiumError.status === 400) && (podiumError.data.apiCode === API_CODE.INVALID_TOKEN)) {
-            this.RemoveToken()
-        }
-        return podiumError
     }
 
 }

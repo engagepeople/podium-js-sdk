@@ -1,5 +1,8 @@
+import {Request} from "../src/Podium/Request"
+
 export interface ISettings {
-    endpoint: string
+    endpoint: string,
+    onRequestError: Function
 }
 
 export interface IPodiumError {
@@ -191,4 +194,9 @@ export const enum ECARD_STATUS {
     RECEIVED = 'received',
     SENT = 'sent',
     PENDING = 'pending',
+}
+
+export interface IPodiumRequestError {
+    error: IPodiumErrorResponse,
+    request: Request
 }

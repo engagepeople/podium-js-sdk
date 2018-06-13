@@ -2401,6 +2401,13 @@ class Request extends Token_1.Token {
         this.Legacy = false;
         this.settings = settings;
     }
+    static parseError(error) {
+        return {
+            data: error.response.data,
+            status: error.response.status,
+            statusText: error.response.statusText,
+        };
+    }
     GetRequest(id) {
         const request = {
             method: 'get',
@@ -2451,11 +2458,6 @@ class Request extends Token_1.Token {
         if (!url) {
             url = this.makeURL();
         }
-        if ((this.Resource !== 'login') && !this.HasToken()) { // Don't even make the request
-            return new Promise((resolve, reject) => {
-                reject("INVALID_TOKEN" /* INVALID_TOKEN */);
-            });
-        }
         if (typeof config.data === 'object') {
             const convertTimeToAPI = new ConvertTime_1.ConvertTime(config.data);
             config.data = convertTimeToAPI.ToAPI();
@@ -2473,7 +2475,16 @@ class Request extends Token_1.Token {
                 resolve(response.data);
             })
                 .catch((error) => {
-                reject(this.parseError(error));
+                // todo: Discuss if this is needed or axios error should be passed below
+                const parsedError = Request.parseError(error);
+                if ((parsedError.status === 400) && (parsedError.data.apiCode === "INVALID_TOKEN" /* INVALID_TOKEN */)) {
+                    this.RemoveToken();
+                }
+                this.onRequestError({
+                    error: parsedError,
+                    request: this,
+                });
+                reject(parsedError);
             });
         });
     }
@@ -2491,16 +2502,10 @@ class Request extends Token_1.Token {
             };
         }
     }
-    parseError(error) {
-        const podiumError = {
-            data: error.response.data,
-            status: error.response.status,
-            statusText: error.response.statusText,
-        };
-        if ((podiumError.status === 400) && (podiumError.data.apiCode === "INVALID_TOKEN" /* INVALID_TOKEN */)) {
-            this.RemoveToken();
+    onRequestError(errorData) {
+        if (typeof this.settings.onRequestError === 'function') {
+            this.settings.onRequestError(errorData);
         }
-        return podiumError;
     }
 }
 exports.Request = Request;
@@ -2606,7 +2611,8 @@ class Token {
         }
     }
     HasToken() {
-        return (typeof this.GetToken() === 'string' && this.GetToken().length === 50);
+        const token = this.GetToken();
+        return (typeof token === 'string' && token.length > 0);
     }
     RemoveToken() {
         if (this.hasLocalStorage()) {
