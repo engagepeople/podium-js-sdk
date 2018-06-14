@@ -1,4 +1,4 @@
-const LOCAL_STORAGE_KEY = '__podiumAdminSDK__'
+const LOCAL_STORAGE_KEY = '__podiumSDK__'
 
 export class Token {
     private token: string = null

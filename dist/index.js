@@ -2585,7 +2585,7 @@ exports.Resource = Resource;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const LOCAL_STORAGE_KEY = '__podiumAdminSDK__';
+const LOCAL_STORAGE_KEY = '__podiumSDK__';
 class Token {
     constructor() {
         this.token = null;

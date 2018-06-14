@@ -1,8 +1,6 @@
-import {Request} from "../src/Podium/Request"
-
 export interface ISettings {
     endpoint: string,
-    onRequestError: Function
+    onRequestError: (error: IPodiumErrorResponse) => void
 }
 
 export interface IPodiumError {
