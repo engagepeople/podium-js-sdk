@@ -4,7 +4,6 @@ import {
     IPodiumErrorResponse,
     IPodiumList,
     IPodiumPromise,
-    IPodiumRequestError,
     IResponse,
     ISettings,
 } from '../../types'
@@ -107,15 +106,11 @@ export class Request extends Token {
                     resolve(response.data)
                 })
                 .catch((error) => {
-                    // todo: Discuss if this is needed or axios error should be passed below
                     const parsedError = Request.parseError(error)
                     if ((parsedError.status === 400) && (parsedError.data.apiCode === API_CODE.INVALID_TOKEN)) {
                         this.RemoveToken()
                     }
-                    this.onRequestError({
-                        error: parsedError,
-                        request: this,
-                    })
+                    this.onRequestError(parsedError)
                     reject(parsedError)
                 })
         })
@@ -137,7 +132,7 @@ export class Request extends Token {
         }
     }
 
-    private onRequestError(errorData: IPodiumRequestError): void {
+    private onRequestError(errorData: IPodiumErrorResponse): void {
         if (typeof this.settings.onRequestError === 'function') {
             this.settings.onRequestError(errorData)
         }

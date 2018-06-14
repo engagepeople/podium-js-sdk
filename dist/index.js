@@ -2475,15 +2475,11 @@ class Request extends Token_1.Token {
                 resolve(response.data);
             })
                 .catch((error) => {
-                // todo: Discuss if this is needed or axios error should be passed below
                 const parsedError = Request.parseError(error);
                 if ((parsedError.status === 400) && (parsedError.data.apiCode === "INVALID_TOKEN" /* INVALID_TOKEN */)) {
                     this.RemoveToken();
                 }
-                this.onRequestError({
-                    error: parsedError,
-                    request: this,
-                });
+                this.onRequestError(parsedError);
                 reject(parsedError);
             });
         });

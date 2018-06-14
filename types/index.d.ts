@@ -195,8 +195,3 @@ export const enum ECARD_STATUS {
     SENT = 'sent',
     PENDING = 'pending',
 }
-
-export interface IPodiumRequestError {
-    error: IPodiumErrorResponse,
-    request: Request
-}
