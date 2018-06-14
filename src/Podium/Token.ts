@@ -1,4 +1,4 @@
-const LOCAL_STORAGE_KEY = '__podiumAdminSDK__'
+const LOCAL_STORAGE_KEY = '__podiumSDK__'
 
 export class Token {
     private token: string = null
@@ -21,7 +21,8 @@ export class Token {
     }
 
     protected HasToken(): boolean {
-        return (typeof this.GetToken() === 'string' && this.GetToken().length === 50)
+        const token = this.GetToken()
+        return (typeof token === 'string' && token.length > 0)
     }
 
     protected RemoveToken(): boolean {
