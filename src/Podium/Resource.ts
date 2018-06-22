@@ -42,6 +42,9 @@ export class Resource extends Request {
                 paginator.setResponse(rep.current_page, rep.from, rep.last_page, rep.per_page, rep.to, rep.total)
                 paginator.isLoading(false)
             }
+            if (filter instanceof Filter && rep.hasOwnProperty('facets')) {
+                filter.setFacets(rep.facets)
+            }
             return rep.data
         })
     }

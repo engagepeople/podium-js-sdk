@@ -2237,6 +2237,13 @@ class Filter extends ListQuery_1.ListQuery {
         super();
         this.values = values;
     }
+    setFacets(facets) {
+        this.facets = facets;
+        return this;
+    }
+    getFacets() {
+        return this.facets;
+    }
     setValues(values) {
         this.values = values;
         return this;
@@ -2556,6 +2563,9 @@ class Resource extends Request_1.Request {
             if (paginator instanceof Paginator_1.Paginator) {
                 paginator.setResponse(rep.current_page, rep.from, rep.last_page, rep.per_page, rep.to, rep.total);
                 paginator.isLoading(false);
+            }
+            if (filter instanceof Filter_1.Filter && rep.hasOwnProperty('facets')) {
+                filter.setFacets(rep.facets);
             }
             return rep.data;
         });

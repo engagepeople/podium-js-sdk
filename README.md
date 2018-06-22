@@ -130,6 +130,8 @@ PodiumPaginator.toParams()
 The following set properties are chainable:
 
 ```
+PodiumFilter.getFacets()
+PodiumFilter.setFacets(object)
 PodiumFilter.setValues(object)
 PodiumFilter.getValues(number)
 PodiumFilter.toParams()

@@ -38,10 +38,16 @@ export interface ILogoutResponse {
     message: string
 }
 
+export interface IPodiumSearchList<T> {
+    results: T[]
+    facets: object
+}
+
 export interface IPodiumList<T> {
     readonly current_page: number
     readonly data: T[]
     readonly from: number
+    readonly facets?: object
     readonly last_page: number
     readonly per_page: number
     readonly to: number
