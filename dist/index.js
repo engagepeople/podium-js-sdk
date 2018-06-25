@@ -2027,6 +2027,72 @@ exports.Auth = Auth;
 
 /***/ }),
 
+/***/ "./src/Api/Discretionary.ts":
+/*!**********************************!*\
+  !*** ./src/Api/Discretionary.ts ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const Resource_1 = __webpack_require__(/*! ../Podium/Resource */ "./src/Podium/Resource.ts");
+const Filter_1 = __webpack_require__(/*! ../Podium/Filter */ "./src/Podium/Filter.ts");
+class Discretionary extends Resource_1.Resource {
+    constructor(settings) {
+        super(settings);
+    }
+    // Retrieves single campaign.
+    GetCampaign(campaignId) {
+        super.SetResource(`campaign/discretionary/${campaignId}`);
+        return super.Get();
+    }
+    // Retrieves all campaigns that are associated with the authenticated User.
+    GetCampaigns(filter, paginator) {
+        super.SetResource('campaign/discretionary');
+        return super.List(filter, paginator);
+    }
+    // Retrieves all transactions the authenticated user made on all the Discretionary Campaign.
+    GetTransactions(transactionType, paginator) {
+        super.SetResource('campaign/discretionary/transactions');
+        if (transactionType) {
+            const filter = new Filter_1.Filter({
+                sort_direction: "desc" /* DESC */,
+                sort_field: "created_at" /* CREATED_AT */,
+                type: transactionType,
+            });
+            return super.List(filter, paginator);
+        }
+        return super.List(paginator);
+    }
+    // Retrieves campaign ledger
+    GetCampaignLedger(campaignId, paginator) {
+        super.SetResource(`campaign/discretionary/ledger`);
+        const filter = new Filter_1.Filter({ campaign_id: campaignId });
+        return super.List(filter);
+    }
+    // Retrieves a single transaction that's associated with the authenticated User.
+    GetTransaction(transactionId) {
+        super.SetResource(`campaign/discretionary/transactions/${transactionId}`);
+        return super.Get();
+    }
+    // Send funds to a user
+    Issue(campaignId, payload) {
+        super.SetResource(`campaign/discretionary/${campaignId}`);
+        return super.PostRequest(payload);
+    }
+    // Updates the read status on the Discretionary Campaign Transaction
+    UpdateTransactionReadStatus(transactionId, read) {
+        super.SetResource(`campaign/discretionary/transactions`);
+        return super.Update(transactionId, { read });
+    }
+}
+exports.Discretionary = Discretionary;
+
+
+/***/ }),
+
 /***/ "./src/Api/Ecards/Ecards.ts":
 /*!**********************************!*\
   !*** ./src/Api/Ecards/Ecards.ts ***!
@@ -2642,6 +2708,7 @@ const Lrg_1 = __webpack_require__(/*! ./Api/Lrg */ "./src/Api/Lrg.ts");
 const Ledgers_1 = __webpack_require__(/*! ./Api/Ledgers */ "./src/Api/Ledgers.ts");
 const Resource_1 = __webpack_require__(/*! ./Podium/Resource */ "./src/Podium/Resource.ts");
 const Terms_1 = __webpack_require__(/*! ./Api/Terms */ "./src/Api/Terms.ts");
+const Discretionary_1 = __webpack_require__(/*! ./Api/Discretionary */ "./src/Api/Discretionary.ts");
 var Filter_1 = __webpack_require__(/*! ./Podium/Filter */ "./src/Podium/Filter.ts");
 exports.PodiumFilter = Filter_1.Filter;
 var Paginator_1 = __webpack_require__(/*! ./Podium/Paginator */ "./src/Podium/Paginator.ts");
@@ -2662,6 +2729,8 @@ class Podium {
         };
         this.Terms = new Terms_1.Terms(settings);
         this.Users = new Resource_1.Resource(settings).SetResource('user').SetLegacy(true);
+        this.Discretionary = new Discretionary_1.Discretionary(settings);
+        this.DirectReports = new Resource_1.Resource(settings).SetResource('user/reports');
     }
 }
 exports.Podium = Podium;

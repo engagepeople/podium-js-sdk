@@ -193,3 +193,67 @@ export const enum ECARD_STATUS {
     SENT = 'sent',
     PENDING = 'pending',
 }
+
+export const enum DISCRETIONARY_TRANSACTION_TYPE {
+    SENT = 'sent',
+    RECIEVED = 'received',
+}
+export const enum DISCRETIONARY_CAMP_TYPE {
+    ISSUER = 'issuer',
+    RECIEVER = 'reciever',
+}
+
+export interface IDiscretionaryCampaign {
+    id: number,
+    name: string,
+    start_at: Date,
+    end_at: Date
+}
+
+export interface IDiscretionaryCampaignParticipant {
+    id: number,
+    first_name: string,
+    last_name: string
+}
+
+export interface IDiscretionaryLedgerTransaction extends IPodiumModel {
+    id: number,
+    // external_id: string,
+    // description: string,
+    // amount: number,
+}
+
+export interface IDiscretionaryTransaction extends IPodiumModel {
+    id: number,
+    external_id: string,
+    description: string,
+    amount: number,
+    currency: string,
+    campaign: IDiscretionaryCampaign,
+    issuer?: IDiscretionaryCampaignParticipant
+    recipient?: IDiscretionaryCampaignParticipant
+}
+
+export interface IDiscretionaryTransactionFilter {
+    id?: number,
+    type?: DISCRETIONARY_TRANSACTION_TYPE,
+    sort_direction?: SORT_DIRECTION
+    sort_field?: SORT_FIELD,
+}
+
+export interface IDiscretionaryCampaignFilter {
+    campaign_id?: number,
+    type?: DISCRETIONARY_CAMP_TYPE
+}
+
+export interface IDiscretionaryResponse {
+    code: API_CODE,
+    message: string,
+    id: number
+}
+
+export interface IDiscretionaryIssuePayload {
+    user_id: number,
+    message?: string,
+    amount: number
+}

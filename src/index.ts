@@ -6,6 +6,7 @@ import {LRG} from './Api/Lrg'
 import {Ledgers} from './Api/Ledgers'
 import {Resource} from './Podium/Resource'
 import {Terms} from './Api/Terms'
+import {Discretionary} from './Api/Discretionary'
 
 export {Filter as PodiumFilter} from './Podium/Filter'
 export {Paginator as PodiumPaginator} from './Podium/Paginator'
@@ -24,6 +25,8 @@ export class Podium {
     }
     public Terms: Terms
     public Users: Resource
+    public Discretionary: Resource
+    public DirectReports: Resource
 
     constructor(settings: ISettings) {
         this.Auth = new Auth(settings)
@@ -40,5 +43,7 @@ export class Podium {
         }
         this.Terms = new Terms(settings)
         this.Users = new Resource(settings).SetResource('user').SetLegacy(true)
+        this.Discretionary = new Discretionary(settings)
+        this.DirectReports = new Resource(settings).SetResource('user/reports')
     }
 }
