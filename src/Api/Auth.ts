@@ -22,6 +22,20 @@ export class Auth extends Resource {
         })
     }
 
+    public SSO(token: string): IPodiumPromise<number> {
+        super.SetResource('authenticate')
+        super.RemoveToken()
+        return super.PostRequest<IAuthResponse>({
+            token,
+            type: 'sso',
+        }).then((response) => {
+            if (response.code === API_CODE.SUCCESS) {
+                this.SetToken(response.token)
+                return response.user_id
+            }
+        })
+    }
+
     public GetToken(): string {
         return super.GetToken()
     }
