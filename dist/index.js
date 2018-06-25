@@ -2005,6 +2005,19 @@ class Auth extends Resource_1.Resource {
             }
         });
     }
+    SSO(token) {
+        super.SetResource('authenticate');
+        super.RemoveToken();
+        return super.PostRequest({
+            token,
+            type: 'sso',
+        }).then((response) => {
+            if (response.code === "success" /* SUCCESS */) {
+                this.SetToken(response.token);
+                return response.user_id;
+            }
+        });
+    }
     GetToken() {
         return super.GetToken();
     }
