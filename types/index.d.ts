@@ -200,7 +200,7 @@ export const enum DISCRETIONARY_TRANSACTION_TYPE {
 }
 export const enum DISCRETIONARY_CAMP_TYPE {
     ISSUER = 'issuer',
-    RECIEVER = 'reciever',
+    RECEIVER = 'receiver',
 }
 
 export interface IDiscretionaryCampaign {
@@ -218,9 +218,8 @@ export interface IDiscretionaryCampaignParticipant {
 
 export interface IDiscretionaryLedgerTransaction extends IPodiumModel {
     id: number,
-    // external_id: string,
-    // description: string,
-    // amount: number,
+    description: string,
+    amount: number,
 }
 
 export interface IDiscretionaryTransaction extends IPodiumModel {
