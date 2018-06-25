@@ -1,6 +1,8 @@
 export interface ISettings {
-    endpoint: string,
+    endpoint: string
+    locale: string
     onRequestError: (error: IPodiumErrorResponse) => void
+    version: number
 }
 
 export interface IPodiumError {

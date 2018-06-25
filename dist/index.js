@@ -2498,16 +2498,25 @@ class Request extends Token_1.Token {
         });
     }
     makeURL(id) {
-        let build = this.settings.endpoint + this.Resource;
+        let endpoint = this.settings.endpoint || 'https://api.podiumrewards.com/';
+        if (!endpoint.endsWith('/')) {
+            endpoint += '/';
+        }
+        const version = this.settings.version || 1;
+        let build = `${endpoint}v${version}/${this.Resource}`;
         if (id) {
             build += `/${id}`;
         }
         return build;
     }
+    GetLocale() {
+        return this.settings.locale || 'en-US';
+    }
     makeHeaders() {
         if (this.GetToken()) {
             return {
-                Authentication: this.GetToken(),
+                'Accept-Language': this.GetLocale(),
+                'Authentication': this.GetToken(),
             };
         }
     }
