@@ -97,6 +97,10 @@ Log in with a username and password and receive an API token to interact with ot
 ### Methods that extend Resource
 
 ```
+Podium.Discretionary.DirectReports
+Podium.Discretionary.Discretionary
+Podium.Discretionary.Ledger
+Podium.Discretionary.Transactions
 Podium.Ecards.Categories
 Podium.Ecards.Templates
 Podium.Profile
