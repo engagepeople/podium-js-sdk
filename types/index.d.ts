@@ -125,7 +125,6 @@ export interface IEcardTemplate extends IPodiumModel {
     program_id: number
     subject: string
     message: string
-    tags: [string]
     image: IImage
     categories: [IEcardCategory]
 }
