@@ -2649,6 +2649,12 @@ exports.PodiumPaginator = Paginator_1.Paginator;
 class Podium {
     constructor(settings) {
         this.Auth = new Auth_1.Auth(settings);
+        this.Discretionary = {
+            DirectReports: new Resource_1.Resource(settings).SetResource('user/reports'),
+            Discretionary: new Resource_1.Resource(settings).SetResource('campaign/discretionary'),
+            Ledger: new Resource_1.Resource(settings).SetResource('campaign/discretionary/ledger'),
+            Transactions: new Resource_1.Resource(settings).SetResource('campaign/discretionary/transactions'),
+        };
         this.Ecards = {
             Categories: new Resource_1.Resource(settings).SetResource('ecard/category'),
             Ecards: new Ecards_1.Ecards(settings),
@@ -2662,12 +2668,6 @@ class Podium {
         };
         this.Terms = new Terms_1.Terms(settings);
         this.Users = new Resource_1.Resource(settings).SetResource('user').SetLegacy(true);
-        this.Discretionary = {
-            DirectReports: new Resource_1.Resource(settings).SetResource('user/reports'),
-            Discretionary: new Resource_1.Resource(settings).SetResource('campaign/discretionary'),
-            Ledger: new Resource_1.Resource(settings).SetResource('campaign/discretionary/ledger'),
-            Transactions: new Resource_1.Resource(settings).SetResource('campaign/discretionary/transactions'),
-        };
     }
 }
 exports.Podium = Podium;

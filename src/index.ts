@@ -34,6 +34,12 @@ export class Podium {
 
     constructor(settings: ISettings) {
         this.Auth = new Auth(settings)
+        this.Discretionary = {
+            DirectReports: new Resource(settings).SetResource('user/reports'),
+            Discretionary: new Resource(settings).SetResource('campaign/discretionary'),
+            Ledger: new Resource(settings).SetResource('campaign/discretionary/ledger'),
+            Transactions: new Resource(settings).SetResource('campaign/discretionary/transactions'),
+        }
         this.Ecards = {
             Categories: new Resource(settings).SetResource('ecard/category'),
             Ecards: new Ecards(settings),
@@ -47,13 +53,5 @@ export class Podium {
         }
         this.Terms = new Terms(settings)
         this.Users = new Resource(settings).SetResource('user').SetLegacy(true)
-
-        this.Discretionary = {
-            DirectReports: new Resource(settings).SetResource('user/reports'),
-            Discretionary: new Resource(settings).SetResource('campaign/discretionary'),
-            Ledger: new Resource(settings).SetResource('campaign/discretionary/ledger'),
-            Transactions: new Resource(settings).SetResource('campaign/discretionary/transactions'),
-        }
-
     }
 }
