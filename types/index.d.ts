@@ -103,8 +103,8 @@ export interface IUserFilter {
 }
 
 export interface IEcardsFilter {
-    status?: ECARD_STATUS,
-    read?: boolean,
+    status?: ECARD_STATUS
+    read?: boolean
     subject?: string
     body?: string
     name?: string
@@ -136,7 +136,7 @@ export interface ITermsAccept extends IPodiumModel {
 
 export interface ILRGRedirect extends IPodiumModel {
     body: {
-        redirect_url: string,
+        redirect_url: string
     }
 }
 
@@ -153,17 +153,17 @@ export interface IEcardUser {
 }
 
 export interface IEcard extends IPodiumModel {
-    template_id: number,
-    subject: string,
-    message: string,
-    sent: boolean,
-    read?: boolean,
-    send_date: Date,
-    image: IImage,
+    template_id: number
+    subject: string
+    message: string
+    sent: boolean
+    read?: boolean
+    send_date: Date
+    image: IImage
     categories: [IEcardCategory]
-    sender: IEcardUser,
-    recipients: [IEcardUser],
-    cc: [IEcardUser],
+    sender: IEcardUser
+    recipients: [IEcardUser]
+    cc: [IEcardUser]
     collaborators: [IEcardUser]
 }
 
@@ -179,19 +179,82 @@ export const enum API_CODE {
     INVALID_TOKEN = 'INVALID_TOKEN',
     SUCCESS = 'success',
     NO_TERMS = 'NO_TERMS',
-    UNACCEPTED_TERMS = 'UNACCEPTED_TERMS',
+    UNACCEPTED_TERMS = 'UNACCEPTED_TERMS'
 }
 
 export const enum SORT_DIRECTION {
     ASC = 'asc',
-    DESC = 'desc',
+    DESC = 'desc'
 }
 export const enum SORT_FIELD {
-    CREATED_AT = 'created_at',
+    CREATED_AT = 'created_at'
 }
 
 export const enum ECARD_STATUS {
     RECEIVED = 'received',
     SENT = 'sent',
-    PENDING = 'pending',
+    PENDING = 'pending'
+}
+
+export const enum DISCRETIONARY_TRANSACTION_TYPE {
+    SENT = 'sent',
+    RECIEVED = 'received'
+}
+export const enum DISCRETIONARY_CAMPAIGN_TYPE {
+    ISSUER = 'issuer',
+    RECEIVER = 'receiver'
+}
+
+export interface IDiscretionaryCampaign {
+    id: number
+    name: string
+    start_at: Date
+    end_at: Date
+}
+
+export interface IDiscretionaryCampaignParticipant {
+    id: number
+    first_name: string
+    last_name: string
+}
+
+export interface IDiscretionaryLedgerTransaction extends IPodiumModel {
+    id: number
+    description: string
+    amount: number
+}
+
+export interface IDiscretionaryTransaction extends IPodiumModel {
+    id: number
+    external_id: string
+    description: string
+    amount: number
+    currency: string
+    campaign: IDiscretionaryCampaign
+    issuer?: IDiscretionaryCampaignParticipant
+    recipient?: IDiscretionaryCampaignParticipant
+}
+
+export interface IDiscretionaryTransactionFilter {
+    id?: number
+    type?: DISCRETIONARY_TRANSACTION_TYPE
+    sort_direction?: SORT_DIRECTION
+    sort_field?: SORT_FIELD
+}
+
+export interface IDiscretionaryCampaignFilter {
+    campaign_id?: number
+    type?: DISCRETIONARY_CAMPAIGN_TYPE
+}
+
+export interface IDiscretionaryResponse {
+    code: API_CODE
+    message: string
+    id: number
+}
+
+export interface IDiscretionaryIssuePayload {
+    user_id: number
+    message?: string
+    amount: number
 }
