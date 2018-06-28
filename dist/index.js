@@ -2684,6 +2684,7 @@ class Podium {
         };
         this.Ledgers = new Ledgers_1.Ledgers(settings);
         this.LRG = new Lrg_1.LRG(settings);
+        this.Permissions = new Resource_1.Resource(settings).SetResource('member/modulePermissions');
         this.Profile = new Resource_1.Resource(settings).SetResource('profile').SetLegacy(true);
         this.Shop = {
             Products: new Resource_1.Resource(settings).SetResource('member/product'),

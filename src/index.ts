@@ -18,6 +18,7 @@ export class Podium {
     }
     public Ledgers: Ledgers
     public LRG: LRG
+    public Permissions: Resource
     public Profile: Resource
     public Shop: {
         Products: Resource,
@@ -47,6 +48,7 @@ export class Podium {
         }
         this.Ledgers = new Ledgers(settings)
         this.LRG = new LRG(settings)
+        this.Permissions = new Resource(settings).SetResource('member/modulePermissions')
         this.Profile = new Resource(settings).SetResource('profile').SetLegacy(true)
         this.Shop = {
             Products: new Resource(settings).SetResource('member/product'),
