@@ -103,6 +103,7 @@ Podium.Discretionary.Ledger
 Podium.Discretionary.Transactions
 Podium.Ecards.Categories
 Podium.Ecards.Templates
+Podium.Permissions
 Podium.Profile
 Podium.Users
 
