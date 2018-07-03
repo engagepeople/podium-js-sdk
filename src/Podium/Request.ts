@@ -87,7 +87,7 @@ export class Request extends Token {
             url = this.makeURL()
         }
 
-        if (typeof config.data  === 'object') {
+        if (typeof config.data === 'object') {
             const convertTimeToAPI = new ConvertTime(config.data)
             config.data = convertTimeToAPI.ToAPI()
         }
@@ -117,17 +117,27 @@ export class Request extends Token {
     }
 
     protected makeURL(id?: number | string): string {
-        let build = this.settings.endpoint + this.Resource
+        let endpoint = this.settings.endpoint || 'https://api.podiumrewards.com/'
+        if (!endpoint.endsWith('/')) {
+            endpoint += '/'
+        }
+        const version = this.settings.version || 1
+        let build = `${endpoint}v${version}/${this.Resource}`
         if (id) {
             build += `/${id}`
         }
         return build
     }
 
+    private GetLocale(): string {
+        return this.settings.locale || 'en-US'
+    }
+
     private makeHeaders(): object {
         if (this.GetToken()) {
             return {
-                Authentication: this.GetToken(),
+                'Accept-Language': this.GetLocale(),
+                'Authentication': this.GetToken(),
             }
         }
     }

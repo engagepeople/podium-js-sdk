@@ -2005,6 +2005,19 @@ class Auth extends Resource_1.Resource {
             }
         });
     }
+    SSO(token) {
+        super.SetResource('authenticate');
+        super.RemoveToken();
+        return super.PostRequest({
+            token,
+            type: 'sso',
+        }).then((response) => {
+            if (response.code === "success" /* SUCCESS */) {
+                this.SetToken(response.token);
+                return response.user_id;
+            }
+        });
+    }
     GetToken() {
         return super.GetToken();
     }
@@ -2492,16 +2505,25 @@ class Request extends Token_1.Token {
         });
     }
     makeURL(id) {
-        let build = this.settings.endpoint + this.Resource;
+        let endpoint = this.settings.endpoint || 'https://api.podiumrewards.com/';
+        if (!endpoint.endsWith('/')) {
+            endpoint += '/';
+        }
+        const version = this.settings.version || 1;
+        let build = `${endpoint}v${version}/${this.Resource}`;
         if (id) {
             build += `/${id}`;
         }
         return build;
     }
+    GetLocale() {
+        return this.settings.locale || 'en-US';
+    }
     makeHeaders() {
         if (this.GetToken()) {
             return {
-                Authentication: this.GetToken(),
+                'Accept-Language': this.GetLocale(),
+                'Authentication': this.GetToken(),
             };
         }
     }
@@ -2659,6 +2681,12 @@ exports.PodiumPaginator = Paginator_1.Paginator;
 class Podium {
     constructor(settings) {
         this.Auth = new Auth_1.Auth(settings);
+        this.Discretionary = {
+            DirectReports: new Resource_1.Resource(settings).SetResource('user/reports'),
+            Discretionary: new Resource_1.Resource(settings).SetResource('campaign/discretionary'),
+            Ledger: new Resource_1.Resource(settings).SetResource('campaign/discretionary/ledger'),
+            Transactions: new Resource_1.Resource(settings).SetResource('campaign/discretionary/transactions'),
+        };
         this.Ecards = {
             Categories: new Resource_1.Resource(settings).SetResource('ecard/category'),
             Ecards: new Ecards_1.Ecards(settings),
@@ -2666,6 +2694,7 @@ class Podium {
         };
         this.Ledgers = new Ledgers_1.Ledgers(settings);
         this.LRG = new Lrg_1.LRG(settings);
+        this.Permissions = new Resource_1.Resource(settings).SetResource('member/modulePermissions');
         this.Profile = new Resource_1.Resource(settings).SetResource('profile').SetLegacy(true);
         this.Shop = {
             Products: new Resource_1.Resource(settings).SetResource('member/product'),

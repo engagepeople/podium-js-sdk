@@ -37,7 +37,10 @@ Settings can be passed into the Podium constructor as a JSON object.
 
 | Name  | Type | Default | Description |
 | :------------- | :------------- | :------------- | :------------- |
-| endpoint  | url  | https://api.podiumrewards.com/v1/ | The Podium endpoint URL. |
+| endpoint  | url  | https://api.podiumrewards.com/ | The Podium endpoint URL. |
+| locale  | string  | en-US | The Podium endpoint URL. |
+| onRequestError  | function(IPodiumErrorResponse)  |  | Callback when an API error is encountered. |
+| version  | number  | 1 | Version of Podium API to use. |
 
 ## API methods
 
@@ -46,6 +49,7 @@ Log in with a username and password and receive an API token to interact with ot
 
 ```
 Podium.Auth.Login(email, password, slug)
+Podium.Auth.SSO(token)
 Podium.Auth.GetToken()
 Podium.Auth.SetToken(string)
 Podium.Auth.HasToken()
@@ -93,8 +97,13 @@ Log in with a username and password and receive an API token to interact with ot
 ### Methods that extend Resource
 
 ```
+Podium.Discretionary.DirectReports
+Podium.Discretionary.Discretionary
+Podium.Discretionary.Ledger
+Podium.Discretionary.Transactions
 Podium.Ecards.Categories
 Podium.Ecards.Templates
+Podium.Permissions
 Podium.Profile
 Podium.Users
 
