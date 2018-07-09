@@ -30,9 +30,10 @@ export class Request extends Token {
         this.settings = settings
     }
 
-    protected GetRequest<T>(id?: number | string): IPodiumPromise<T> {
+    protected GetRequest<T>(id?: number | string, params?: object): IPodiumPromise<T> {
         const request: AxiosRequestConfig = {
             method: 'get',
+            params,
         }
         let url = `${this.makeURL()}`
         if (id) {

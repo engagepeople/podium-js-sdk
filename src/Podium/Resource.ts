@@ -19,8 +19,8 @@ export class Resource extends Request {
         return this
     }
 
-    public Get<T>(id?: number | string): IPodiumPromise<T> {
-        return super.GetRequest(id)
+    public Get<T>(id?: number | string, data?: object): IPodiumPromise<T> {
+        return super.GetRequest(id, data)
     }
 
     public List<F, T>(arg1?: Filter<F> | Paginator, paginator?: | Paginator): IPodiumPromise<T[]> {

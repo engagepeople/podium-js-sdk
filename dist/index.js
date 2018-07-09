@@ -2250,6 +2250,22 @@ class Filter extends ListQuery_1.ListQuery {
         super();
         this.values = values;
     }
+    setFacetQuery(facets) {
+        this.facetQuery = facets;
+        return this;
+    }
+    getFacetQuery() {
+        // tslint:disable-next-line:no-any
+        const build = {};
+        for (const property in this.facetQuery) {
+            if (this.facetQuery.hasOwnProperty(property)) {
+                if (!(this.facetQuery[property] === null || this.facetQuery[property].length === 0)) {
+                    build[property] = this.facetQuery[property];
+                }
+            }
+        }
+        return build;
+    }
     setFacets(facets) {
         this.facets = facets;
         return this;
@@ -2265,13 +2281,18 @@ class Filter extends ListQuery_1.ListQuery {
         return this.values;
     }
     toParams() {
+        // tslint:disable-next-line:no-any
+        const build = this.getValues();
+        if (this.getFacetQuery()) {
+            build.facets = this.getFacetQuery();
+        }
         if (super.isLegacyMode()) {
             return {
-                filter: this.values,
+                filter: build,
             };
         }
         else {
-            return this.values;
+            return build;
         }
     }
 }
@@ -2428,9 +2449,10 @@ class Request extends Token_1.Token {
             statusText: error.response.statusText,
         };
     }
-    GetRequest(id) {
+    GetRequest(id, params) {
         const request = {
             method: 'get',
+            params,
         };
         let url = `${this.makeURL()}`;
         if (id) {
@@ -2563,8 +2585,8 @@ class Resource extends Request_1.Request {
         super.Legacy = legacy;
         return this;
     }
-    Get(id) {
-        return super.GetRequest(id);
+    Get(id, data) {
+        return super.GetRequest(id, data);
     }
     List(arg1, paginator) {
         let filter;
