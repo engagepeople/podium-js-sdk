@@ -2092,7 +2092,7 @@ class Ledgers extends Resource_1.Resource {
         super.SetResource('ledger');
     }
     GetTransactions(LedgerID, paginator) {
-        super.SetResource(`ledger/${LedgerID}/transaction`);
+        super.SetResourceOnce(`ledger/${LedgerID}/transaction`);
         return super.List(paginator);
     }
 }
@@ -2503,7 +2503,12 @@ class Request extends Token_1.Token {
             endpoint += '/';
         }
         const version = this.settings.version || 1;
-        let build = `${endpoint}v${version}/${this.Resource}`;
+        let resource = this.Resource;
+        if (this.ResourceOnce) {
+            resource = this.ResourceOnce;
+            this.ResourceOnce = null;
+        }
+        let build = `${endpoint}v${version}/${resource}`;
         if (id) {
             build += `/${id}`;
         }
@@ -2547,6 +2552,10 @@ const Paginator_1 = __webpack_require__(/*! ./Paginator */ "./src/Podium/Paginat
 class Resource extends Request_1.Request {
     constructor(settings) {
         super(settings);
+    }
+    SetResourceOnce(resource) {
+        super.ResourceOnce = resource;
+        return this;
     }
     SetResource(resource) {
         super.Resource = resource;
