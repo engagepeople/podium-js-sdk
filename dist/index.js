@@ -1990,9 +1990,9 @@ const Resource_1 = __webpack_require__(/*! ../Podium/Resource */ "./src/Podium/R
 class Auth extends Resource_1.Resource {
     constructor(settings) {
         super(settings);
+        super.SetResource('login');
     }
     Login(username, password, slug) {
-        super.SetResource('login');
         super.RemoveToken();
         return super.PostRequest({
             password,
@@ -2006,7 +2006,7 @@ class Auth extends Resource_1.Resource {
         });
     }
     SSO(token) {
-        super.SetResource('authenticate');
+        super.SetResourceOnce('authenticate');
         super.RemoveToken();
         return super.PostRequest({
             token,
@@ -2028,7 +2028,7 @@ class Auth extends Resource_1.Resource {
         return super.HasToken();
     }
     Logout() {
-        super.SetResource('logout');
+        super.SetResourceOnce('logout');
         return super.PostRequest().then((rsp) => {
             super.RemoveToken();
             return rsp;
@@ -2092,7 +2092,7 @@ class Ledgers extends Resource_1.Resource {
         super.SetResource('ledger');
     }
     GetTransactions(LedgerID, paginator) {
-        super.SetResource(`ledger/${LedgerID}/transaction`);
+        super.SetResourceOnce(`ledger/${LedgerID}/transaction`);
         return super.List(paginator);
     }
 }
@@ -2503,7 +2503,9 @@ class Request extends Token_1.Token {
             endpoint += '/';
         }
         const version = this.settings.version || 1;
-        let build = `${endpoint}v${version}/${this.Resource}`;
+        const resource = this.ResourceOnce || this.Resource;
+        this.ResourceOnce = null;
+        let build = `${endpoint}v${version}/${resource}`;
         if (id) {
             build += `/${id}`;
         }
@@ -2547,6 +2549,10 @@ const Paginator_1 = __webpack_require__(/*! ./Paginator */ "./src/Podium/Paginat
 class Resource extends Request_1.Request {
     constructor(settings) {
         super(settings);
+    }
+    SetResourceOnce(resource) {
+        super.ResourceOnce = resource;
+        return this;
     }
     SetResource(resource) {
         super.Resource = resource;
