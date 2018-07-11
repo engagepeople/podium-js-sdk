@@ -12,7 +12,7 @@ import {Filter} from './Filter'
 import {Token} from './Token'
 import {Paginator} from './Paginator'
 
-export class Request extends Token {
+export class Request {
     private static parseError(error: AxiosError): IPodiumErrorResponse {
         return {
             data: error.response.data as IResponse,
@@ -27,7 +27,6 @@ export class Request extends Token {
     private settings: ISettings
 
     constructor(settings: ISettings) {
-        super()
         this.settings = settings
     }
 
@@ -109,7 +108,7 @@ export class Request extends Token {
                 .catch((error) => {
                     const parsedError = Request.parseError(error)
                     if ((parsedError.status === 400) && (parsedError.data.apiCode === API_CODE.INVALID_TOKEN)) {
-                        this.RemoveToken()
+                        Token.getInstance().RemoveToken()
                     }
                     this.onRequestError(parsedError)
                     reject(parsedError)
@@ -138,10 +137,10 @@ export class Request extends Token {
     }
 
     private makeHeaders(): object {
-        if (this.GetToken()) {
+        if (Token.getInstance().GetToken()) {
             return {
                 'Accept-Language': this.GetLocale(),
-                'Authentication': this.GetToken(),
+                'Authentication': Token.getInstance().GetToken(),
             }
         }
     }
