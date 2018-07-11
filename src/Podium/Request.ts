@@ -123,11 +123,9 @@ export class Request extends Token {
             endpoint += '/'
         }
         const version = this.settings.version || 1
-        let resource = this.Resource
-        if (this.ResourceOnce) {
-            resource = this.ResourceOnce
-            this.ResourceOnce = null
-        }
+        const resource = this.ResourceOnce || this.Resource
+        this.ResourceOnce = null
+
         let build = `${endpoint}v${version}/${resource}`
         if (id) {
             build += `/${id}`
