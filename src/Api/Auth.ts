@@ -1,14 +1,14 @@
-import {API_CODE, IAuthResponse, ILogoutResponse, IPodiumPromise, ISettings} from '../../types'
+import { API_CODE, IAPIResponse, IAuthResponse, IPodiumPromise, ISettings} from '../../types'
 import {Resource} from '../Podium/Resource'
 
 export class Auth extends Resource {
 
     constructor(settings: ISettings) {
         super(settings)
+        super.SetResource('login')
     }
 
     public Login(username: string, password: string, slug: string): IPodiumPromise<number> {
-        super.SetResource('login')
         super.RemoveToken()
         return super.PostRequest<IAuthResponse>({
             password,
@@ -23,7 +23,7 @@ export class Auth extends Resource {
     }
 
     public SSO(token: string): IPodiumPromise<number> {
-        super.SetResource('authenticate')
+        super.SetResourceOnce('authenticate')
         super.RemoveToken()
         return super.PostRequest<IAuthResponse>({
             token,
@@ -48,9 +48,9 @@ export class Auth extends Resource {
         return super.HasToken()
     }
 
-    public Logout(): IPodiumPromise<ILogoutResponse> {
-        super.SetResource('logout')
-        return super.PostRequest<ILogoutResponse>().then((rsp) => {
+    public Logout(): IPodiumPromise<IAPIResponse> {
+        super.SetResourceOnce('logout')
+        return super.PostRequest<IAPIResponse>().then((rsp) => {
             super.RemoveToken()
             return rsp
         })

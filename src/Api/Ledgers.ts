@@ -1,4 +1,4 @@
-import {IPodiumList, IPodiumPromise, ISettings, ITermsAccept, ITransactions} from '../../types'
+import {IPodiumPromise, ISettings, ITransactions} from '../../types'
 import {Resource} from '../Podium/Resource'
 import {Paginator} from '../Podium/Paginator'
 
@@ -10,7 +10,7 @@ export class Ledgers extends Resource {
     }
 
     public GetTransactions(LedgerID: number, paginator?: Paginator): IPodiumPromise<ITransactions[]> {
-        super.SetResource(`ledger/${LedgerID}/transaction`)
+        super.SetResourceOnce(`ledger/${LedgerID}/transaction`)
         return super.List(paginator)
     }
 }

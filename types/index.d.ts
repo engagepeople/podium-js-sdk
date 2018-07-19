@@ -34,7 +34,7 @@ export interface IAuthResponse {
     token: string
 }
 
-export interface ILogoutResponse {
+export interface IAPIResponse {
     code: API_CODE
     id: object
     message: string

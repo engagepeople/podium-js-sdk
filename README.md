@@ -104,7 +104,11 @@ Podium.Discretionary.Transactions
 Podium.Ecards.Categories
 Podium.Ecards.Templates
 Podium.Permissions
-Podium.Profile
+Podium.Shop.Cart
+Podium.Shop.Orders
+Podium.Shop.Products
+Podium.User.Address
+Podium.User.Profile
 Podium.Users
 
 ```
@@ -118,6 +122,8 @@ Podium.Ecards.Ecards.GetPending(Paginator)
 Podium.Ledgers.GetTransactions(LedgerID, Paginator)
 Podium.LRG.GetUrl(redirectUrl)
 Podium.LRG.Redirect(redirectUrl)
+Podium.Shop.Cart.Confirm(cartId, addressId, ledgerId)
+Podium.Shop.Cart.Checkout(cartId, addressId, ledgerId)
 Podium.Terms.Accept(termsId)
 
 ```

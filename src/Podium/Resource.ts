@@ -9,6 +9,10 @@ export class Resource extends Request {
         super(settings)
     }
 
+    public SetResourceOnce(resource: string): Resource {
+        super.ResourceOnce = resource
+        return this
+    }
     public SetResource(resource: string): Resource {
         super.Resource = resource
         return this

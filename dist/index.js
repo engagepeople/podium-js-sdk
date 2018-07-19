@@ -46,17 +46,32 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
 /******/ 		}
 /******/ 	};
 /******/
 /******/ 	// define __esModule on exports
 /******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
 /******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
 /******/ 	};
 /******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
@@ -1990,9 +2005,9 @@ const Resource_1 = __webpack_require__(/*! ../Podium/Resource */ "./src/Podium/R
 class Auth extends Resource_1.Resource {
     constructor(settings) {
         super(settings);
+        super.SetResource('login');
     }
     Login(username, password, slug) {
-        super.SetResource('login');
         super.RemoveToken();
         return super.PostRequest({
             password,
@@ -2006,7 +2021,7 @@ class Auth extends Resource_1.Resource {
         });
     }
     SSO(token) {
-        super.SetResource('authenticate');
+        super.SetResourceOnce('authenticate');
         super.RemoveToken();
         return super.PostRequest({
             token,
@@ -2028,7 +2043,7 @@ class Auth extends Resource_1.Resource {
         return super.HasToken();
     }
     Logout() {
-        super.SetResource('logout');
+        super.SetResourceOnce('logout');
         return super.PostRequest().then((rsp) => {
             super.RemoveToken();
             return rsp;
@@ -2092,7 +2107,7 @@ class Ledgers extends Resource_1.Resource {
         super.SetResource('ledger');
     }
     GetTransactions(LedgerID, paginator) {
-        super.SetResource(`ledger/${LedgerID}/transaction`);
+        super.SetResourceOnce(`ledger/${LedgerID}/transaction`);
         return super.List(paginator);
     }
 }
@@ -2135,6 +2150,36 @@ class LRG extends Resource_1.Resource {
     }
 }
 exports.LRG = LRG;
+
+
+/***/ }),
+
+/***/ "./src/Api/Shop/Cart.ts":
+/*!******************************!*\
+  !*** ./src/Api/Shop/Cart.ts ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const Resource_1 = __webpack_require__(/*! ../../Podium/Resource */ "./src/Podium/Resource.ts");
+class ShopCart extends Resource_1.Resource {
+    constructor(settings) {
+        super(settings);
+        super.SetResource('shoppingCart');
+    }
+    Confirm(cartId, addressId, ledgerId) {
+        super.SetResourceOnce(`shoppingCart/confirm`);
+        return super.Create();
+    }
+    Checkout(cartId, addressId, ledgerId) {
+        super.SetResourceOnce(`shoppingCart/checkout`);
+        return super.Create();
+    }
+}
+exports.ShopCart = ShopCart;
 
 
 /***/ }),
@@ -2532,7 +2577,9 @@ class Request extends Token_1.Token {
             endpoint += '/';
         }
         const version = this.settings.version || 1;
-        let build = `${endpoint}v${version}/${this.Resource}`;
+        const resource = this.ResourceOnce || this.Resource;
+        this.ResourceOnce = null;
+        let build = `${endpoint}v${version}/${resource}`;
         if (id) {
             build += `/${id}`;
         }
@@ -2576,6 +2623,10 @@ const Paginator_1 = __webpack_require__(/*! ./Paginator */ "./src/Podium/Paginat
 class Resource extends Request_1.Request {
     constructor(settings) {
         super(settings);
+    }
+    SetResourceOnce(resource) {
+        super.ResourceOnce = resource;
+        return this;
     }
     SetResource(resource) {
         super.Resource = resource;
@@ -2692,6 +2743,7 @@ exports.Token = Token;
 Object.defineProperty(exports, "__esModule", { value: true });
 const Auth_1 = __webpack_require__(/*! ./Api/Auth */ "./src/Api/Auth.ts");
 const Ecards_1 = __webpack_require__(/*! ./Api/Ecards/Ecards */ "./src/Api/Ecards/Ecards.ts");
+const Cart_1 = __webpack_require__(/*! ./Api/Shop/Cart */ "./src/Api/Shop/Cart.ts");
 const Lrg_1 = __webpack_require__(/*! ./Api/Lrg */ "./src/Api/Lrg.ts");
 const Ledgers_1 = __webpack_require__(/*! ./Api/Ledgers */ "./src/Api/Ledgers.ts");
 const Resource_1 = __webpack_require__(/*! ./Podium/Resource */ "./src/Podium/Resource.ts");
@@ -2717,11 +2769,16 @@ class Podium {
         this.Ledgers = new Ledgers_1.Ledgers(settings);
         this.LRG = new Lrg_1.LRG(settings);
         this.Permissions = new Resource_1.Resource(settings).SetResource('member/modulePermissions');
-        this.Profile = new Resource_1.Resource(settings).SetResource('profile').SetLegacy(true);
         this.Shop = {
+            Cart: new Cart_1.ShopCart(settings),
+            Orders: new Resource_1.Resource(settings).SetResource('order'),
             Products: new Resource_1.Resource(settings).SetResource('member/product'),
         };
         this.Terms = new Terms_1.Terms(settings);
+        this.User = {
+            Address: new Resource_1.Resource(settings).SetResource('address'),
+            Profile: new Resource_1.Resource(settings).SetResource('profile').SetLegacy(true),
+        };
         this.Users = new Resource_1.Resource(settings).SetResource('user').SetLegacy(true);
     }
 }
