@@ -1,9 +1,22 @@
 const LOCAL_STORAGE_KEY = '__podiumSDK__'
 
 export class Token {
+
+    public static getInstance(): Token {
+        return Token.instance
+    }
+
+    private static instance: Token = new Token()
     private token: string = null
 
-    protected SetToken(token: string): string {
+    constructor() {
+        if (Token.instance) {
+            throw new Error('Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.')
+        }
+        Token.instance = this
+    }
+
+    public SetToken(token: string): string {
         this.token = token
         if (this.hasLocalStorage()) {
             localStorage.setItem(`${LOCAL_STORAGE_KEY}token`, this.token)
@@ -12,7 +25,7 @@ export class Token {
         return this.token
     }
 
-    protected GetToken(): string {
+    public GetToken(): string {
         if (this.hasLocalStorage()) {
             return localStorage.getItem(`${LOCAL_STORAGE_KEY}token`)
         } else {
@@ -20,12 +33,12 @@ export class Token {
         }
     }
 
-    protected HasToken(): boolean {
+    public HasToken(): boolean {
         const token = this.GetToken()
         return (typeof token === 'string' && token.length > 0)
     }
 
-    protected RemoveToken(): boolean {
+    public RemoveToken(): boolean {
         if (this.hasLocalStorage()) {
             localStorage.removeItem(`${LOCAL_STORAGE_KEY}token`)
         }

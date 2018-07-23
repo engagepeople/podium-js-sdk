@@ -2002,13 +2002,14 @@ process.umask = function() { return 0; };
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const Resource_1 = __webpack_require__(/*! ../Podium/Resource */ "./src/Podium/Resource.ts");
+const Token_1 = __webpack_require__(/*! ../Podium/Token */ "./src/Podium/Token.ts");
 class Auth extends Resource_1.Resource {
     constructor(settings) {
         super(settings);
         super.SetResource('login');
     }
     Login(username, password, slug) {
-        super.RemoveToken();
+        Token_1.Token.getInstance().RemoveToken();
         return super.PostRequest({
             password,
             program_slug: slug,
@@ -2022,7 +2023,7 @@ class Auth extends Resource_1.Resource {
     }
     SSO(token) {
         super.SetResourceOnce('authenticate');
-        super.RemoveToken();
+        Token_1.Token.getInstance().RemoveToken();
         return super.PostRequest({
             token,
             type: 'sso',
@@ -2034,18 +2035,18 @@ class Auth extends Resource_1.Resource {
         });
     }
     GetToken() {
-        return super.GetToken();
+        return Token_1.Token.getInstance().GetToken();
     }
     SetToken(token) {
-        return super.SetToken(token);
+        return Token_1.Token.getInstance().SetToken(token);
     }
     HasToken() {
-        return super.HasToken();
+        return Token_1.Token.getInstance().HasToken();
     }
     Logout() {
         super.SetResourceOnce('logout');
         return super.PostRequest().then((rsp) => {
-            super.RemoveToken();
+            Token_1.Token.getInstance().RemoveToken();
             return rsp;
         });
     }
@@ -2481,9 +2482,8 @@ const ConvertTime_1 = __webpack_require__(/*! ./ConvertTime */ "./src/Podium/Con
 const Filter_1 = __webpack_require__(/*! ./Filter */ "./src/Podium/Filter.ts");
 const Token_1 = __webpack_require__(/*! ./Token */ "./src/Podium/Token.ts");
 const Paginator_1 = __webpack_require__(/*! ./Paginator */ "./src/Podium/Paginator.ts");
-class Request extends Token_1.Token {
+class Request {
     constructor(settings) {
-        super();
         this.Legacy = false;
         this.settings = settings;
     }
@@ -2564,7 +2564,7 @@ class Request extends Token_1.Token {
                 .catch((error) => {
                 const parsedError = Request.parseError(error);
                 if ((parsedError.status === 400) && (parsedError.data.apiCode === "INVALID_TOKEN" /* INVALID_TOKEN */)) {
-                    this.RemoveToken();
+                    Token_1.Token.getInstance().RemoveToken();
                 }
                 this.onRequestError(parsedError);
                 reject(parsedError);
@@ -2589,10 +2589,10 @@ class Request extends Token_1.Token {
         return this.settings.locale || 'en-US';
     }
     makeHeaders() {
-        if (this.GetToken()) {
+        if (Token_1.Token.getInstance().GetToken()) {
             return {
                 'Accept-Language': this.GetLocale(),
-                'Authentication': this.GetToken(),
+                'Authentication': Token_1.Token.getInstance().GetToken(),
             };
         }
     }
@@ -2694,6 +2694,13 @@ const LOCAL_STORAGE_KEY = '__podiumSDK__';
 class Token {
     constructor() {
         this.token = null;
+        if (Token.instance) {
+            throw new Error('Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.');
+        }
+        Token.instance = this;
+    }
+    static getInstance() {
+        return Token.instance;
     }
     SetToken(token) {
         this.token = token;
@@ -2726,6 +2733,7 @@ class Token {
         return !(typeof localStorage === 'undefined' || localStorage === null);
     }
 }
+Token.instance = new Token();
 exports.Token = Token;
 
 
