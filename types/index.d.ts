@@ -263,3 +263,8 @@ export interface IDiscretionaryIssuePayload {
     message?: string
     amount: number
 }
+
+export interface IShopSearch {
+    currency_id: number
+    search?: string
+}

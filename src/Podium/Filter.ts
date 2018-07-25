@@ -1,6 +1,8 @@
 import {ListQuery} from './ListQuery'
+import {IShopSearch} from '../../types'
 
-export class Filter<F> extends ListQuery {
+// tslint:disable-next-line:no-any
+export class Filter<F extends { [key: string]: any }> extends ListQuery {
 
     private values: F
     private facets: object
@@ -9,6 +11,9 @@ export class Filter<F> extends ListQuery {
 
     constructor(values?: F) {
         super()
+        // if (!values) {
+        //     values = {}
+        // }
         this.values = values
     }
 
@@ -37,6 +42,16 @@ export class Filter<F> extends ListQuery {
 
     public getFacets(): object {
         return this.facets
+    }
+
+    // tslint:disable-next-line:no-any
+    public setValue(key: string, value: any): Filter<F> {
+        this.values[key] = value
+        return this
+    }
+
+    public getValue(key: string): F {
+        return this.values[key]
     }
 
     public setValues(values: F): Filter<F> {

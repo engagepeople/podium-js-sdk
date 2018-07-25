@@ -2291,9 +2291,13 @@ exports.ConvertTime = ConvertTime;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const ListQuery_1 = __webpack_require__(/*! ./ListQuery */ "./src/Podium/ListQuery.ts");
+// tslint:disable-next-line:no-any
 class Filter extends ListQuery_1.ListQuery {
     constructor(values) {
         super();
+        // if (!values) {
+        //     values = {}
+        // }
         this.values = values;
     }
     setFacetQuery(facets) {
@@ -2318,6 +2322,14 @@ class Filter extends ListQuery_1.ListQuery {
     }
     getFacets() {
         return this.facets;
+    }
+    // tslint:disable-next-line:no-any
+    setValue(key, value) {
+        this.values[key] = value;
+        return this;
+    }
+    getValue(key) {
+        return this.values[key];
     }
     setValues(values) {
         this.values = values;
