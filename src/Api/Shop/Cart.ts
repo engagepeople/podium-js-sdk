@@ -11,11 +11,19 @@ export class ShopCart extends Resource {
 
     public Confirm(cartId: number, addressId: number, ledgerId: number): IPodiumPromise<IAPIResponse[]> {
         super.SetResourceOnce(`shoppingCart/confirm`)
-        return super.Create()
+        return super.Create({
+            address_id: addressId,
+            ledger_id: ledgerId,
+            shopping_cart_id: cartId,
+        })
     }
 
     public Checkout(cartId: number, addressId: number, ledgerId: number): IPodiumPromise<IAPIResponse[]> {
         super.SetResourceOnce(`shoppingCart/checkout`)
-        return super.Create()
+        return super.Create({
+            address_id: addressId,
+            ledger_id: ledgerId,
+            shopping_cart_id: cartId,
+        })
     }
 }

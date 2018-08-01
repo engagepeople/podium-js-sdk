@@ -57,12 +57,12 @@ export class Podium {
         this.Permissions = new Resource(settings).SetResource('member/modulePermissions')
         this.Shop = {
             Cart: new ShopCart(settings),
-            Orders: new Resource(settings).SetResource('order'),
+            Orders: new Resource(settings).SetResource('member/order'),
             Products: new Resource(settings).SetResource('member/product'),
         }
         this.Terms = new Terms(settings)
         this.User = {
-            Address: new Resource(settings).SetResource('address'),
+            Address: new Resource(settings).SetResource('address').SetLegacy(true),
             Profile: new Resource(settings).SetResource('profile').SetLegacy(true),
         }
         this.Users = new Resource(settings).SetResource('user').SetLegacy(true)
