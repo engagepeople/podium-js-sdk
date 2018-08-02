@@ -1,4 +1,4 @@
-import {IPodiumList, IPodiumPromise, ISettings, ITermsAccept, ITransactions} from '../../types'
+import {IPodiumPromise, ISettings, ITransactions} from '../../types'
 import {Resource} from '../Podium/Resource'
 import {Paginator} from '../Podium/Paginator'
 

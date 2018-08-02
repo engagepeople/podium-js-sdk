@@ -2,6 +2,7 @@
 import {ISettings} from '../types'
 import {Auth} from './Api/Auth'
 import {Ecards} from './Api/Ecards/Ecards'
+import {ShopCart} from './Api/Shop/Cart'
 import {LRG} from './Api/Lrg'
 import {Ledgers} from './Api/Ledgers'
 import {Resource} from './Podium/Resource'
@@ -9,6 +10,7 @@ import {Terms} from './Api/Terms'
 
 export {Filter as PodiumFilter} from './Podium/Filter'
 export {Paginator as PodiumPaginator} from './Podium/Paginator'
+
 export class Podium {
     public Auth: Auth
     public Ecards: {
@@ -19,11 +21,16 @@ export class Podium {
     public Ledgers: Ledgers
     public LRG: LRG
     public Permissions: Resource
-    public Profile: Resource
     public Shop: {
+        Cart: ShopCart,
+        Orders: Resource,
         Products: Resource,
     }
     public Terms: Terms
+    public User: {
+        Address: Resource,
+        Profile: Resource,
+    }
     public Users: Resource
     public Discretionary: {
         DirectReports: Resource,
@@ -31,7 +38,6 @@ export class Podium {
         Ledger: Resource,
         Transactions: Resource,
     }
-    public DirectReports: Resource
 
     constructor(settings: ISettings) {
         this.Auth = new Auth(settings)
@@ -49,11 +55,16 @@ export class Podium {
         this.Ledgers = new Ledgers(settings)
         this.LRG = new LRG(settings)
         this.Permissions = new Resource(settings).SetResource('member/modulePermissions')
-        this.Profile = new Resource(settings).SetResource('profile').SetLegacy(true)
         this.Shop = {
+            Cart: new ShopCart(settings),
+            Orders: new Resource(settings).SetResource('member/order'),
             Products: new Resource(settings).SetResource('member/product'),
         }
         this.Terms = new Terms(settings)
+        this.User = {
+            Address: new Resource(settings).SetResource('address').SetLegacy(true),
+            Profile: new Resource(settings).SetResource('profile').SetLegacy(true),
+        }
         this.Users = new Resource(settings).SetResource('user').SetLegacy(true)
     }
 }

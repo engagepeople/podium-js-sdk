@@ -34,16 +34,22 @@ export interface IAuthResponse {
     token: string
 }
 
-export interface ILogoutResponse {
+export interface IAPIResponse {
     code: API_CODE
     id: object
     message: string
+}
+
+export interface IPodiumSearchList<T> {
+    results: T[]
+    facets: object
 }
 
 export interface IPodiumList<T> {
     readonly current_page: number
     readonly data: T[]
     readonly from: number
+    readonly facets?: object
     readonly last_page: number
     readonly per_page: number
     readonly to: number
@@ -256,4 +262,9 @@ export interface IDiscretionaryIssuePayload {
     user_id: number
     message?: string
     amount: number
+}
+
+export interface IShopSearch {
+    currency_id: number
+    search?: string
 }
