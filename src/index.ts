@@ -1,5 +1,4 @@
 // tslint:disable:max-classes-per-file
-import {ISettings} from '../types'
 import {Auth} from './Api/Auth'
 import {Ecards} from './Api/Ecards/Ecards'
 import {ShopCart} from './Api/Shop/Cart'
@@ -7,7 +6,9 @@ import {LRG} from './Api/Lrg'
 import {Ledgers} from './Api/Ledgers'
 import {Resource} from './Podium/Resource'
 import {Terms} from './Api/Terms'
+import {Settings} from './Podium/Settings'
 
+export {Settings as PodiumSettings} from './Podium/Settings'
 export {Filter as PodiumFilter} from './Podium/Filter'
 export {Paginator as PodiumPaginator} from './Podium/Paginator'
 
@@ -39,7 +40,7 @@ export class Podium {
         Transactions: Resource,
     }
 
-    constructor(settings: ISettings) {
+    constructor(settings: Settings) {
         this.Auth = new Auth(settings)
         this.Discretionary = {
             DirectReports: new Resource(settings).SetResource('user/reports'),

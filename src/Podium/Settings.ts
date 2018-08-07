@@ -3,14 +3,13 @@ import {FatalError} from 'tslint/lib/error'
 
 export class Settings {
 
-    private settings: ISettings
+    private settings: ISettings = {} as ISettings
     private APIVersions: number[] = [1]
 
-    constructor(values?: ISettings) {
-        this.settings.endpoint = 'https://api.podiumrewards.com/'
-        this.settings.locale = API_LOCALE.EN_CA
-        this.settings.version = this.APIVersions[this.APIVersions.length - 1]
-        this.settings = Object.assign(values, this.settings)
+    constructor() {
+        this.setEndpoint('https://api.podiumrewards.com/')
+        this.setLocale(API_LOCALE.EN_CA)
+        this.setVersion(this.APIVersions[this.APIVersions.length - 1])
     }
 
     public setVersion(version: number): Settings {
@@ -31,8 +30,8 @@ export class Settings {
         return this
     }
 
-    public getLocale(): number {
-        return this.settings.version
+    public getLocale(): string {
+        return this.settings.locale
     }
 
     public setEndpoint(endpoint: string): Settings {

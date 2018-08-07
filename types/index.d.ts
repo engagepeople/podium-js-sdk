@@ -6,7 +6,10 @@ export interface ISettings {
 }
 
 export const enum API_LOCALE {
+    EN_AU = 'en-AU',
     EN_CA = 'en-CA',
+    EN_US = 'en-US',
+    FR_CA = 'fr-CA',
 }
 
 export interface IPodiumError {

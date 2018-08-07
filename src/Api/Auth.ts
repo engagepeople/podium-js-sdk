@@ -1,10 +1,11 @@
-import {API_CODE, IAPIResponse, IAuthResponse, IPodiumPromise, ISettings} from '../../types'
+import {API_CODE, IAPIResponse, IAuthResponse, IPodiumPromise} from '../../types'
 import {Resource} from '../Podium/Resource'
 import {Token} from '../Podium/Token'
+import {Settings} from '../Podium/Settings'
 
 export class Auth extends Resource {
 
-    constructor(settings: ISettings) {
+    constructor(settings: Settings) {
         super(settings)
         super.SetResource('login')
     }
