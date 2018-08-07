@@ -1,4 +1,4 @@
-import {API_CODE, IAuthResponse, ILogoutResponse, IPodiumPromise, ISettings} from '../../types'
+import {API_CODE, IAPIResponse, IAuthResponse, IPodiumPromise, ISettings} from '../../types'
 import {Resource} from '../Podium/Resource'
 import {Token} from '../Podium/Token'
 
@@ -49,9 +49,9 @@ export class Auth extends Resource {
         return Token.getInstance().HasToken()
     }
 
-    public Logout(): IPodiumPromise<ILogoutResponse> {
+    public Logout(): IPodiumPromise<IAPIResponse> {
         super.SetResourceOnce('logout')
-        return super.PostRequest<ILogoutResponse>().then((rsp) => {
+        return super.PostRequest<IAPIResponse>().then((rsp) => {
             Token.getInstance().RemoveToken()
             return rsp
         })

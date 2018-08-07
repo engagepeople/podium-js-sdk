@@ -30,9 +30,10 @@ export class Request {
         this.settings = settings
     }
 
-    protected GetRequest<T>(id?: number | string): IPodiumPromise<T> {
+    protected GetRequest<T>(id?: number | string, params?: object): IPodiumPromise<T> {
         const request: AxiosRequestConfig = {
             method: 'get',
+            params,
         }
         let url = `${this.makeURL()}`
         if (id) {
@@ -82,9 +83,9 @@ export class Request {
         return this.Request(request, this.makeURL(id))
     }
 
-    protected Request<T>(config: AxiosRequestConfig, url?: string): IPodiumPromise<T> {
+    protected Request<T>(config: AxiosRequestConfig, url?: string, id?: number | string): IPodiumPromise<T> {
         if (!url) {
-            url = this.makeURL()
+            url = this.makeURL(id)
         }
 
         if (typeof config.data === 'object') {
