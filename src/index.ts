@@ -3,10 +3,13 @@ import {ISettings} from '../types'
 import {Auth} from './Api/Auth'
 import {Ecards} from './Api/Ecards/Ecards'
 import {ShopCart} from './Api/Shop/Cart'
+import {Orders} from './Api/Shop/Orders'
 import {LRG} from './Api/Lrg'
 import {Ledgers} from './Api/Ledgers'
 import {Resource} from './Podium/Resource'
 import {Terms} from './Api/Terms'
+
+import axios from 'axios'
 
 export {Filter as PodiumFilter} from './Podium/Filter'
 export {Paginator as PodiumPaginator} from './Podium/Paginator'
@@ -23,7 +26,7 @@ export class Podium {
     public Permissions: Resource
     public Shop: {
         Cart: ShopCart,
-        Orders: Resource,
+        Orders: Orders,
         Products: Resource,
     }
     public Terms: Terms
@@ -38,6 +41,8 @@ export class Podium {
         Ledger: Resource,
         Transactions: Resource,
     }
+
+    public RequestsInProgress: string[] = []
 
     constructor(settings: ISettings) {
         this.Auth = new Auth(settings)
@@ -57,7 +62,7 @@ export class Podium {
         this.Permissions = new Resource(settings).SetResource('member/modulePermissions')
         this.Shop = {
             Cart: new ShopCart(settings),
-            Orders: new Resource(settings).SetResource('member/order'),
+            Orders: new Orders(settings),
             Products: new Resource(settings).SetResource('member/product'),
         }
         this.Terms = new Terms(settings)
@@ -66,5 +71,24 @@ export class Podium {
             Profile: new Resource(settings).SetResource('profile').SetLegacy(true),
         }
         this.Users = new Resource(settings).SetResource('user').SetLegacy(true)
+
+        axios.interceptors.request.use((config) => {
+            this.RequestsInProgress.push(config.url)
+            return config
+        }, (error) => {
+            return Promise.reject(error)
+        })
+
+        axios.interceptors.response.use((response) => {
+            const url = response.config.url
+            this.RequestsInProgress.splice(this.RequestsInProgress.findIndex((requestUrl) => requestUrl === url), 1)
+            return response
+        }, (error) => {
+            const url = error.config.url
+            this.RequestsInProgress.splice(
+                this.RequestsInProgress.findIndex((requestUrl) => requestUrl === url),
+                1)
+            return Promise.reject(error)
+        })
     }
 }
