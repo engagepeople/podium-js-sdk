@@ -9,10 +9,10 @@ npm install podium-sdk
 
 ## Usage
 ```
-import { Podium, PodiumPaginator, PodiumFilter } from 'podium-sdk'
-let podium = new Podium({
-  endpoint: 'https://api.podiumrewards.com/v1/'
-})
+import { Podium, PodiumPaginator, PodiumFilter, PodiumSettings } from 'podium-sdk'
+
+let podiumSettings = new PodiumSettings().setEndpoint('https://api.podiumrewards.com/')
+let podium = new Podium(podiumSettings)
 
 podium.Auth.login(email, password, slug).then(rsp => {
   console.log(rsp.message)
@@ -33,14 +33,14 @@ podium.Users.List(filter, paginator).then((rsp) => {
 ``` 
 
 ## Settings
-Settings can be passed into the Podium constructor as a JSON object.
+Settings can be passed into the Podium constructor as a `PodiumSettings` class.
 
 | Name  | Type | Default | Description |
 | :------------- | :------------- | :------------- | :------------- |
-| endpoint  | url  | https://api.podiumrewards.com/ | The Podium endpoint URL. |
-| locale  | string  | en-US | The Podium endpoint URL. |
-| onRequestError  | function(IPodiumErrorResponse)  |  | Callback when an API error is encountered. |
-| version  | number  | 1 | Version of Podium API to use. |
+| setEndpoint  | url  | https://api.podiumrewards.com/ | The Podium endpoint URL. |
+| setLocale  | API_LOCALE  | en-US | The Podium endpoint URL. |
+| setOnRequestError  | function(IPodiumErrorResponse)  |  | Callback when an API error is encountered. |
+| setVersion  | number  | 1 | Version of Podium API to use. |
 
 ## API methods
 

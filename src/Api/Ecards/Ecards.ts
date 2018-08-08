@@ -1,11 +1,12 @@
-import {ECARD_STATUS, IEcard, IEcardsFilter, IPodiumList, IPodiumPromise, ISettings} from '../../../types/index'
+import {ECARD_STATUS, IEcard, IEcardsFilter, IPodiumPromise} from '../../../types/index'
 import {Resource} from '../../Podium/Resource'
 import {Paginator} from '../../Podium/Paginator'
 import {Filter} from '../../Podium/Filter'
+import {Settings} from '../../Podium/Settings'
 
 export class Ecards extends Resource {
 
-    constructor(settings: ISettings) {
+    constructor(settings: Settings) {
         super(settings)
         super.SetResource('ecard')
     }

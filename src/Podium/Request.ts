@@ -11,6 +11,7 @@ import {ConvertTime} from './ConvertTime'
 import {Filter} from './Filter'
 import {Token} from './Token'
 import {Paginator} from './Paginator'
+import {Settings} from './Settings'
 
 export class Request {
     private static parseError(error: AxiosError): IPodiumErrorResponse {
@@ -24,9 +25,9 @@ export class Request {
     protected Legacy: boolean = false
     protected ResourceOnce: string
     protected Resource: string
-    private settings: ISettings
+    private settings: Settings
 
-    constructor(settings: ISettings) {
+    constructor(settings: Settings) {
         this.settings = settings
     }
 
@@ -118,11 +119,11 @@ export class Request {
     }
 
     protected makeURL(id?: number | string): string {
-        let endpoint = this.settings.endpoint || 'https://api.podiumrewards.com/'
+        let endpoint = this.settings.getEndpoint()
         if (!endpoint.endsWith('/')) {
             endpoint += '/'
         }
-        const version = this.settings.version || 1
+        const version = this.settings.getVersion()
         const resource = this.ResourceOnce || this.Resource
         this.ResourceOnce = null
 
@@ -134,7 +135,7 @@ export class Request {
     }
 
     private GetLocale(): string {
-        return this.settings.locale || 'en-US'
+        return this.settings.getLocale()
     }
 
     private makeHeaders(): object {
@@ -147,8 +148,8 @@ export class Request {
     }
 
     private onRequestError(errorData: IPodiumErrorResponse): void {
-        if (typeof this.settings.onRequestError === 'function') {
-            this.settings.onRequestError(errorData)
+        if (typeof this.settings.getOnRequestError() === 'function') {
+            this.settings.getOnRequestError()(errorData)
         }
     }
 

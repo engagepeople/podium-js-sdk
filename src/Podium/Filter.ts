@@ -1,5 +1,4 @@
 import {ListQuery} from './ListQuery'
-import {IShopSearch} from '../../types'
 
 // tslint:disable-next-line:no-any
 export class Filter<F extends { [key: string]: any }> extends ListQuery {

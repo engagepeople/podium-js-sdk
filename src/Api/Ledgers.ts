@@ -1,10 +1,11 @@
-import {IPodiumPromise, ISettings, ITransactions} from '../../types'
+import {IPodiumPromise, ITransactions} from '../../types'
 import {Resource} from '../Podium/Resource'
 import {Paginator} from '../Podium/Paginator'
+import {Settings} from '../Podium/Settings'
 
 export class Ledgers extends Resource {
 
-    constructor(settings: ISettings) {
+    constructor(settings: Settings) {
         super(settings)
         super.SetResource('ledger')
     }
