@@ -1,10 +1,11 @@
-import {IPodiumPromise, IResponse, ISettings, ITransactions} from '../../../types/index'
+import {IPodiumPromise} from '../../../types/index'
 import {Resource} from '../../Podium/Resource'
 import {IAPIResponse} from '../../../types'
+import {Settings} from '../../Podium/Settings'
 
 export class Orders extends Resource {
 
-    constructor(settings: ISettings) {
+    constructor(settings: Settings) {
         super(settings)
         super.SetResource('member/order')
     }

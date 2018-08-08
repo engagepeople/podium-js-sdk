@@ -45,7 +45,6 @@ export class Podium {
 
     public RequestsInProgress: string[] = []
 
-    constructor(settings: ISettings) {
     constructor(settings: Settings) {
         this.Auth = new Auth(settings)
         this.Discretionary = {
