@@ -11,7 +11,7 @@ export class Orders extends Resource {
     }
 
     public Cancel(orderId: number | string): IPodiumPromise<IAPIResponse[]> {
-        super.SetResourceOnce(`member/orderCancel`)
+        super.SetResourceOnce('member/orderCancel')
         return super.Update(orderId)
     }
 }
