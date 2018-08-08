@@ -8,8 +8,7 @@ import {Ledgers} from './Api/Ledgers'
 import {Resource} from './Podium/Resource'
 import {Terms} from './Api/Terms'
 import {Settings} from './Podium/Settings'
-
-import axios from 'axios'
+import {Utils} from './Podium/Utils'
 
 export {Settings as PodiumSettings} from './Podium/Settings'
 export {Filter as PodiumFilter} from './Podium/Filter'
@@ -43,7 +42,7 @@ export class Podium {
         Transactions: Resource,
     }
 
-    public RequestsInProgress: string[] = []
+    public Utils: Utils
 
     constructor(settings: Settings) {
         this.Auth = new Auth(settings)
@@ -73,23 +72,6 @@ export class Podium {
         }
         this.Users = new Resource(settings).SetResource('user').SetLegacy(true)
 
-        axios.interceptors.request.use((config) => {
-            this.RequestsInProgress.push(config.url)
-            return config
-        }, (error) => {
-            return Promise.reject(error)
-        })
-
-        axios.interceptors.response.use((response) => {
-            const url = response.config.url
-            this.RequestsInProgress.splice(this.RequestsInProgress.findIndex((requestUrl) => requestUrl === url), 1)
-            return response
-        }, (error) => {
-            const url = error.config.url
-            this.RequestsInProgress.splice(
-                this.RequestsInProgress.findIndex((requestUrl) => requestUrl === url),
-                1)
-            return Promise.reject(error)
-        })
+        this.Utils = new Utils()
     }
 }
