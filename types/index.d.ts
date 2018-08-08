@@ -1,8 +1,15 @@
 export interface ISettings {
-    endpoint: string
-    locale: string
-    onRequestError: (error: IPodiumErrorResponse) => void
-    version: number
+    endpoint?: string
+    locale?: API_LOCALE
+    onRequestError?: (error: IPodiumErrorResponse) => void
+    version?: number
+}
+
+export const enum API_LOCALE {
+    EN_AU = 'en-AU',
+    EN_CA = 'en-CA',
+    EN_US = 'en-US',
+    FR_CA = 'fr-CA',
 }
 
 export interface IPodiumError {
@@ -184,7 +191,7 @@ export const enum API_CODE {
     INVALID_TOKEN = 'INVALID_TOKEN',
     SUCCESS = 'success',
     NO_TERMS = 'NO_TERMS',
-    UNACCEPTED_TERMS = 'UNACCEPTED_TERMS'
+    UNACCEPTED_TERMS = 'UNACCEPTED_TERMS',
 }
 
 export const enum SORT_DIRECTION {
@@ -198,16 +205,16 @@ export const enum SORT_FIELD {
 export const enum ECARD_STATUS {
     RECEIVED = 'received',
     SENT = 'sent',
-    PENDING = 'pending'
+    PENDING = 'pending',
 }
 
 export const enum DISCRETIONARY_TRANSACTION_TYPE {
     SENT = 'sent',
-    RECIEVED = 'received'
+    RECIEVED = 'received',
 }
 export const enum DISCRETIONARY_CAMPAIGN_TYPE {
     ISSUER = 'issuer',
-    RECEIVER = 'receiver'
+    RECEIVER = 'receiver',
 }
 
 export interface IDiscretionaryCampaign {

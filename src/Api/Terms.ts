@@ -1,9 +1,10 @@
-import {IPodiumPromise, ISettings, ITermsAccept} from '../../types'
+import {IPodiumPromise, ITermsAccept} from '../../types'
 import {Resource} from '../Podium/Resource'
+import {Settings} from '../Podium/Settings'
 
 export class Terms extends Resource {
 
-    constructor(settings: ISettings) {
+    constructor(settings: Settings) {
         super(settings)
         super.SetResource('terms')
     }

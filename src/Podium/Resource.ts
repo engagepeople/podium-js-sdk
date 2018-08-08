@@ -1,11 +1,12 @@
-import {IPodiumList, IPodiumPromise, ISettings} from '../../types'
+import {IPodiumList, IPodiumPromise} from '../../types'
 import {Request} from './Request'
 import {Filter} from './Filter'
 import {Paginator} from './Paginator'
+import {Settings} from './Settings'
 
 export class Resource extends Request {
 
-    constructor(settings: ISettings) {
+    constructor(settings: Settings) {
         super(settings)
     }
 
