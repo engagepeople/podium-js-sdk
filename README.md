@@ -54,7 +54,6 @@ Podium.Auth.GetToken()
 Podium.Auth.SetToken(string)
 Podium.Auth.HasToken()
 Podium.Auth.logout()
-
 ```
 
 ### Podium Resource
@@ -122,9 +121,12 @@ Podium.Ecards.Ecards.GetPending(Paginator)
 Podium.Ledgers.GetTransactions(LedgerID, Paginator)
 Podium.LRG.GetUrl(redirectUrl)
 Podium.LRG.Redirect(redirectUrl)
+Podium.Orders.Cancel(orderId: number | string)
 Podium.Shop.Cart.Confirm(cartId, addressId, ledgerId)
 Podium.Shop.Cart.Checkout(cartId, addressId, ledgerId)
 Podium.Terms.Accept(termsId)
+Podium.Utils.isRequesting - Property of boolean if SDK is currently making a request
+Podium.Utils.RequestsInProgress - array of request URL's SDK is currently making
 
 ```
 
