@@ -70,7 +70,7 @@ export class Filter<F extends { [key: string]: any }> extends ListQuery {
             build.facets = this.getFacetQuery()
         }
 
-        if (super.isLegacyMode()) {
+        if (this.isLegacyMode()) {
             return {
                 filter: build,
             }

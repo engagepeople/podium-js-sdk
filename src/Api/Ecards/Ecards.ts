@@ -8,21 +8,21 @@ export class Ecards extends Resource {
 
     constructor(settings: Settings) {
         super(settings)
-        super.SetResource('ecard')
+        this.SetResource('ecard')
     }
 
     public GetReceived(paginator: Paginator): IPodiumPromise<IEcard[]> {
         const filter: Filter<IEcardsFilter> = new Filter<IEcardsFilter>({status: ECARD_STATUS.RECEIVED})
-        return super.List(filter, paginator)
+        return this.List(filter, paginator)
     }
 
     public GetSent(paginator: Paginator): IPodiumPromise<IEcard[]> {
         const filter: Filter<IEcardsFilter> = new Filter<IEcardsFilter>({status: ECARD_STATUS.SENT})
-        return super.List(filter, paginator)
+        return this.List(filter, paginator)
     }
 
     public GetPending(paginator: Paginator): IPodiumPromise<IEcard[]> {
         const filter: Filter<IEcardsFilter> = new Filter<IEcardsFilter>({status: ECARD_STATUS.PENDING})
-        return super.List(filter, paginator)
+        return this.List(filter, paginator)
     }
 }

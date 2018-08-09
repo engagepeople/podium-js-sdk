@@ -6,11 +6,11 @@ export class Terms extends Resource {
 
     constructor(settings: Settings) {
         super(settings)
-        super.SetResource('terms')
+        this.SetResource('terms')
     }
 
     public Accept(termsId: number): IPodiumPromise<ITermsAccept> {
-        return super.PostRequest<ITermsAccept>({
+        return this.PostRequest<ITermsAccept>({
             terms_id : termsId,
         })
     }

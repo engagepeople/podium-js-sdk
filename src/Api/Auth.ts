@@ -7,12 +7,12 @@ export class Auth extends Resource {
 
     constructor(settings: Settings) {
         super(settings)
-        super.SetResource('login')
+        this.SetResource('login')
     }
 
     public Login(username: string, password: string, slug: string): IPodiumPromise<number> {
         Token.getInstance().RemoveToken()
-        return super.PostRequest<IAuthResponse>({
+        return this.PostRequest<IAuthResponse>({
             password,
             program_slug: slug,
             user_account: username,
@@ -25,9 +25,9 @@ export class Auth extends Resource {
     }
 
     public SSO(token: string): IPodiumPromise<number> {
-        super.SetResourceOnce('authenticate')
+        this.SetResourceOnce('authenticate')
         Token.getInstance().RemoveToken()
-        return super.PostRequest<IAuthResponse>({
+        return this.PostRequest<IAuthResponse>({
             token,
             type: 'sso',
         }).then((response) => {
@@ -51,8 +51,8 @@ export class Auth extends Resource {
     }
 
     public Logout(): IPodiumPromise<IAPIResponse> {
-        super.SetResourceOnce('logout')
-        return super.PostRequest<IAPIResponse>().then((rsp) => {
+        this.SetResourceOnce('logout')
+        return this.PostRequest<IAPIResponse>().then((rsp) => {
             Token.getInstance().RemoveToken()
             return rsp
         })

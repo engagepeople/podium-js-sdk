@@ -6,11 +6,11 @@ export class LRG extends Resource {
 
     constructor(settings: Settings) {
         super(settings)
-        super.SetResource('lrg/session')
+        this.SetResource('lrg/session')
     }
 
     public GetUrl(redirectUrl: string): IPodiumPromise<ILRGRedirect> {
-        return super.PostRequest<ILRGRedirect>({
+        return this.PostRequest<ILRGRedirect>({
             website_back : redirectUrl,
         })
     }

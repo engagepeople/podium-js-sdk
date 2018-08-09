@@ -7,12 +7,12 @@ export class ShopCart extends Resource {
 
     constructor(settings: Settings) {
         super(settings)
-        super.SetResource('shoppingCart')
+        this.SetResource('shoppingCart')
     }
 
     public Confirm(cartId: number, addressId: number, ledgerId: number): IPodiumPromise<IAPIResponse[]> {
-        super.SetResourceOnce(`shoppingCart/confirm`)
-        return super.Create({
+        this.SetResourceOnce(`shoppingCart/confirm`)
+        return this.Create({
             address_id: addressId,
             ledger_id: ledgerId,
             shopping_cart_id: cartId,
@@ -20,8 +20,8 @@ export class ShopCart extends Resource {
     }
 
     public Checkout(cartId: number, addressId: number, ledgerId: number): IPodiumPromise<IAPIResponse[]> {
-        super.SetResourceOnce(`shoppingCart/checkout`)
-        return super.Create({
+        this.SetResourceOnce(`shoppingCart/checkout`)
+        return this.Create({
             address_id: addressId,
             ledger_id: ledgerId,
             shopping_cart_id: cartId,

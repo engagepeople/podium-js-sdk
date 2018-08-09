@@ -11,21 +11,21 @@ export class Resource extends Request {
     }
 
     public SetResourceOnce(resource: string): Resource {
-        super.ResourceOnce = resource
+        this.ResourceOnce = resource
         return this
     }
     public SetResource(resource: string): Resource {
-        super.Resource = resource
+        this.Resource = resource
         return this
     }
 
     public SetLegacy(legacy: boolean): Resource {
-        super.Legacy = legacy
+        this.Legacy = legacy
         return this
     }
 
     public Get<T>(id?: number | string, data?: object): IPodiumPromise<T> {
-        return super.GetRequest(id, data)
+        return this.GetRequest(id, data)
     }
 
     public List<F, T>(arg1?: Filter<F> | Paginator, paginator?: | Paginator): IPodiumPromise<T[]> {
@@ -42,7 +42,7 @@ export class Resource extends Request {
         if (paginator instanceof Paginator) {
             paginator.isLoading(true)
         }
-        return super.ListRequest(filter, paginator).then((rep: IPodiumList<T>): T[] => {
+        return this.ListRequest(filter, paginator).then((rep: IPodiumList<T>): T[] => {
             if (paginator instanceof Paginator) {
                 paginator.setResponse(rep.current_page, rep.from, rep.last_page, rep.per_page, rep.to, rep.total)
                 paginator.isLoading(false)
@@ -55,15 +55,15 @@ export class Resource extends Request {
     }
 
     public Create<T>(params?: object): IPodiumPromise<T> {
-        return super.PostRequest(params)
+        return this.PostRequest(params)
     }
 
     public Update<T>(id: number | string, params?: object): IPodiumPromise<T> {
-        return super.UpdateRequest(id, params)
+        return this.UpdateRequest(id, params)
     }
 
     public Delete<T>(id: number | string): IPodiumPromise<T> {
-        return super.DeleteRequest(id)
+        return this.DeleteRequest(id)
     }
 
 }
