@@ -2277,11 +2277,11 @@ const Token_1 = __webpack_require__(/*! ../Podium/Token */ "./src/Podium/Token.t
 class Auth extends Resource_1.Resource {
     constructor(settings) {
         super(settings);
-        super.SetResource('login');
+        this.SetResource('login');
     }
     Login(username, password, slug) {
         Token_1.Token.getInstance().RemoveToken();
-        return super.PostRequest({
+        return this.PostRequest({
             password,
             program_slug: slug,
             user_account: username,
@@ -2293,9 +2293,9 @@ class Auth extends Resource_1.Resource {
         });
     }
     SSO(token) {
-        super.SetResourceOnce('authenticate');
+        this.SetResourceOnce('authenticate');
         Token_1.Token.getInstance().RemoveToken();
-        return super.PostRequest({
+        return this.PostRequest({
             token,
             type: 'sso',
         }).then((response) => {
@@ -2315,8 +2315,8 @@ class Auth extends Resource_1.Resource {
         return Token_1.Token.getInstance().HasToken();
     }
     Logout() {
-        super.SetResourceOnce('logout');
-        return super.PostRequest().then((rsp) => {
+        this.SetResourceOnce('logout');
+        return this.PostRequest().then((rsp) => {
             Token_1.Token.getInstance().RemoveToken();
             return rsp;
         });
@@ -2342,19 +2342,19 @@ const Filter_1 = __webpack_require__(/*! ../../Podium/Filter */ "./src/Podium/Fi
 class Ecards extends Resource_1.Resource {
     constructor(settings) {
         super(settings);
-        super.SetResource('ecard');
+        this.SetResource('ecard');
     }
     GetReceived(paginator) {
         const filter = new Filter_1.Filter({ status: "received" /* RECEIVED */ });
-        return super.List(filter, paginator);
+        return this.List(filter, paginator);
     }
     GetSent(paginator) {
         const filter = new Filter_1.Filter({ status: "sent" /* SENT */ });
-        return super.List(filter, paginator);
+        return this.List(filter, paginator);
     }
     GetPending(paginator) {
         const filter = new Filter_1.Filter({ status: "pending" /* PENDING */ });
-        return super.List(filter, paginator);
+        return this.List(filter, paginator);
     }
 }
 exports.Ecards = Ecards;
@@ -2376,11 +2376,11 @@ const Resource_1 = __webpack_require__(/*! ../Podium/Resource */ "./src/Podium/R
 class Ledgers extends Resource_1.Resource {
     constructor(settings) {
         super(settings);
-        super.SetResource('ledger');
+        this.SetResource('ledger');
     }
     GetTransactions(LedgerID, paginator) {
-        super.SetResourceOnce(`ledger/${LedgerID}/transaction`);
-        return super.List(paginator);
+        this.SetResourceOnce(`ledger/${LedgerID}/transaction`);
+        return this.List(paginator);
     }
 }
 exports.Ledgers = Ledgers;
@@ -2402,10 +2402,10 @@ const Resource_1 = __webpack_require__(/*! ../Podium/Resource */ "./src/Podium/R
 class LRG extends Resource_1.Resource {
     constructor(settings) {
         super(settings);
-        super.SetResource('lrg/session');
+        this.SetResource('lrg/session');
     }
     GetUrl(redirectUrl) {
-        return super.PostRequest({
+        return this.PostRequest({
             website_back: redirectUrl,
         });
     }
@@ -2440,19 +2440,19 @@ const Resource_1 = __webpack_require__(/*! ../../Podium/Resource */ "./src/Podiu
 class ShopCart extends Resource_1.Resource {
     constructor(settings) {
         super(settings);
-        super.SetResource('shoppingCart');
+        this.SetResource('shoppingCart');
     }
     Confirm(cartId, addressId, ledgerId) {
-        super.SetResourceOnce(`shoppingCart/confirm`);
-        return super.Create({
+        this.SetResourceOnce(`shoppingCart/confirm`);
+        return this.Create({
             address_id: addressId,
             ledger_id: ledgerId,
             shopping_cart_id: cartId,
         });
     }
     Checkout(cartId, addressId, ledgerId) {
-        super.SetResourceOnce(`shoppingCart/checkout`);
-        return super.Create({
+        this.SetResourceOnce(`shoppingCart/checkout`);
+        return this.Create({
             address_id: addressId,
             ledger_id: ledgerId,
             shopping_cart_id: cartId,
@@ -2460,6 +2460,32 @@ class ShopCart extends Resource_1.Resource {
     }
 }
 exports.ShopCart = ShopCart;
+
+
+/***/ }),
+
+/***/ "./src/Api/Shop/Orders.ts":
+/*!********************************!*\
+  !*** ./src/Api/Shop/Orders.ts ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const Resource_1 = __webpack_require__(/*! ../../Podium/Resource */ "./src/Podium/Resource.ts");
+class Orders extends Resource_1.Resource {
+    constructor(settings) {
+        super(settings);
+        this.SetResource('member/order');
+    }
+    Cancel(orderId) {
+        this.SetResourceOnce('member/orderCancel');
+        return this.Update(orderId);
+    }
+}
+exports.Orders = Orders;
 
 
 /***/ }),
@@ -2478,10 +2504,10 @@ const Resource_1 = __webpack_require__(/*! ../Podium/Resource */ "./src/Podium/R
 class Terms extends Resource_1.Resource {
     constructor(settings) {
         super(settings);
-        super.SetResource('terms');
+        this.SetResource('terms');
     }
     Accept(termsId) {
-        return super.PostRequest({
+        return this.PostRequest({
             terms_id: termsId,
         });
     }
@@ -2623,7 +2649,7 @@ class Filter extends ListQuery_1.ListQuery {
         if (this.getFacetQuery()) {
             build.facets = this.getFacetQuery();
         }
-        if (super.isLegacyMode()) {
+        if (this.isLegacyMode()) {
             return {
                 filter: build,
             };
@@ -2740,7 +2766,7 @@ class Paginator extends ListQuery_1.ListQuery {
             count: this.perPage,
             page: this.page,
         };
-        if (super.isLegacyMode()) {
+        if (this.isLegacyMode()) {
             return Object.assign(payload, {
                 sorting: { [this.sortField]: this.sortDirection },
             });
@@ -2916,19 +2942,19 @@ class Resource extends Request_1.Request {
         super(settings);
     }
     SetResourceOnce(resource) {
-        super.ResourceOnce = resource;
+        this.ResourceOnce = resource;
         return this;
     }
     SetResource(resource) {
-        super.Resource = resource;
+        this.Resource = resource;
         return this;
     }
     SetLegacy(legacy) {
-        super.Legacy = legacy;
+        this.Legacy = legacy;
         return this;
     }
     Get(id, data) {
-        return super.GetRequest(id, data);
+        return this.GetRequest(id, data);
     }
     List(arg1, paginator) {
         let filter;
@@ -2945,7 +2971,7 @@ class Resource extends Request_1.Request {
         if (paginator instanceof Paginator_1.Paginator) {
             paginator.isLoading(true);
         }
-        return super.ListRequest(filter, paginator).then((rep) => {
+        return this.ListRequest(filter, paginator).then((rep) => {
             if (paginator instanceof Paginator_1.Paginator) {
                 paginator.setResponse(rep.current_page, rep.from, rep.last_page, rep.per_page, rep.to, rep.total);
                 paginator.isLoading(false);
@@ -2957,13 +2983,13 @@ class Resource extends Request_1.Request {
         });
     }
     Create(params) {
-        return super.PostRequest(params);
+        return this.PostRequest(params);
     }
     Update(id, params) {
-        return super.UpdateRequest(id, params);
+        return this.UpdateRequest(id, params);
     }
     Delete(id) {
-        return super.DeleteRequest(id);
+        return this.DeleteRequest(id);
     }
 }
 exports.Resource = Resource;
@@ -3088,6 +3114,47 @@ exports.Token = Token;
 
 /***/ }),
 
+/***/ "./src/Podium/Utils.ts":
+/*!*****************************!*\
+  !*** ./src/Podium/Utils.ts ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const axios_1 = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+class Utils {
+    constructor() {
+        this.RequestsInProgress = [];
+        this.isRequesting = false;
+        const checkIfStillRequesting = () => !this.RequestsInProgress.length && (this.isRequesting = false);
+        axios_1.default.interceptors.request.use((config) => {
+            this.RequestsInProgress.push(config.url);
+            this.isRequesting = true;
+            return config;
+        }, (error) => {
+            return Promise.reject(error);
+        });
+        axios_1.default.interceptors.response.use((response) => {
+            const url = response.config.url;
+            this.RequestsInProgress.splice(this.RequestsInProgress.indexOf(url), 1);
+            checkIfStillRequesting();
+            return response;
+        }, (error) => {
+            const url = error.config.url;
+            this.RequestsInProgress.splice(this.RequestsInProgress.indexOf(url), 1);
+            checkIfStillRequesting();
+            return Promise.reject(error);
+        });
+    }
+}
+exports.Utils = Utils;
+
+
+/***/ }),
+
 /***/ "./src/index.ts":
 /*!**********************!*\
   !*** ./src/index.ts ***!
@@ -3102,10 +3169,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Auth_1 = __webpack_require__(/*! ./Api/Auth */ "./src/Api/Auth.ts");
 const Ecards_1 = __webpack_require__(/*! ./Api/Ecards/Ecards */ "./src/Api/Ecards/Ecards.ts");
 const Cart_1 = __webpack_require__(/*! ./Api/Shop/Cart */ "./src/Api/Shop/Cart.ts");
+const Orders_1 = __webpack_require__(/*! ./Api/Shop/Orders */ "./src/Api/Shop/Orders.ts");
 const Lrg_1 = __webpack_require__(/*! ./Api/Lrg */ "./src/Api/Lrg.ts");
 const Ledgers_1 = __webpack_require__(/*! ./Api/Ledgers */ "./src/Api/Ledgers.ts");
 const Resource_1 = __webpack_require__(/*! ./Podium/Resource */ "./src/Podium/Resource.ts");
 const Terms_1 = __webpack_require__(/*! ./Api/Terms */ "./src/Api/Terms.ts");
+const Utils_1 = __webpack_require__(/*! ./Podium/Utils */ "./src/Podium/Utils.ts");
 var Settings_1 = __webpack_require__(/*! ./Podium/Settings */ "./src/Podium/Settings.ts");
 exports.PodiumSettings = Settings_1.Settings;
 var Filter_1 = __webpack_require__(/*! ./Podium/Filter */ "./src/Podium/Filter.ts");
@@ -3131,7 +3200,7 @@ class Podium {
         this.Permissions = new Resource_1.Resource(settings).SetResource('member/modulePermissions');
         this.Shop = {
             Cart: new Cart_1.ShopCart(settings),
-            Orders: new Resource_1.Resource(settings).SetResource('member/order'),
+            Orders: new Orders_1.Orders(settings),
             Products: new Resource_1.Resource(settings).SetResource('member/product'),
         };
         this.Terms = new Terms_1.Terms(settings);
@@ -3140,6 +3209,7 @@ class Podium {
             Profile: new Resource_1.Resource(settings).SetResource('profile').SetLegacy(true),
         };
         this.Users = new Resource_1.Resource(settings).SetResource('user').SetLegacy(true);
+        this.Utils = new Utils_1.Utils();
     }
 }
 exports.Podium = Podium;

@@ -5,7 +5,6 @@ import {
     IPodiumList,
     IPodiumPromise,
     IResponse,
-    ISettings,
 } from '../../types'
 import {ConvertTime} from './ConvertTime'
 import {Filter} from './Filter'
