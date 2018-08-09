@@ -7,11 +7,11 @@ export class Ledgers extends Resource {
 
     constructor(settings: Settings) {
         super(settings)
-        super.SetResource('ledger')
+        this.SetResource('ledger')
     }
 
     public GetTransactions(LedgerID: number, paginator?: Paginator): IPodiumPromise<ITransactions[]> {
-        super.SetResourceOnce(`ledger/${LedgerID}/transaction`)
-        return super.List(paginator)
+        this.SetResourceOnce(`ledger/${LedgerID}/transaction`)
+        return this.List(paginator)
     }
 }

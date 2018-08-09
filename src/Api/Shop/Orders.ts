@@ -7,11 +7,11 @@ export class Orders extends Resource {
 
     constructor(settings: Settings) {
         super(settings)
-        super.SetResource('member/order')
+        this.SetResource('member/order')
     }
 
     public Cancel(orderId: number | string): IPodiumPromise<IAPIResponse[]> {
-        super.SetResourceOnce('member/orderCancel')
-        return super.Update(orderId)
+        this.SetResourceOnce('member/orderCancel')
+        return this.Update(orderId)
     }
 }
