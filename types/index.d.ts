@@ -100,6 +100,19 @@ export interface IFlex extends IPodiumModel {
     rules: IFlexRule[]
 }
 
+export interface ICountry extends IPodiumModel {
+    alpha_2_code: string
+    alpha_3_code: string
+    ascii_name: string
+    full_name: string
+    numeric_code: string
+}
+
+export interface IRegion extends IPodiumModel {
+    name: string
+    country: ICountry
+}
+
 export interface IFlexRule {
     id: number
     name: string
@@ -121,6 +134,14 @@ export interface IEcardsFilter {
     subject?: string
     body?: string
     name?: string
+}
+
+export interface IRegionFilter {
+    country_id: string
+}
+
+export interface ICountryFilter {
+    program_slug: string
 }
 
 export interface IEcardCategory extends IPodiumModel {

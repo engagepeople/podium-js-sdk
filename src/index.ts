@@ -9,6 +9,8 @@ import {Resource} from './Podium/Resource'
 import {Terms} from './Api/Terms'
 import {Settings} from './Podium/Settings'
 import {Utils} from './Podium/Utils'
+import {Country} from './Api/Country'
+import {Region} from './Api/Region'
 
 export {Settings as PodiumSettings} from './Podium/Settings'
 export {Filter as PodiumFilter} from './Podium/Filter'
@@ -41,6 +43,8 @@ export class Podium {
         Ledger: Resource,
         Transactions: Resource,
     }
+    public Country: Country
+    public Region: Region
 
     public Utils: Utils
 
@@ -71,6 +75,8 @@ export class Podium {
             Profile: new Resource(settings).SetResource('profile').SetLegacy(true),
         }
         this.Users = new Resource(settings).SetResource('user').SetLegacy(true)
+        this.Country = new Country(settings)
+        this.Region = new Region(settings)
 
         this.Utils = new Utils()
     }
