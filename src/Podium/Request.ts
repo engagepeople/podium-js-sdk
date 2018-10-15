@@ -14,8 +14,18 @@ import {Settings} from './Settings'
 
 export class Request {
     private static parseError(error: AxiosError): IPodiumErrorResponse {
+        const message =
+            (typeof error.response.data === 'object' &&
+                (error.response.data.message
+                    || (error.response.data.detail && Object.values(error.response.data.detail)
+                        .map((errorDetail: string[]) =>
+                            (typeof errorDetail === 'string' && errorDetail) || errorDetail[0]))
+                    || Object.values(error.response.data)[0])
+            ) || error.response
         return {
+            apiCode: error.response.data.apiCode,
             data: error.response.data as IResponse,
+            message,
             status: error.response.status,
             statusText: error.response.statusText,
         }
