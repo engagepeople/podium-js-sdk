@@ -20,6 +20,8 @@ export interface IPodiumError {
 
 export interface IPodiumErrorResponse {
     data: IResponse
+    apiCode: string
+    message: string
     status: number
     statusText: string
 }
