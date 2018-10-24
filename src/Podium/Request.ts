@@ -23,7 +23,7 @@ export class Request {
                     || Object.values(error.response.data)[0])
             ) || error.response
         return {
-            apiCode: error.response.data.apiCode,
+            code: error.response.data.code,
             data: error.response.data as IResponse,
             message,
             status: error.response.status,
@@ -118,7 +118,7 @@ export class Request {
                 })
                 .catch((error) => {
                     const parsedError = Request.parseError(error)
-                    if ((parsedError.status === 400) && (parsedError.data.apiCode === API_CODE.INVALID_TOKEN)) {
+                    if ((parsedError.status === 401) && (parsedError.data.code === API_CODE.INVALID_TOKEN)) {
                         Token.getInstance().RemoveToken()
                     }
                     this.onRequestError(parsedError)

@@ -20,7 +20,7 @@ export interface IPodiumError {
 
 export interface IPodiumErrorResponse {
     data: IResponse
-    apiCode: string
+    code: string
     message: string
     status: number
     statusText: string
@@ -31,7 +31,7 @@ export interface IPodiumPromise<T> extends Promise<T> {
 }
 
 export interface IResponse {
-    apiCode: API_CODE
+    code: API_CODE
     detail: object
     token: string
 }
@@ -190,7 +190,7 @@ export interface IReward extends IPodiumModel {
 }
 
 export const enum API_CODE {
-    INVALID_TOKEN = 'INVALID_TOKEN',
+    INVALID_TOKEN = 'unauthorized',
     SUCCESS = 'success',
     NO_TERMS = 'NO_TERMS',
     UNACCEPTED_TERMS = 'UNACCEPTED_TERMS',
