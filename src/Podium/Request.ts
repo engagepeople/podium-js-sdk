@@ -40,7 +40,7 @@ export class Request {
         this.settings = settings
     }
 
-    protected GetRequest<T>(id?: number | string, params?: object): IPodiumPromise<T> {
+    protected GetRequest<T>(id?: number | string, params?: object, postfix?: string): IPodiumPromise<T> {
         const request: AxiosRequestConfig = {
             method: 'get',
             params,
@@ -49,17 +49,21 @@ export class Request {
         if (id) {
             url = `${url}/${id}`
         }
+        if (postfix) {
+            url += `/${postfix}`
+        }
         return this.Request(request, url)
     }
 
-    protected DeleteRequest<T>(id: number | string): IPodiumPromise<T> {
+    protected DeleteRequest<T>(id: number | string, postfix?: string): IPodiumPromise<T> {
         const request: AxiosRequestConfig = {
             method: 'delete',
         }
-        return this.Request(request, this.makeURL(id))
+        return this.Request(request, this.makeURL(id, postfix))
     }
 
-    protected ListRequest<F, T>(filter?: Filter<F>, paginator?: Paginator): IPodiumPromise<IPodiumList<T>> {
+    protected ListRequest<F, T>(filter?: Filter<F>, paginator?: Paginator, postfix?: string)
+        : IPodiumPromise<IPodiumList<T>> {
         let params = {}
         if (filter instanceof Filter) {
             filter.setLegacyMode(this.Legacy)
@@ -74,28 +78,29 @@ export class Request {
             method: 'get',
             params,
         }
-        return this.Request(request, this.makeURL())
+        return this.Request(request, this.makeURL(null, postfix))
     }
 
-    protected PostRequest<T>(data: object = {}): IPodiumPromise<T> {
+    protected PostRequest<T>(data: object = {}, postfix?: string): IPodiumPromise<T> {
         const request: AxiosRequestConfig = {
             data,
             method: 'post',
         }
-        return this.Request(request, this.makeURL())
+        return this.Request(request, this.makeURL(null, postfix))
     }
 
-    protected UpdateRequest<T>(id: number | string, data: object): IPodiumPromise<T> {
+    protected UpdateRequest<T>(id: number | string, data: object, postfix?: string): IPodiumPromise<T> {
         const request: AxiosRequestConfig = {
             data,
             method: 'put',
         }
-        return this.Request(request, this.makeURL(id))
+        return this.Request(request, this.makeURL(id, postfix))
     }
 
-    protected Request<T>(config: AxiosRequestConfig, url?: string, id?: number | string): IPodiumPromise<T> {
+    protected Request<T>(config: AxiosRequestConfig, url?: string, id?: number | string, postfix?: string)
+        : IPodiumPromise<T> {
         if (!url) {
-            url = this.makeURL(id)
+            url = this.makeURL(id, postfix)
         }
 
         if (typeof config.data === 'object') {
@@ -127,7 +132,7 @@ export class Request {
         })
     }
 
-    protected makeURL(id?: number | string): string {
+    protected makeURL(id?: number | string, postfix?: string): string {
         let endpoint = this.settings.getEndpoint()
         if (!endpoint.endsWith('/')) {
             endpoint += '/'
@@ -139,6 +144,9 @@ export class Request {
         let build = `${endpoint}v${version}/${resource}`
         if (id) {
             build += `/${id}`
+        }
+        if (postfix) {
+            build += `/${postfix}`
         }
         return build
     }
