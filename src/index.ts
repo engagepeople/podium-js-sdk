@@ -28,6 +28,7 @@ export class Podium {
         Cart: ShopCart,
         Orders: Orders,
         Products: Resource,
+        Wishlist: Resource,
     }
     public Terms: Terms
     public User: {
@@ -64,6 +65,7 @@ export class Podium {
             Cart: new ShopCart(settings),
             Orders: new Orders(settings),
             Products: new Resource(settings).SetResource('member/product'),
+            Wishlist: new Resource(settings).SetResource('wishlist'),
         }
         this.Terms = new Terms(settings)
         this.User = {
