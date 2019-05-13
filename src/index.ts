@@ -65,7 +65,7 @@ export class Podium {
             Cart: new ShopCart(settings),
             Orders: new Orders(settings),
             Products: new Resource(settings).SetResource('member/product'),
-            Wishlist: new Resource(settings).SetResource('wishlist'),
+            Wishlist: new Resource(settings).SetResource('member/wishlist'),
         }
         this.Terms = new Terms(settings)
         this.User = {
