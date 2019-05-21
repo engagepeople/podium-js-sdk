@@ -15,6 +15,7 @@ export {Filter as PodiumFilter} from './Podium/Filter'
 export {Paginator as PodiumPaginator} from './Podium/Paginator'
 
 export class Podium {
+    public Account: Resource
     public Auth: Auth
     public Ecards: {
         Categories: Resource
@@ -46,6 +47,7 @@ export class Podium {
     public Utils: Utils
 
     constructor(settings: Settings) {
+        this.Account = new Resource(settings).SetResource('member/account')
         this.Auth = new Auth(settings)
         this.Discretionary = {
             DirectReports: new Resource(settings).SetResource('user/reports'),
