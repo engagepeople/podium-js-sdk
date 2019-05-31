@@ -154,6 +154,10 @@ export interface ILRGRedirect extends IPodiumModel {
     }
 }
 
+export interface IAccountTravel extends IPodiumModel {
+    token: string
+}
+
 export interface IImage extends IPodiumModel {
     height: number
     url: string
