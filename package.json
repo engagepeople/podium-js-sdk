@@ -1,6 +1,6 @@
 {
   "name": "podium-sdk",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Podium Client JavaScript SDK",
   "keywords": [
     "loyalty",
