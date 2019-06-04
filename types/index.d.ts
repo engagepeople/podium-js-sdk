@@ -79,6 +79,11 @@ export interface ITransactions extends IPodiumModel {
     link_id: number
 }
 
+export interface ITransactionsFilter {
+    date_from: Date
+    date_to: Date
+}
+
 export interface IUser extends IPodiumModel {
     first_name: string
     last_name: string
