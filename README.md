@@ -106,6 +106,7 @@ Podium.Permissions
 Podium.Shop.Cart
 Podium.Shop.Orders
 Podium.Shop.Products
+Podium.Shop.Wishlist
 Podium.User.Address
 Podium.User.Profile
 Podium.Users
@@ -115,10 +116,12 @@ Podium.Users
 ### Methods with additional functions
 
 ```
+Podium.Accounts.GetTravelUrl(AccountID)
+Podium.Accounts.GetAccountActivity(AccountID, Filter, Paginator)
 Podium.Ecards.Ecards.GetReceived(Paginator)
 Podium.Ecards.Ecards.GetSent(Paginator)
 Podium.Ecards.Ecards.GetPending(Paginator)
-Podium.Ledgers.GetTransactions(LedgerID, Paginator)
+Podium.Ledgers.GetTransactions(LedgerID, Filter, Paginator)
 Podium.LRG.GetUrl(redirectUrl)
 Podium.LRG.Redirect(redirectUrl)
 Podium.Orders.Cancel(orderId: number | string)
