@@ -159,8 +159,75 @@ export interface ILRGRedirect extends IPodiumModel {
     }
 }
 
+export interface ICurrency extends IPodiumModel {
+    id: number
+    code: string
+    name: string
+    symbol: string
+    precision: string
+}
+
+export interface ILedger extends IPodiumModel {
+    id: number
+    current_balance: number
+}
+
+export interface ILedgerTransaction extends IPodiumModel {
+    amount?: number
+    running_balance?: number
+}
+
+export interface IAccountMedium extends IPodiumModel {
+    masked_medium_number: string
+    name_on_medium: string
+}
+
+export interface IAccountTransactionsActions extends IPodiumModel {
+    code: string
+    name: string
+}
+
+export interface IAccountType extends IPodiumModel {
+    id: number
+    reference_identifier: string
+    name: string
+    description: string
+    currency: [ICurrency]
+    is_active: boolean
+    created_at: Date
+    updated_at: Date
+}
+
+export interface IAccountTransactions extends IPodiumModel {
+    id: number
+    reference_identifier: string
+    action: [IAccountTransactionsActions]
+    transaction_amount: number
+    transaction_description: string
+    ledger_transaction: [ILedgerTransaction]
+    created_at: Date
+}
+
 export interface IAccountTravel extends IPodiumModel {
     token: string
+}
+
+export interface IAccountActivity extends IPodiumModel {
+    id: number
+    reference_identifier: string
+    status: string
+    last_balance: number
+    last_balance_updated_at: Date
+    account_type: [IAccountType]
+    mediums: [IAccountMedium]
+    ledgers: [ILedger]
+    transactions: [IAccountTransactions]
+}
+
+export interface IAccountActivityFilter {
+    transaction_date_from: Date
+    transaction_date_to: Date
+    transaction_action_code: string
 }
 
 export interface IImage extends IPodiumModel {
