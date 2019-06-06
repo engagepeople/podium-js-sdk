@@ -1,4 +1,4 @@
-import {IAccountActivity, IAccountActivityFilter, IAccountTravel, IPodiumPromise} from '../../types'
+import {IAccountActivity, IAccountActivityFilter, IAccountTransfer, IAccountTravel, IPodiumPromise} from '../../types'
 import {Resource} from '../Podium/Resource'
 import {Filter} from '../Podium/Filter'
 import {Paginator} from '../Podium/Paginator'
@@ -37,5 +37,35 @@ export class Accounts extends Resource {
                               paginator?: Paginator): IPodiumPromise<IAccountActivity[]> {
         this.SetResourceOnce(`member/account/${AccountID}/activity`)
         return this.List(filter, paginator)
+    }
+
+    /**
+     * This will facilitate the transfer points from one account to another
+     * @param {number} AccountID
+     * @param {number} ReceiverAccountID
+     * @param {number} Amount
+     * @param {string} SenderTransactionDescription
+     * @param {string} ReceiverTransactionDescription
+     * @returns {IPodiumPromise<IAccountTransfer>}
+     * @constructor
+     */
+    public Transfer(AccountID: number,
+                    ReceiverAccountID: number,
+                    Amount: number,
+                    SenderTransactionDescription?: string,
+                    ReceiverTransactionDescription?: string): IPodiumPromise<IAccountTransfer> {
+
+        this.SetResourceOnce(`member/account/${AccountID}/transfer`)
+
+        const payload = {
+            amount: Amount,
+            receiver_account_id: ReceiverAccountID,
+            receiver_transaction_description: (typeof ReceiverTransactionDescription !== 'undefined') ?
+                ReceiverTransactionDescription : 'Transfer Points',
+            sender_transaction_description: (typeof SenderTransactionDescription !== 'undefined') ?
+                SenderTransactionDescription : 'Transfer Points',
+        }
+
+        return this.PostRequest<IAccountTransfer>(payload)
     }
 }
