@@ -110,7 +110,6 @@ Podium.Shop.Wishlist
 Podium.User.Address
 Podium.User.Profile
 Podium.Users
-
 ```
 
 ### Methods with additional functions
@@ -118,6 +117,7 @@ Podium.Users
 ```
 Podium.Accounts.GetTravelUrl(AccountID)
 Podium.Accounts.GetAccountActivity(AccountID, Filter, Paginator)
+Podium.Accounts.Transfer(AccountID, ReceiverAccountID, Amount, SenderTransactionDescription, ReceiverTransactionDescription)
 Podium.Ecards.Ecards.GetReceived(Paginator)
 Podium.Ecards.Ecards.GetSent(Paginator)
 Podium.Ecards.Ecards.GetPending(Paginator)
@@ -130,7 +130,6 @@ Podium.Shop.Cart.Checkout(cartId, addressId, ledgerId)
 Podium.Terms.Accept(termsId)
 Podium.Utils.isRequesting - Property of boolean if SDK is currently making a request
 Podium.Utils.RequestsInProgress - array of request URL's SDK is currently making
-
 ```
 
 ### Paginator properties
@@ -143,7 +142,6 @@ PodiumPaginator.setSortField(field)
 PodiumPaginator.setSortDirection([asc|desc])
 PodiumPaginator.setSortDesc(boolean)
 PodiumPaginator.toParams()
-
 ```
 
 ### Filter properties
