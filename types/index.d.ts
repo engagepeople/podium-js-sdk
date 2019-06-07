@@ -200,28 +200,54 @@ export interface IAccountType extends IPodiumModel {
 
 export interface IAccountTransactions extends IPodiumModel {
     id: number
-    reference_identifier: string
-    action: [IAccountTransactionsActions]
+    account_id: number
+    type: string
+    action: string
+    masked_medium_number: string
     transaction_amount: number
+    transaction_currency_code: string
     transaction_description: string
+    transaction_posted_date: Date
+    reversal_original_reference_identifier: string
+    custom_fields: Array
     ledger_transaction: [ILedgerTransaction]
+    processed_at: Date
+    reversed_at: Date
     created_at: Date
+    updated_at: Date
+}
+
+export interface IAccountStatus extends IPodiumModel {
+    code: string
+    name: string
 }
 
 export interface IAccountTravel extends IPodiumModel {
     token: string
 }
 
+export interface IAccountTransfer extends IPodiumModel {
+    sender_account: [IAccount]
+    receiver_account: [IAccount]
+    sender_transaction: [IAccountTransactions]
+    receiver_transaction: [IAccountTransactions]
+}
+
 export interface IAccountActivity extends IPodiumModel {
+    transactions: [IAccountTransactions]
+}
+
+export interface IAccount extends IPodiumModel {
     id: number
+    account_type: [IAccountType]
+    status: [IAccountStatus]
     reference_identifier: string
-    status: string
     last_balance: number
     last_balance_updated_at: Date
-    account_type: [IAccountType]
     mediums: [IAccountMedium]
     ledgers: [ILedger]
-    transactions: [IAccountTransactions]
+    created_at: Date
+    updated_at: Date
 }
 
 export interface IAccountActivityFilter {
