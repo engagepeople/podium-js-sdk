@@ -75,7 +75,7 @@ export class Podium {
             Address: new Resource(settings).SetResource('address').SetLegacy(true),
             Profile: new Resource(settings).SetResource('member/profile').SetLegacy(true),
         }
-        this.Users = new Resource(settings).SetResource('user').SetLegacy(true)
+        this.Users = new Resource(settings).SetResource('member/user').SetLegacy(true)
 
         this.Utils = new Utils()
     }
