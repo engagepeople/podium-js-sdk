@@ -1,4 +1,10 @@
-import {IAccountActivity, IAccountActivityFilter, IAccountTransfer, IAccountTravel, IPodiumPromise} from '../../types'
+import {
+    IAccountTransaction,
+    IAccountTransactionFilter,
+    IAccountTransfer,
+    IAccountTravel,
+    IPodiumPromise,
+} from '../../types'
 import {Resource} from '../Podium/Resource'
 import {Filter} from '../Podium/Filter'
 import {Paginator} from '../Podium/Paginator'
@@ -25,17 +31,17 @@ export class Accounts extends Resource {
     }
 
     /**
-     * Based on the AccountID, retrieve the account's activity (transactions)
+     * Based on the AccountID, retrieve the account transactions
      * @param {number} AccountID
-     * @param {Filter<IAccountActivityFilter>} filter
+     * @param {Filter<IAccountTransactionFilter>} filter
      * @param {Paginator} paginator
-     * @returns {IPodiumPromise<IAccountActivity[]>}
+     * @returns {IPodiumPromise<IAccountTransaction[]>}
      * @constructor
      */
-    public GetAccountActivity(AccountID: number,
-                              filter?: Filter<IAccountActivityFilter>,
-                              paginator?: Paginator): IPodiumPromise<IAccountActivity[]> {
-        this.SetResourceOnce(`member/account/${AccountID}/activity`)
+    public GetTransactions(AccountID: number,
+                           filter?: Filter<IAccountTransactionFilter>,
+                           paginator?: Paginator): IPodiumPromise<IAccountTransaction[]> {
+        this.SetResourceOnce(`member/account/${AccountID}/transaction`)
         return this.List(filter, paginator)
     }
 

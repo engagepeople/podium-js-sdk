@@ -233,8 +233,14 @@ export interface IAccountTransfer extends IPodiumModel {
     receiver_transaction: [IAccountTransactions]
 }
 
-export interface IAccountActivity extends IPodiumModel {
-    transactions: [IAccountTransactions]
+export interface IAccountTransaction extends IPodiumModel {
+    id: number
+    reference_identifier: string
+    action: string
+    transaction_amount: number
+    transaction_description: string
+    ledger_transaction: [ILedgerTransaction]
+    created_at: Date
 }
 
 export interface IAccount extends IPodiumModel {
@@ -250,7 +256,7 @@ export interface IAccount extends IPodiumModel {
     updated_at: Date
 }
 
-export interface IAccountActivityFilter {
+export interface IAccountTransactionFilter {
     transaction_date_from: Date
     transaction_date_to: Date
     transaction_action_code: string
