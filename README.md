@@ -116,7 +116,7 @@ Podium.Users
 
 ```
 Podium.Accounts.GetTravelUrl(AccountID)
-Podium.Accounts.GetAccountActivity(AccountID, Filter, Paginator)
+Podium.Accounts.GetTransactions(AccountID, Filter, Paginator)
 Podium.Accounts.Transfer(AccountID, ReceiverAccountID, Amount, SenderTransactionDescription, ReceiverTransactionDescription)
 Podium.Ecards.Ecards.GetReceived(Paginator)
 Podium.Ecards.Ecards.GetSent(Paginator)
