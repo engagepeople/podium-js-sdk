@@ -17,9 +17,12 @@ export class Request {
         const message =
             (typeof error.response.data === 'object' &&
                 (error.response.data.message
-                    || (error.response.data.detail && Object.values(error.response.data.detail)
-                        .map((errorDetail: string[]) =>
-                            (typeof errorDetail === 'string' && errorDetail) || errorDetail[0]))
+                    || (error.response.data.detail ||
+                        (Array.isArray(error.response.data.detail) &&
+                            Object.values(error.response.data.detail)
+                                .map((errorDetail: string[]) =>
+                                    (typeof errorDetail === 'string' && errorDetail) || errorDetail[0])
+                        ))
                     || Object.values(error.response.data)[0])
             ) || error.response
         return {
