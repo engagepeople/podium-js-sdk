@@ -262,6 +262,12 @@ export interface IAccountTransactionFilter {
     transaction_action_code: string
 }
 
+export interface IAccountDownloadTransactionsFilter {
+    transaction_date_from: Date
+    transaction_date_to: Date
+    format: string
+}
+
 export interface IImage extends IPodiumModel {
     height: number
     url: string

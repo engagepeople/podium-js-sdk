@@ -46,6 +46,30 @@ export class Accounts extends Resource {
     }
 
     /**
+     *
+     * @param {number} AccountID
+     * @param {string} Format
+     * @param {Date} TransactionDateFrom
+     * @param {Date} TransactionDateTo
+     * @returns {IPodiumPromise<IAccountTravel>}
+     * @constructor
+     */
+    public DownloadTransactions(AccountID: number,
+                                Format: string,
+                                TransactionDateFrom: Date,
+                                TransactionDateTo: Date): IPodiumPromise<IAccountTravel> {
+        this.SetResourceOnce(`member/account/${AccountID}/download`)
+
+        const payload = {
+            format: Format,
+            transaction_date_from: TransactionDateFrom,
+            transaction_date_to: TransactionDateTo,
+        }
+
+        return this.PostRequest<IAccountTravel>(payload)
+    }
+
+    /**
      * This will facilitate the transfer points from one account to another
      * @param {number} AccountID
      * @param {number} ReceiverAccountID
