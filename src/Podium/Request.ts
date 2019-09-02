@@ -65,8 +65,9 @@ export class Request {
         return this.Request(request, this.makeURL(id, postfix))
     }
 
-    protected ListRequest<F, T>(filter?: Filter<F>, paginator?: Paginator, postfix?: string)
-        : IPodiumPromise<IPodiumList<T>> {
+    protected ListRequest<F, T>(filter?: Filter<F>,
+                                paginator?: Paginator,
+                                postfix?: string): IPodiumPromise<IPodiumList<T>> {
         let params = {}
         if (filter instanceof Filter) {
             filter.setLegacyMode(this.Legacy)
@@ -85,11 +86,18 @@ export class Request {
     }
 
     protected PostRequest<T>(data: object = {}, postfix?: string): IPodiumPromise<T> {
+        const url = this.makeURL(null, postfix)
         const request: AxiosRequestConfig = {
             data,
             method: 'post',
         }
-        return this.Request(request, this.makeURL(null, postfix))
+
+        // Note: Sorry for the hack code. Time crunch
+        if (url.indexOf('download') >= 0) {
+            request.responseType = 'arraybuffer'
+        }
+
+        return this.Request(request, url)
     }
 
     protected UpdateRequest<T>(id: number | string, data: object, postfix?: string): IPodiumPromise<T> {
@@ -100,8 +108,10 @@ export class Request {
         return this.Request(request, this.makeURL(id, postfix))
     }
 
-    protected Request<T>(config: AxiosRequestConfig, url?: string, id?: number | string, postfix?: string)
-        : IPodiumPromise<T> {
+    protected Request<T>(config: AxiosRequestConfig,
+                         url?: string,
+                         id?: number | string,
+                         postfix?: string): IPodiumPromise<T> {
         if (!url) {
             url = this.makeURL(id, postfix)
         }

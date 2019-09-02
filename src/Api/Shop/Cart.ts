@@ -10,6 +10,11 @@ export class ShopCart extends Resource {
         this.SetResource('shoppingCart')
     }
 
+    public RemoveItemFromCart(cartId: number,
+                              productId: number): IPodiumPromise<IAPIResponse[]> {
+        return this.DeleteRequest(cartId, `item/${productId}`)
+    }
+
     public Confirm(cartId: number,
                    addressId: number,
                    ledgerId: number,
