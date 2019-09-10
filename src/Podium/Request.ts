@@ -123,11 +123,14 @@ export class Request {
 
         config = Object.assign({
             headers: this.makeHeaders(),
-            transformResponse: [(data: string) => {
+        }, config)
+
+        if (url.indexOf('download') < 0) {
+            config.transformResponse = [(data: string) => {
                 const convertTimeToUTC = new ConvertTime(JSON.parse(data))
                 return convertTimeToUTC.ToUTC()
-            }],
-        }, config)
+            }]
+        }
 
         return new Promise((resolve, reject) => {
             return axios(url, config)
