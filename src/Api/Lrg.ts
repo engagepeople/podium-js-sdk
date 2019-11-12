@@ -1,6 +1,6 @@
-import { ILRGRedirect, IPodiumPromise } from "../../types";
-import { Resource } from "../Podium/Resource";
-import { Settings } from "../Podium/Settings";
+import {ILRGRedirect, IPodiumPromise} from '../../types'
+import {Resource} from '../Podium/Resource'
+import {Settings} from '../Podium/Settings'
 
 export class LRG extends Resource {
 
