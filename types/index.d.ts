@@ -156,6 +156,7 @@ export interface ITermsAccept extends IPodiumModel {
 export interface ILRGRedirect extends IPodiumModel {
     body: {
         redirect_url: string
+        account_id: number
     }
 }
 

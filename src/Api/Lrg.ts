@@ -9,15 +9,19 @@ export class LRG extends Resource {
         this.SetResource('lrg/session')
     }
 
-    public GetUrl(redirectUrl: string): IPodiumPromise<ILRGRedirect> {
+    public GetUrl(data: {
+        redirectUrl: string;
+        accountId: number;
+    }): IPodiumPromise<ILRGRedirect> {
         return this.PostRequest<ILRGRedirect>({
-            website_back : redirectUrl,
+            account_id: data.accountId,
+            website_back: data.redirectUrl,
         })
     }
 
-    public Redirect(redirectUrl: string): boolean {
+    public Redirect(data: { redirectUrl: string; accountId: number }): boolean {
         if (!(typeof window === 'undefined' || window === null)) {
-            this.GetUrl(redirectUrl).then((response) => {
+            this.GetUrl(data).then((response) => {
                 window.location.replace(response.body.redirect_url)
             })
             return true
@@ -25,5 +29,4 @@ export class LRG extends Resource {
             return false
         }
     }
-
 }
