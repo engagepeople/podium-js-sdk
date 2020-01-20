@@ -42,4 +42,17 @@ export class ShopCart extends Resource {
             shopping_cart_id: cartId,
         })
     }
+
+    public UpdateItem(cartId: number,
+                      itemId: string,
+                      quantity: number): IPodiumPromise<IAPIResponse> {
+        console.log(cartId)
+        const payload = {
+            quantity,
+        }
+
+        console.log(payload)
+
+        return this.UpdateRequest<IAPIResponse>(cartId, payload, `item/${itemId}`)
+    }
 }
