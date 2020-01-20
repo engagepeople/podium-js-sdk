@@ -29,17 +29,23 @@ export class ShopCart extends Resource {
     }
 
     public Checkout(cartId: number,
-                    addressId: number,
-                    ledgerId: number,
                     accountId: number,
+                    addressId?: number,
                     kountSessionId?: string): IPodiumPromise<IAPIResponse[]> {
         this.SetResourceOnce(`shoppingCart/checkout`)
+
         return this.Create({
             account_id: accountId,
             address_id: addressId,
             kount_session_id: kountSessionId,
-            ledger_id: ledgerId,
             shopping_cart_id: cartId,
         })
+    }
+
+    public UpdateItem(cartId: number,
+                      itemId: string,
+                      quantity: number): IPodiumPromise<IAPIResponse> {
+
+        return this.UpdateRequest<IAPIResponse>(cartId, { quantity }, `item/${itemId}`)
     }
 }
