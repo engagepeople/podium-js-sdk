@@ -51,6 +51,14 @@ export interface IJwtAuthResponse {
     }
 }
 
+export interface IJwtDecoded {
+    iss: string,
+    iat: number,
+    exp: number,
+    nbf: number,
+    jti: string,
+    sub: number
+}
 export interface IAPIResponse {
     code: API_CODE
     id: object

@@ -1,4 +1,4 @@
-import {API_CODE, IAPIResponse, IAuthResponse, IJwtAuthResponse, IPodiumPromise } from '../../types'
+import {API_CODE, IAPIResponse, IAuthResponse, IJwtAuthResponse, IJwtDecoded, IPodiumPromise } from '../../types'
 import {Resource} from '../Podium/Resource'
 import {Token} from '../Podium/Token'
 import {Settings} from '../Podium/Settings'
@@ -19,8 +19,9 @@ export class Auth extends Resource {
             user_account: username,
         }).then((response) => {
             if (response.auth.expires_in > 0) {
+                const decodedToken = this.decodeJWT(response.auth.access_token)
                 this.SetToken(response.auth.token_type + ' ' + response.auth.access_token)
-                return response.auth.expires_in
+                return decodedToken.sub
             }
         })
     }
@@ -57,5 +58,13 @@ export class Auth extends Resource {
             Token.getInstance().RemoveToken()
             return rsp
         })
+    }
+
+    private decodeJWT(token: string): IJwtDecoded {
+        try {
+            return JSON.parse(atob(token.split('.')[1]))
+          } catch (e) {
+            return null
+          }
     }
 }
