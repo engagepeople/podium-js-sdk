@@ -175,7 +175,7 @@ export class Request {
         if (Token.getInstance().GetToken()) {
             return {
                 'Accept-Language': this.GetLocale(),
-                'Authentication': Token.getInstance().GetToken(),
+                'Authorization': Token.getInstance().GetToken(),
             }
         }
     }

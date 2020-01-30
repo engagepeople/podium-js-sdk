@@ -43,6 +43,14 @@ export interface IAuthResponse {
     token: string
 }
 
+export interface IJwtAuthResponse {
+    auth: {
+        access_token: string,
+        token_type: string,
+        expires_in: number
+    }
+}
+
 export interface IAPIResponse {
     code: API_CODE
     id: object
