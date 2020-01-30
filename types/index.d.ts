@@ -59,6 +59,14 @@ export interface IJwtDecoded {
     jti: string,
     sub: number
 }
+
+export interface IJwtLogoutRepsonse {
+    detail: object,
+    token: string,
+    apiCode: string,
+    trace: string
+}
+
 export interface IAPIResponse {
     code: API_CODE
     id: object
