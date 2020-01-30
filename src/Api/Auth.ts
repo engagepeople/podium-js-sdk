@@ -1,4 +1,4 @@
-import {API_CODE, IAPIResponse, IAuthResponse, IPodiumPromise} from '../../types'
+import {API_CODE, IAPIResponse, IAuthResponse, IJwtAuthResponse, IJwtDecoded, IPodiumPromise } from '../../types'
 import {Resource} from '../Podium/Resource'
 import {Token} from '../Podium/Token'
 import {Settings} from '../Podium/Settings'
@@ -7,19 +7,21 @@ export class Auth extends Resource {
 
     constructor(settings: Settings) {
         super(settings)
-        this.SetResource('login')
+        this.SetResource('auth/login')
     }
 
     public Login(username: string, password: string, slug: string): IPodiumPromise<number> {
         Token.getInstance().RemoveToken()
-        return this.PostRequest<IAuthResponse>({
+        return this.PostRequest<IJwtAuthResponse>({
             password,
             program_slug: slug,
+            type: 'member',
             user_account: username,
         }).then((response) => {
-            if (response.code === API_CODE.SUCCESS) {
-                this.SetToken(response.token)
-                return response.user_id
+            if (response.auth.expires_in > 0) {
+                const decodedToken = this.decodeJWT(response.auth.access_token)
+                this.SetToken(`${response.auth.token_type} ${response.auth.access_token}`)
+                return decodedToken.sub
             }
         })
     }
@@ -56,5 +58,13 @@ export class Auth extends Resource {
             Token.getInstance().RemoveToken()
             return rsp
         })
+    }
+
+    private decodeJWT(token: string): IJwtDecoded {
+        try {
+            return JSON.parse(atob(token.split('.')[1]))
+          } catch (e) {
+            return null
+          }
     }
 }
