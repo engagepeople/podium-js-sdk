@@ -20,7 +20,7 @@ export class Auth extends Resource {
         }).then((response) => {
             if (response.auth.expires_in > 0) {
                 const decodedToken = this.decodeJWT(response.auth.access_token)
-                this.SetToken(response.auth.token_type + ' ' + response.auth.access_token)
+                this.SetToken(`${response.auth.token_type} ${response.auth.access_token}`)
                 return decodedToken.sub
             }
         })
