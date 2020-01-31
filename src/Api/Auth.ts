@@ -26,9 +26,8 @@ export class Auth extends Resource {
             user_account: username,
         }).then((response) => {
             if (response.auth.expires_in > 0) {
-                const decodedToken = this.decodeJWT(response.auth.access_token)
                 this.SetToken(`${response.auth.token_type} ${response.auth.access_token}`)
-                return decodedToken.sub
+                return response.auth.expires_in
             }
         })
     }
@@ -67,11 +66,13 @@ export class Auth extends Resource {
         })
     }
 
-    private decodeJWT(token: string): IJwtDecoded {
-        try {
-            return JSON.parse(atob(token.split('.')[1]))
-          } catch (e) {
-            return null
-          }
+    public RefreshToken(): IPodiumPromise<number> {
+        this.SetResourceOnce('auth/refresh')
+        return this.PostRequest<IJwtAuthResponse>().then((response) => {
+            if (response.auth.expires_in > 0) {
+                this.SetToken(`${response.auth.token_type} ${response.auth.access_token}`)
+                return response.auth.expires_in
+            }
+        })
     }
 }
