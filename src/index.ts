@@ -44,6 +44,7 @@ export class Podium {
         Ledger: Resource,
         Transactions: Resource,
     }
+    public PendingAction: Resource
 
     public Utils: Utils
 
@@ -76,6 +77,7 @@ export class Podium {
             Profile: new Resource(settings).SetResource('member/profile').SetLegacy(true),
         }
         this.Users = new Resource(settings).SetResource('member/user').SetLegacy(true)
+        this.PendingAction = new Resource(settings).SetResource('member/pending-action')
 
         this.Utils = new Utils()
     }
