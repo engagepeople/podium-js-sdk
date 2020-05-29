@@ -49,6 +49,7 @@ Log in with a username and password and receive an API token to interact with ot
 
 ```
 Podium.Auth.Login(email, password, slug)
+Podium.Auth.LoginAs(userAccount, token, slug)
 Podium.Auth.SSO(token)
 Podium.Auth.GetToken()
 Podium.Auth.SetToken(string)
