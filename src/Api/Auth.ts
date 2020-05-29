@@ -32,6 +32,20 @@ export class Auth extends Resource {
         })
     }
 
+    public LoginAs(userAccount: string, token: string, slug: string): IPodiumPromise<number> {
+        this.SetResourceOnce(`program/${slug}/login-as`)
+        const payload = {
+            token,
+            user_account: userAccount,
+        }
+        return this.GetRequest<IJwtAuthResponse>(null, payload).then((response) => {
+            if (response.auth.expires_in > 0) {
+                this.SetToken(`${response.auth.token_type} ${response.auth.access_token}`)
+                return response.auth.expires_in
+            }
+        })
+    }
+
     public SSO(token: string): IPodiumPromise<number> {
         this.SetResourceOnce('authenticate')
         Token.getInstance().RemoveToken()
