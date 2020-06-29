@@ -49,13 +49,13 @@ export class Auth extends Resource {
     public SSO(token: string): IPodiumPromise<number> {
         this.SetResourceOnce('authenticate')
         Token.getInstance().RemoveToken()
-        return this.PostRequest<IAuthResponse>({
+        return this.PostRequest<IJwtAuthResponse>({
             token,
             type: 'sso',
         }).then((response) => {
-            if (response.code === API_CODE.SUCCESS) {
-                this.SetToken(response.token)
-                return response.user_id
+            if (response.auth.expires_in > 0) {
+                this.SetToken(`${response.auth.token_type} ${response.auth.access_token}`)
+                return response.auth.expires_in
             }
         })
     }
