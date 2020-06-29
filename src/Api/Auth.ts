@@ -5,6 +5,7 @@ import {
     IJwtAuthResponse,
     IJwtDecoded,
     IJwtLogoutRepsonse,
+    IJwtSSOAuthResponse,
     IPodiumPromise } from '../../types'
 import {Resource} from '../Podium/Resource'
 import {Token} from '../Podium/Token'
@@ -49,13 +50,13 @@ export class Auth extends Resource {
     public SSO(token: string): IPodiumPromise<number> {
         this.SetResourceOnce('authenticate')
         Token.getInstance().RemoveToken()
-        return this.PostRequest<IJwtAuthResponse>({
+        return this.PostRequest<IJwtSSOAuthResponse>({
             token,
             type: 'sso',
         }).then((response) => {
-            if (response.auth.expires_in > 0) {
-                this.SetToken(`${response.auth.token_type} ${response.auth.access_token}`)
-                return response.auth.expires_in
+            if (response.expires_in > 0) {
+                this.SetToken(`${response.token_type} ${response.token}`)
+                return response.expires_in
             }
         })
     }

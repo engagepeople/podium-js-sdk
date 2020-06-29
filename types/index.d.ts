@@ -51,6 +51,15 @@ export interface IJwtAuthResponse {
     }
 }
 
+export interface IJwtSSOAuthResponse {
+    code: API_CODE
+    message: string
+    token_type: string
+    token: string
+    expires_in: number
+    user_id: number
+}
+
 export interface IJwtDecoded {
     iss: string,
     iat: number,
