@@ -18,16 +18,16 @@ export class Token {
 
     public SetToken(token: string): string {
         this.token = token
-        if (this.hasLocalStorage()) {
-            localStorage.setItem(`${LOCAL_STORAGE_KEY}token`, this.token)
+        if (this.hasSessionStorage()) {
+            sessionStorage.setItem(`${LOCAL_STORAGE_KEY}token`, this.token)
             return this.token
         }
         return this.token
     }
 
     public GetToken(): string {
-        if (this.hasLocalStorage()) {
-            return localStorage.getItem(`${LOCAL_STORAGE_KEY}token`)
+        if (this.hasSessionStorage()) {
+            return sessionStorage.getItem(`${LOCAL_STORAGE_KEY}token`)
         } else {
             return this.token
         }
@@ -39,15 +39,15 @@ export class Token {
     }
 
     public RemoveToken(): boolean {
-        if (this.hasLocalStorage()) {
-            localStorage.removeItem(`${LOCAL_STORAGE_KEY}token`)
+        if (this.hasSessionStorage()) {
+            sessionStorage.removeItem(`${LOCAL_STORAGE_KEY}token`)
         }
         this.token = null
         return true
     }
 
-    private hasLocalStorage(): boolean {
-        return !(typeof localStorage === 'undefined' || localStorage === null)
+    private hasSessionStorage(): boolean {
+        return !(typeof sessionStorage === 'undefined' || sessionStorage === null)
     }
 
 }
